@@ -18,9 +18,13 @@ const Navbar = () => {
     { href: "/hasil", label: "Hasil Voting" },
   ];
 
+  const handleOverlayClick = () => {
+    setIsExpanded(false);
+  };
+
   return (
     <>
-      <nav className="fixed z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] pl-4 pr-6 text-[#FA3A91] shadow-lg md:pl-10 md:pr-24">
+      <nav className="z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] pl-4 pr-6 text-[#FA3A91] md:pl-10 md:pr-24">
         <Link href="/">
           <Image className="mr-2" src={Logo} height={60} alt="Logo" />
         </Link>
@@ -30,12 +34,14 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <li key={link.href} className="relative hidden md:block">
               <Link href={link.href}>
-                <span className="group relative inline-block">
-                  <span className="relative transition-colors duration-300 group-hover:text-[#FFAAB7]">
+                <span className="group relative">
+                  <span className="transition-colors duration-300 hover:text-[#FFAAB7]">
                     {link.label}
                   </span>
                   {pathname.startsWith(link.href) && (
-                    <span className="absolute bottom-[-2px] left-0 h-[3px] w-full bg-[#FA3A91] transition-all duration-300 group-hover:bg-[#FFAAB7]"></span>
+                    <span
+                      className={`absolute bottom-[-4px] left-0 h-[3px] w-full bg-[#FA3A91] transition-all duration-300 group-hover:bg-[#FFAAB7]`}
+                    ></span>
                   )}
                 </span>
               </Link>
@@ -65,8 +71,15 @@ const Navbar = () => {
         </button>
       </nav>
 
+      {isExpanded && (
+        <div
+          className="fixed inset-0 z-[998] bg-black opacity-70 transition-opacity duration-300 md:hidden"
+          onClick={handleOverlayClick}
+        ></div>
+      )}
+
       <div
-        className={`fixed left-0 right-0 z-[998] mt-16 bg-[#BEEF62] transition-opacity duration-300 ease-in-out md:hidden ${
+        className={`fixed left-0 right-0 z-[999] mt-16 rounded-b bg-[#BEEF62] transition-opacity duration-300 ease-in-out md:hidden ${
           isExpanded
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -85,7 +98,9 @@ const Navbar = () => {
               <Link
                 href={link.href}
                 className="relative flex w-full items-center justify-center px-6 py-5 text-lg font-black transition-all duration-300"
-                onClick={() => setIsExpanded(false)}
+                onClick={() => {
+                  setIsExpanded(false);
+                }}
               >
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-[#FFAAB7]">
                   {link.label}
