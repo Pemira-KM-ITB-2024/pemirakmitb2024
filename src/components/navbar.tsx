@@ -64,6 +64,38 @@ const Navbar = () => {
           ></div>
         </button>
       </nav>
+
+      <div
+        className={`fixed left-0 right-0 z-[998] mt-16 bg-[#BEEF62] transition-opacity duration-300 ease-in-out md:hidden ${
+          isExpanded
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
+        }`}
+      >
+        <ul
+          className={`flex flex-col text-[#FA3A91] ${clashDisplay.className}`}
+        >
+          {navLinks.map((link) => (
+            <li
+              key={link.href}
+              className={`group w-full ${
+                pathname.startsWith(link.href) ? "bg-[#b3e251]" : ""
+              }`}
+            >
+              <Link
+                href={link.href}
+                className="relative flex w-full items-center justify-center px-6 py-5 text-lg font-black transition-all duration-300"
+                onClick={() => setIsExpanded(false)}
+              >
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-[#FFAAB7]">
+                  {link.label}
+                </span>
+                <span className="absolute inset-0 bg-[#b3e251] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 };
