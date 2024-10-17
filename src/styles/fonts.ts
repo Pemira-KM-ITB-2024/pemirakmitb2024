@@ -1,10 +1,11 @@
 import localFont from "next/font/local";
-import { Montserrat, Open_Sans } from 'next/font/google'
+import { Montserrat, Open_Sans } from "next/font/google";
 
 const header = localFont({
   src: "fonts/PropagationRegular.ttf",
-  variable: '--font-header',
+  variable: "--font-header",
 });
+
 const body = localFont({
   src: "/fonts/TangoSans.ttf",
 });
@@ -21,11 +22,24 @@ const openSans = Open_Sans({
   weight: ["400", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-})
+});
 const montserrat = Montserrat({
   weight: ["400", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-})
+});
 
-export { header, body, bodyBold, bodyBoldItalic, bodyItalic, openSans, montserrat };
+const clashDisplay = localFont({
+  src: "/fonts/ClashDisplay.ttf",
+});
+
+export {
+  header,
+  body,
+  bodyBold,
+  bodyBoldItalic,
+  bodyItalic,
+  openSans,
+  montserrat,
+  clashDisplay,
+};
