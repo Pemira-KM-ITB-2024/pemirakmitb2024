@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "../../public/Logo Transparan.png";
-import { clashDisplay } from "@fonts";
+import { body, header } from "@fonts";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -29,7 +29,7 @@ const Navbar = () => {
           <Image className="mr-2" src={Logo} height={60} alt="Logo" />
         </Link>
         <ul
-          className={`${clashDisplay.className} flex items-center font-black *:px-4 *:transition-colors *:duration-300`}
+          className={`${body.className} flex items-center font-black *:px-4 *:transition-colors *:duration-300`}
         >
           {navLinks.map((link) => (
             <li key={link.href} className="relative hidden md:block">
@@ -85,9 +85,7 @@ const Navbar = () => {
             : "pointer-events-none opacity-0"
         }`}
       >
-        <ul
-          className={`flex flex-col text-[#FA3A91] ${clashDisplay.className}`}
-        >
+        <ul className={`flex flex-col text-[#FA3A91] ${body.className}`}>
           {navLinks.map((link) => (
             <li
               key={link.href}
@@ -102,7 +100,7 @@ const Navbar = () => {
                   setIsExpanded(false);
                 }}
               >
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-[#FFAAB7]">
+                <span className="relative z-10 transition-colors duration-300 ">
                   {link.label}
                 </span>
                 <span className="absolute inset-0 bg-[#b3e251] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
