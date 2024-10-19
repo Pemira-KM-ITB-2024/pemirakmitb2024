@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { Montserrat, Open_Sans } from 'next/font/google'
+import { Montserrat, Open_Sans, Oswald } from 'next/font/google'
 
 const header = localFont({
   src: "fonts/PropagationRegular.ttf",
@@ -28,4 +28,15 @@ const montserrat = Montserrat({
   display: "swap",
 })
 
-export { header, body, bodyBold, bodyBoldItalic, bodyItalic, openSans, montserrat };
+const anisette = localFont({
+  src: "fonts/Anisette.otf",
+  variable: '--font-anisette',
+})
+
+const clashDisplay = localFont({
+  src: "/fonts/ClashDisplay-Variable (Subheader & body).ttf",
+  variable: '--font-clash',
+});
+
+
+export { header, body, bodyBold, bodyBoldItalic, bodyItalic, openSans, montserrat, anisette, clashDisplay };
