@@ -74,8 +74,7 @@ const LokasiVoting = () => {
 
     return (
         <div className="sm:flex w-full px-10">
-        <Card className="flex-col rounded-3xl w-full sm:max-w-md md:max-w-xl mx-auto bg-transparent shadow-lg relative"
-            style={{ backgroundColor: 'rgba(250, 58, 145, 0.3)' }}>
+        <Card className="flex-col rounded-3xl w-full sm:max-w-md md:max-w-xl mx-auto bg-transparent shadow-lg relative bg-[#FFA5B3] bg-opacity-50">
             <CardContent className="relative w-full p-0 rounded-xl">
                 <div className="relative w-full h-[400px] sm:h-[400px] md:h-[500px] lg:h-[500px] xl:h-[500px] lg:px-3 md:pt-3 lg:pt-5">
                     <MapContainer
@@ -103,7 +102,7 @@ const LokasiVoting = () => {
             </CardContent>
 
             <CardFooter className="mx-auto mb-5 mt-5 text-center items-center justify-center rounded-lg relative p-2 sm:max-w-xs sm:rounded-lg sm:px-4 w-4/6"
-                style={{ backgroundColor: '#FA3A91' }}>
+                style={{ backgroundColor: '#FF6D98' }}>
                 <button
                     onClick={() => handleArrowClick('left')}
                     className="absolute left-4 bg-white p-1.5 text-black font-extrabold rounded-full shadow-lg hover:bg-slate-400 transition"
