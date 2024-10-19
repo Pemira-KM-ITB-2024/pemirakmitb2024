@@ -5,7 +5,7 @@ const Bg = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
       className={cn(
-        "absolute z-0 h-full w-full bg-cream opacity-80",
+        "absolute inset-0 z-0 bg-cover bg-center bg-no-repeat",
         className,
       )}
       {...props}

@@ -13,37 +13,16 @@ const Countdown = dynamic(() => import("~/components/countdown"), {
 
 export default function Home() {
   return (
-    <div className="dusty-bg flex h-screen w-full flex-1 flex-col items-center justify-center [&_.ch]:px-[10vw]">
-      <Bg className="top-0 h-[calc(100vh)] bg-gradient-to-b from-cream from-85% to-brown-1" />
-      <Bg className="top-[calc(100vh)] h-screen bg-brown-1" />
-      <Bg className="top-[calc(200vh)] h-screen bg-brown-1" />
-      <Bg className="top-[calc(300vh)] h-screen bg-gradient-to-b from-brown-1 to-cream to-30%" />
+    <div className="flex h-screen w-full flex-1 flex-col items-center justify-center [&_.ch]:px-[10vw]">
+      <Bg className="bg-[url('/background-pemira-1.png')] bg-cover bg-center" />
       <div className="w-full snap-center">
         <div
           className={`ch isolate flex h-[calc(100vh-4rem)] w-full flex-col justify-center gap-6 text-center`}
         >
-          <h1
-            className={`${header.className} text-center text-4xl text-oren shadow-teal-4 text-shadow text-stroke-width-1 text-stroke-color-cream md:text-6xl`}
-          >
-            PEMILU RAYA KM ITB 2023/2024
-          </h1>
-          <h4 className="text-sm text-navy md:text-xl">
-            Pemilihan Ketua Kabinet KM ITB dan Majelis Wali Amanat Wakil
-            Mahasiswa ITB
-          </h4>
-          <h4
-            className={`${header.className} mb-12 text-red-4 drop-shadow md:mb-24`}
-          >
-            {"#GERAKINKLUSIF"}
-          </h4>
           <Countdown />
-          <div className="text-red-4">
-            {new Date() >= new Date("2024-03-13T07:00:00+07:00")
-              ? "PEMIRA sudah selesai!"
-              : "sampai vote dimulai!"}
-          </div>
         </div>
       </div>
+
       <div className="w-full">
         <div
           className={`ch isolate flex min-h-screen w-full flex-col justify-start gap-6 text-center`}
