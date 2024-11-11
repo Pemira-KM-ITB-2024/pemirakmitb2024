@@ -12,7 +12,7 @@ const ChangeMapCenter = ({ center }: { center: LatLngExpression | undefined }) =
     const map = useMap();
 
     useEffect(() => {
-        if (map && center) { // Pastikan center tidak undefined
+        if (map && center) {
             map.setView(center);
         }
     }, [center, map]);
@@ -94,7 +94,7 @@ const LokasiVoting = () => {
                                 </Popup>
                             </Marker>
                         ))}
-                        {positions[currentPositionIndex] && ( // Pastikan center valid
+                        {positions[currentPositionIndex] && (
                             <ChangeMapCenter center={positions[currentPositionIndex]} />
                         )}
                     </MapContainer>
