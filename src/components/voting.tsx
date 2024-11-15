@@ -6,12 +6,12 @@ import { anisette, clashDisplay } from "~/styles/fonts";
 
 const GuideVote = () => {
   return (
-    <div className="relative w-full min-h-screen bg-[url('/guidevoting/background.png')] bg-cover lg:bg-500 bg-center overflow-auto lg:overflow-hidden">  
+    <div className="relative w-full h-[600px] lg:min-h-screen overflow-auto lg:overflow-hidden">  
       <div className="lg:absolute lg:-top-20 lg:right-0 lg:w-[450px] absolute w-[96px] right-0 -top-4">
         <Image src={bintang} alt="Star" layout="responsive"/>
       </div>
 
-      <div className="lg:absolute lg:bottom-0 lg:left-40 lg:w-[350px] lg:h-[375px] lg:rotate-6 absolute top-14 right-2 w-[80px] h-[96px] rotate-6 lg:opacity-0 opacity-85">
+      <div className="lg:absolute lg:bottom-0 z-10 lg:left-40 lg:w-[350px] lg:h-[375px] lg:rotate-6 absolute top-14 right-2 w-[80px] h-[96px] rotate-6 lg:opacity-0 opacity-85">
         <Image src={kamera} alt="Person" layout="responsive" />
       </div>
 
@@ -73,7 +73,7 @@ const GuideVote = () => {
         </div>
       </div>
 
-      <div className="lg:absolute lg:bottom-0 lg:left-40 lg:w-[350px] lg:h-[375px] lg:rotate-6 absolute -bottom-24 left-2 w-[80px] h-[96px] rotate-6 lg:opacity-100 opacity-60">
+      <div className="lg:absolute lg:bottom-0 lg:left-40 lg:w-[350px] lg:h-[375px] lg:rotate-6 absolute top-[470px] left-2 w-[80px] h-[96px] rotate-6 lg:opacity-100 opacity-60">
         <Image src={orang} alt="Person" layout="responsive" />
       </div>
     </div>

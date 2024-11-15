@@ -7,6 +7,12 @@ import 'leaflet/dist/leaflet.css';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import Image from 'next/image';
+import bintang from "../../public/guidevoting/bintang-map.png";
+import camera from "../../public/guidevoting/camera-map.png";
+import lampu from "../../public/guidevoting/lampu-map.png";
+import bg from "../../public/guidevoting/bg-map.png";
+import { anisette } from "~/styles/fonts";
 
 const ChangeMapCenter = ({ center }: { center: LatLngExpression | undefined }) => {
     const map = useMap();
@@ -73,10 +79,34 @@ const LokasiVoting = () => {
     }
 
     return (
-        <div className="sm:flex w-full px-10">
-        <Card className="flex-col rounded-3xl w-full sm:max-w-md md:max-w-xl mx-auto bg-transparent shadow-lg relative bg-[#FFA5B3] bg-opacity-50">
-            <CardContent className="relative w-full p-0 rounded-xl">
-                <div className="relative w-full h-[400px] sm:h-[400px] md:h-[500px] lg:h-[500px] xl:h-[500px] lg:px-3 md:pt-3 lg:pt-5">
+        <div className="flex w-full px-10 mt-10 flex-col justify-center items-center">
+            <div className="w-full absolute left-0 lg:top-[600px]">
+                <Image src={bg} alt="bg" layout="responsive"/>
+            </div>
+            <div className="lg:w-[400px] absolute w-[100px] top-[700px] left-0 lg:top-[700px]">
+                <Image src={bintang} alt="Star" layout="responsive"/>
+            </div>
+            <div className="lg:w-[200px] absolute -top-10 w-[50px] lg:right-[320px] lg:top-[890px] z-10">
+                <Image src={camera} alt="Camera" layout="responsive"/>
+            </div>
+            <div className="lg:w-[380px] absolute -top-10 w-[100px] left-[190px] lg:top-[1560px] z-10">
+                <Image src={lampu} alt="Lampu" layout="responsive"/>
+            </div>
+            <div className="flex flex-row mb-5">
+                <h1
+                    className={`${anisette.variable} text-3xl md:text-4xl lg:text-6xl font-bold text-[#FFE859] [text-shadow:_4px_4px_0_rgb(0_0_0_/_80%)] -skew-x-6 `}
+                >
+                    LOK
+                </h1>
+                <h1
+                    className={`${anisette.variable} text-3xl md:text-4xl lg:text-6xl font-bold text-[#FFE859] [text-shadow:_4px_4px_0_rgb(0_0_0_/_80%)] skew-x-6 `}
+                >
+                    ASI
+                </h1>
+            </div>
+        <Card className="flex-col rounded-3xl w-full sm:max-w-md md:max-w-xl mx-auto bg-transparent shadow-lg relative bg-[#FFA5B3] bg-opacity-50 pb-5 lg:min-w-[700px]">
+            <CardContent className="relative w-full p-0 rounded-xl z-0">
+                <div className="relative w-full h-[400px] md:h-[500px] lg:h-[500px] xl:h-[700px] lg:px-3 md:pt-3 lg:pt-5">
                     <MapContainer
                         center={positions[0]}
                         zoom={13}
@@ -101,7 +131,7 @@ const LokasiVoting = () => {
                 </div>
             </CardContent>
 
-            <CardFooter className="mx-auto mb-5 mt-5 text-center items-center justify-center rounded-lg relative p-2 sm:max-w-xs sm:rounded-lg sm:px-4 w-4/6"
+            <CardFooter className="mx-auto mb-5 mt-5 text-center items-center justify-center rounded-lg relative p-2 sm:max-w-xs sm:rounded-lg sm:px-4 w-4/6 my-10"
                 style={{ backgroundColor: '#FF6D98' }}>
                 <button
                     onClick={() => handleArrowClick('left')}
