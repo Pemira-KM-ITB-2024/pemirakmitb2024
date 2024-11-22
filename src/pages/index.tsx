@@ -44,16 +44,16 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full h-full">
         <div
           className={`ch isolate flex min-h-screen w-full flex-col justify-start gap-6 text-center`}
         >
           <h1
-            className={`text-custom md:text-6xl ${header.className} pt-12 md:pt-32`}
+            className={`text-custom md:text-6xl ${header.className} pt-12 md:pt-32 mb-24`}
           >
             Linimasa
           </h1>
-          <div className="mt-12 flex h-full flex-1 justify-center pb-20 md:mt-0 md:items-center">
+          <div className="mt-12 flex h-auto flex-1 justify-center md:mt-0 md:items-center">
             <Timeline />
           </div>
         </div>
