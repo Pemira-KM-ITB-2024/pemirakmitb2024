@@ -1,9 +1,10 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { header } from "@fonts";
 
 const Countdown = () => {
   const electionDate = new Date("2024-12-25T00:00:00+07:00");
-
   const [timeLeft, setTimeLeft] = useState(
     Math.floor((electionDate.getTime() - new Date().getTime()) / 1000),
   );
