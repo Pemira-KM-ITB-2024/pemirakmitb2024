@@ -7,6 +7,10 @@
     @apply bg-[url('../../public/texture/dusty-2.png')] bg-cover bg-center relative;
   }
 
+  .voting-bg {
+    @apply bg-[url('../../public/guidevoting/bg-voting.png')] bg-cover bg-center;
+  }
+
   .text-custom {
     @apply text-shadow shadow-teal-4 text-oren text-stroke-width-1 text-stroke-color-cream text-center text-4xl;
   }
