@@ -135,7 +135,7 @@ const LokasiVoting = () => {
                 style={{ backgroundColor: '#FF6D98' }}>
                 <button
                     onClick={() => handleArrowClick('left')}
-                    className="absolute left-4 bg-white p-1.5 text-black font-extrabold rounded-full shadow-lg hover:bg-slate-400 transition"
+                    className="absolute left-4 bg-white p-1.5 text-black font-extrabold rounded-full shadow-lg hover:bg-slate-400 transition z-20"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5l-7.5-7.5 7.5-7.5" />
@@ -151,7 +151,7 @@ const LokasiVoting = () => {
 
                 <button
                     onClick={() => handleArrowClick('right')}
-                    className="absolute right-4 bg-white p-2 text-black font-extrabold rounded-full shadow-lg hover:bg-slate-400 transition"
+                    className="absolute right-4 bg-white p-2 text-black font-extrabold rounded-full shadow-lg hover:bg-slate-400 transition z-20"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
