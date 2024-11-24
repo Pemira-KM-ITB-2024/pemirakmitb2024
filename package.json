@@ -44,6 +44,7 @@
     "cmdk": "^1.0.0",
     "embla-carousel-react": "^8.0.0-rc22",
     "framer-motion": "^11.0.3",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.319.0",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
@@ -52,6 +53,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.50.0",
     "react-icons": "^5.0.1",
+    "react-leaflet": "^4.2.1",
     "recharts": "^2.12.2",
     "sonner": "^1.4.2",
     "superjson": "^2.2.1",
@@ -62,6 +64,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.44.7",
+    "@types/leaflet": "^1.9.13",
     "@types/node": "^18.19.20",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",

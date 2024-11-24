@@ -13,16 +13,22 @@ const Layout = ({ children }: { children?: ReactNode }) => (
         <title>PEMIRA KM ITB</title>
         <meta
           name="description"
-          content="Website Pemilu Raya KM ITB 2023/2024"
+          content="Website Pemilu Raya KM ITB 2024/2025"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster richColors />
-      <main className="flex min-h-dvh flex-1 flex-col">
+      <main className="flex min-h-dvh flex-1 flex-col overflow-hidden"
+      style={{
+        backgroundImage: "url(/background-pemira-1.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      >
         <Navbar />
         {children}
+        <Footer/>
       </main>
-      <Footer />
     </div>
   </FadeIn>
 );
