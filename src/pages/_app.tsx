@@ -1,8 +1,6 @@
 import { SessionProvider } from "next-auth/react";
 import { type AppProps } from "next/app";
 
-import { api } from "~/utils/api";
-
 import "~/styles/globals.css";
 import Layout from "@/layout";
 import type { ReactElement, ReactNode } from "react";
@@ -38,4 +36,4 @@ const Pemira = ({
   );
 };
 
-export default api.withTRPC(Pemira);
+export default Pemira;
