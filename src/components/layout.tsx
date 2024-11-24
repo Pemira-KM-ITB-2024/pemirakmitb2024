@@ -8,6 +8,7 @@ import { Toaster } from "./ui/sonner";
 
 const Layout = ({ children }: { children?: ReactNode }) => (
   <FadeIn>
+    <Navbar />
     <div className={`${body.className} flex min-h-dvh flex-col text-black`}>
       <Head>
         <title>PEMIRA KM ITB</title>
@@ -25,7 +26,6 @@ const Layout = ({ children }: { children?: ReactNode }) => (
         backgroundPosition: "center",
       }}
       >
-        <Navbar />
         {children}
         <Footer/>
       </main>

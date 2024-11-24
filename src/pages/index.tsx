@@ -40,9 +40,9 @@ export default function Home() {
           alt="jam-dinding"
           className="absolute justify-start mt-[210px] overflow-hidden ml-[-30px] xsm:ml-[80px] sm:ml-[90px] md:w-[200px] lg:w-[250px] md:mt-[140px] 2xl:ml-[160px]"
         />
-        <div className="ch isolate flex h-[calc(100vh-4rem)] w-full flex-col justify-center gap-6 text-center">
+        {/* <div className="ch isolate flex h-[calc(100vh-4rem)] w-full flex-col justify-center gap-6 text-center">
           <Countdown />
-        </div>
+        </div> */}
         <Image 
           src="/jam-tangan.png"
           width={200}
@@ -51,7 +51,7 @@ export default function Home() {
           className="absolute  mt-[-380px] mr-5 ml-[340px] z-[-1] overflow-hidden md:w-[200px] lg:w-[250px] lg:ml-[900px] 2xl:ml-[1075px] lg:mt-[-400px] md:ml-[650px] sm:ml-[450px] xsm:ml-[350px]"
         />
       </div>
-      <h1 className={`${header.className} text-center items-center flex text-6xl text-[#FA3A91] font-extrabold mt-[-150px]`}>
+      {/* <h1 className={`${header.className} text-center items-center flex text-6xl text-[#FA3A91] font-extrabold mt-[-150px]`}>
         CALON K3M
       </h1>
       <div className="w-[80%] overflow-x-auto flex justify-start md:justify-center gap-x-6 px-4">
@@ -140,30 +140,33 @@ export default function Home() {
             </CardFooter>
           </Card>
         </div>
-      </div>
-      <div className="mt-[150px]">
-        <Image 
-          src="/orang-1.png"
-          width={200}
-          height={200}
-          alt="gambarorang"
-          className="absolute z-[-1] ml-[-140px] mt-[30px] md:mt-[-90px] md:w-[200px] lg:w-[250px] sm:ml-[-180px] md:ml-[-300px]"
-        />
-        <p className={`${header.className} font-extrabold text-6xl text-[#FA3A91]`}>Tentukan</p>
-        <p className={`${header.className} font-extrabold text-6xl text-[#BEEF62]`}>Pilihanmu</p>
-        <Image 
-          src="/orang-2.png"
-          width={275}
-          height={275}
-          alt="gambarorang2"
-          className="absolute z-[-1] ml-[200px] overflow-hidden mt-[-170px] md:w-[350px] md:ml-[300px]"
-        />
-      </div>
-      <div className="mt-3">
-        <button className="bg-[#FFF859] text-[#FA3A91] rounded-3xl hover:bg-[#FFAAB7] hover:text-[#FFF19A]">
-          <p className={`${body.className}  mx-8 my-2 text-3xl font-extrabold`}>Cara Vote</p>
-        </button>
-      </div>
+      </div> */}
+      <section className="my-[300px]">
+        <div className="mt-[150px]">
+          <Image 
+            src="/orang-1.png"
+            width={200}
+            height={200}
+            alt="gambarorang"
+            className="absolute z-[-1] ml-[-140px] mt-[30px] md:mt-[-90px] md:w-[200px] lg:w-[250px] sm:ml-[-180px] md:ml-[-300px]"
+          />
+          <p className={`${header.className} font-extrabold text-6xl text-[#FA3A91]`}>Tentukan</p>
+          <p className={`${header.className} font-extrabold text-6xl text-[#BEEF62]`}>Pilihanmu</p>
+          <Image 
+            src="/orang-2.png"
+            width={275}
+            height={275}
+            alt="gambarorang2"
+            className="absolute z-[-1] ml-[200px] overflow-hidden mt-[-170px] md:w-[350px] md:ml-[300px]"
+          />
+        </div>
+        <div className="mt-3">
+          <button className="bg-[#FFF859] text-[#FA3A91] rounded-3xl hover:bg-[#FFAAB7] hover:text-[#FFF19A]">
+            <p className={`${body.className}  mx-8 my-2 text-3xl font-extrabold`}>Cara Vote</p>
+          </button>
+        </div>
+      </section>
+
       <div className={`${header.className} mt-[100px] font-bold text-5xl text-[#FA3A91]`}>
         LINI MASA
       </div>
