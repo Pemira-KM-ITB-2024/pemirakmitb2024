@@ -6,14 +6,12 @@ import Link from "next/link";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { type ReactNode } from "react";
 import { FaXTwitter } from 'react-icons/fa6';
-import Bg from "./background";
 import {body} from "@fonts";
 
 const Footer = () => {
   
   return (
     <footer className="bg-[#FA3A91] rounded-t-[100%] relative"> 
-      <Bg/>
       <div className="relative flex flex-col md:flex-row p-4">
         
         {/* Left Smoke Image */}
