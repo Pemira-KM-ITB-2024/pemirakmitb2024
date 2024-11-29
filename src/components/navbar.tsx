@@ -12,10 +12,10 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: "/", label: "Profil Calon" },
-    { href: "/", label: "Guide Voting" },
-    { href: "/", label: "Statistik" },
-    { href: "/", label: "Hasil Voting" },
+    // { href: "/", label: "Profil Calon" },
+    // { href: "/guide-voting", label: "Guide Voting" },
+    // { href: "/", label: "Statistik" },
+    // { href: "/", label: "Hasil Voting" },
   ];
 
   const handleOverlayClick = () => {
@@ -38,11 +38,11 @@ const Navbar = () => {
                   <span className="transition-colors duration-300 hover:text-[#FFAAB7]">
                     {link.label}
                   </span>
-                  {/* {pathname.startsWith(link.href) && (
+                  {pathname.startsWith(link.href) && (
                     <span
                       className={`absolute bottom-[-4px] left-0 h-[3px] w-full bg-[#FA3A91] transition-all duration-300 group-hover:bg-[#FFAAB7]`}
                     ></span>
-                  )} */}
+                  )}
                 </span>
               </Link>
             </li>

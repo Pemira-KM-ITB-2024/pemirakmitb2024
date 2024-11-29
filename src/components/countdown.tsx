@@ -32,22 +32,22 @@ const Countdown = () => {
   }, []);
 
   return (
-    <div className={`flex justify-center gap-20 ${header.className}`}>
+    <div className={`flex justify-between ${header.className}`}>
       <div className="flex flex-col items-center">
-        <div className="text-9xl text-white">{getTimeLeft.days}</div>
-        <div className="text-xl text-white">HARI</div>
+        <div className="text-[52px] sm:text-[82px] lg:text-9xl text-white">{getTimeLeft.days}</div>
+        <div className="sm:text-[16px] lg:text-xl text-white">HARI</div>
       </div>
       <div className="flex flex-col items-center">
-        <div className="text-9xl text-white">{getTimeLeft.hours}</div>
-        <div className="text-xl text-white">JAM</div>
+        <div className="text-[52px] sm:text-[82px] lg:text-9xl text-white">{getTimeLeft.hours}</div>
+        <div className="sm:text-[16px] lg:text-xl text-white">JAM</div>
       </div>
       <div className="flex flex-col items-center">
-        <div className="text-9xl text-white">{getTimeLeft.minutes}</div>
-        <div className="text-xl text-white">MENIT</div>
+        <div className="text-[52px] sm:text-[82px] lg:text-9xl text-white">{getTimeLeft.minutes}</div>
+        <div className="sm:text-[16px] lg:text-xl text-white">MENIT</div>
       </div>
       <div className="flex flex-col items-center">
-        <div className="text-9xl text-white">{getTimeLeft.seconds}</div>
-        <div className="text-xl text-white">DETIK</div>
+        <div className="text-[52px] sm:text-[82px] lg:text-9xl text-white">{getTimeLeft.seconds}</div>
+        <div className="sm:text-[16px] lg:text-xl text-white">DETIK</div>
       </div>
     </div>
   );
