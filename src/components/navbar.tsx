@@ -12,6 +12,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const navLinks = [
+    { href: "/", label: "Home" },
     // { href: "/", label: "Profil Calon" },
     // { href: "/guide-voting", label: "Guide Voting" },
     // { href: "/", label: "Statistik" },
