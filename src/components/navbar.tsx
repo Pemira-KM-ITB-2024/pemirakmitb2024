@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "../../public/Logo Transparan.png";
-import { body, header } from "@fonts";
+import { body } from "@fonts";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -12,10 +12,10 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: "/profil-calon", label: "Profil Calon" },
-    { href: "/guide-voting", label: "Guide Voting" },
-    { href: "/statistik", label: "Statistik" },
-    { href: "/hasil", label: "Hasil Voting" },
+    { href: "/", label: "Profil Calon" },
+    { href: "/", label: "Guide Voting" },
+    { href: "/", label: "Statistik" },
+    { href: "/", label: "Hasil Voting" },
   ];
 
   const handleOverlayClick = () => {
@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] pl-4 pr-6 text-[#FA3A91] md:pl-10 md:pr-24">
+      <nav className="sticky top-0 z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] pl-4 pr-6 text-[#FA3A91] md:pl-10 md:pr-24">
         <Link href="/">
           <Image className="mr-2" src={Logo} height={60} alt="Logo" />
         </Link>
@@ -38,11 +38,11 @@ const Navbar = () => {
                   <span className="transition-colors duration-300 hover:text-[#FFAAB7]">
                     {link.label}
                   </span>
-                  {pathname.startsWith(link.href) && (
+                  {/* {pathname.startsWith(link.href) && (
                     <span
                       className={`absolute bottom-[-4px] left-0 h-[3px] w-full bg-[#FA3A91] transition-all duration-300 group-hover:bg-[#FFAAB7]`}
                     ></span>
-                  )}
+                  )} */}
                 </span>
               </Link>
             </li>

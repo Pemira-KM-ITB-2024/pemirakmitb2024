@@ -1,13 +1,20 @@
 import { type HTMLAttributes } from "react";
 import { cn } from "~/lib/utils";
 
-const Bg = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
+interface BgProps extends HTMLAttributes<HTMLDivElement> {
+  backgroundImage?: string;
+}
+
+const Bg = ({ className, backgroundImage="/background-pemira-1.png", ...props }: BgProps) => {
   return (
     <div
       className={cn(
-        "absolute inset-0 z-0 bg-cover bg-center bg-no-repeat",
-        className,
+        "absolute inset-0 z-[-1] opacity-100 bg-cover bg-center",
+        className
       )}
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+      }}
       {...props}
     ></div>
   );
