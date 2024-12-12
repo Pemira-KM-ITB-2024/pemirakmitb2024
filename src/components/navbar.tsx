@@ -13,6 +13,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/forsos", label: "Forsos" },
     // { href: "/", label: "Profil Calon" },
     // { href: "/guide-voting", label: "Guide Voting" },
     // { href: "/", label: "Statistik" },
@@ -39,7 +40,7 @@ const Navbar = () => {
                   <span className="transition-colors duration-300 hover:text-[#FFAAB7]">
                     {link.label}
                   </span>
-                  {pathname.startsWith(link.href) && (
+                  {pathname === link.href && (
                     <span
                       className={`absolute bottom-[-4px] left-0 h-[3px] w-full bg-[#FA3A91] transition-all duration-300 group-hover:bg-[#FFAAB7]`}
                     ></span>
@@ -80,7 +81,7 @@ const Navbar = () => {
       )}
 
       <div
-        className={`fixed left-0 right-0 z-[999] mt-16 rounded-b bg-[#BEEF62] transition-opacity duration-300 ease-in-out md:hidden ${
+        className={`fixed left-0 right-0 z-[999] rounded-b bg-[#BEEF62] transition-opacity duration-300 ease-in-out md:hidden ${
           isExpanded
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -91,7 +92,7 @@ const Navbar = () => {
             <li
               key={link.href}
               className={`group w-full ${
-                pathname.startsWith(link.href) ? "bg-[#b3e251]" : ""
+                pathname === link.href ? "bg-[#b3e251]" : ""
               }`}
             >
               <Link
@@ -103,7 +104,13 @@ const Navbar = () => {
               >
                 <span className="relative z-10 transition-colors duration-300 ">
                   {link.label}
+                  {pathname === link.href && (
+                    <span
+                      className={`absolute bottom-0 left-0 h-[3px] w-full bg-[#FA3A91] transition-all duration-300 group-hover:bg-[#FFAAB7]`}
+                    ></span>
+                  )}
                 </span>
+                
                 <span className="absolute inset-0 bg-[#b3e251] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
               </Link>
             </li>

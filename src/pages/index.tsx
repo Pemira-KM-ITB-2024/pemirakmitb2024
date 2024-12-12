@@ -7,15 +7,34 @@ import {
 } from "@/ui/card";
 import { body,header } from "@fonts"
 import Timeline from "~/components/dashboard/timeline";
+import Link from "next/link";
+import { Description } from "@radix-ui/react-dialog";
 
 const Countdown = dynamic(() => import("~/components/countdown"), {
   ssr: false,
 });
 
+const events1 = [
+  { date: '16-18 Desember 2024', description: 'Open Berkas' },
+  { date: '19-21 Desember 2024', description: 'Pengambilan Berkas' },
+];
+
+const events2 = [
+  { date: '17 Februari 2025', description: 'Verifikasi Berkas' },
+  { date: '18 Februari 2025', description: 'Pembekalan Calon K3M dan Calon MWA-WM ITB' },
+  { date: '19-28 Februari 2025', description: 'Hearing Zona dan Hearing by Request'},
+  { date: '1-2 Maret 2025', description: 'Debat dan Uji Panelis' },
+]
+
+const events3 = [
+  { date: '19 Maret 2025', description: 'Perhitungan Suara' },
+  { date: '20 Maret 2025', description: 'Pengumuman Hasil Perhitungan Suara' },
+]
+
 export default function Home() {
   return (
     <div className="relative z-0 flex flex-col items-center w-full min-h-screen overflow-hidden">
-      <section className="w-full flex flex-col items-center justify-center h-fit mt-6 mb-12">
+      <section className="w-full flex flex-col items-center justify-center h-fit my-[8vw]">
         <div className="relative w-[80%] h-[40vw] lg:h-[20vw] flex items-center justify-center">
           <Image 
             src="/landing-logo.svg"
@@ -128,7 +147,7 @@ export default function Home() {
             </CardFooter>
           </Card>
 
-          <Card className="bg-[#FFE859]">
+          <Card className="bg-[#FFE859]"
             <CardContent className="mt-5">
               <Image 
                 src="/no-1.png"
@@ -182,8 +201,27 @@ export default function Home() {
           </button>
         </div>
       </section> */}
-      <section className="w-full flex flex-col justify-center items-center">
-        <div className={`${header.className} mt-[100px] font-bold text-5xl text-[#FA3A91]`}>
+      {/* forsos */}
+      <section className="w-[80%] my-[8vw] flex flex-col items-center justify-center">
+        <div className={`${header.className} font-bold text-3xl md:text-5xl text-[#FA3A91] flex items-center justify-center text-center`}>
+          FORUM SOSIALISASI
+        </div>
+        <div className="flex flex-row justify-center items-center gap-4 mt-6">
+          <Link href={"/forsos"}>
+            <button className="bg-[#FFF859] text-[#FA3A91] rounded-3xl hover:bg-[#FA3A91] hover:text-[#FFF859]">
+              <p className={`${body.className} mx-4 md:mx-8 my-2 text-xs md:text-3xl font-extrabold leading-2`}>Materi Forsos</p>
+            </button>
+          </Link>
+          <Link href="https://bit.ly/NotulForSas" target="_blank">
+            <button className="bg-[#FFF859] text-[#FA3A91] rounded-3xl hover:bg-[#FA3A91] hover:text-[#FFF859]">
+              <p className={`${body.className} mx-4 md:mx-8 my-2 text-xs md:text-3xl font-extrabold`}>Notulensi Forsos</p>
+            </button>
+          </Link>
+        </div>
+      </section>
+
+      <section className="my-[8vw] w-full flex flex-col justify-center items-center">
+        <div className={`${header.className} font-bold text-3xl md:text-5xl text-[#FA3A91]`}>
           LINI MASA
         </div>
         <div className="w-[80%] h-full mt-[60px] md:mt-[100px]">
@@ -226,12 +264,17 @@ export default function Home() {
                 alt="toa"
                 className="absolute mt-[750px] mr-[-300px] sm:mt-[1450px] sm:mr-[-450px] md:mt-[1750px] md:w-[200px] md:mr-[-550px] lg:mt-[2400px] lg:mr-[-650px]"
               />
-              <Timeline month="October"/>
-              <div className="mt-[100px] mb-[100px] sm:mt-[120px] md:mt-[160px] lg:mt-[180px] xl:mt-[240px] xl:mb-[120px]">
-                <h1 className="font-bold text-white text-[36px] sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px]">AMBIL BERKAS</h1>
-                <p className="-mt-4 sm:-mt-6 md:-mt-8 lg:-mt-12 xl:-mt-16 text-[#FA3A91] font-bold md:text-[28px] lg:text-[36px] xl:text-[48px]">23 Oktober 2024 - 24 November 2024</p>
+              <Timeline events={events1} month="Desember 2024"/>
+              <div className="mt-[20vw] mb-[10vw]">
+                <h1 className="font-bold text-white text-[36px] sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px] leading-[1]">Pengembalian Berkas</h1>
+                <p className="-mt-[1.5vw] text-[#FA3A91] font-bold md:text-[28px] lg:text-[36px] xl:text-[48px]">17 Februari 2025</p>
               </div>
-              <Timeline month="November" endingMonth="December" endingMonthState={true} showCircle={false}/>
+              <Timeline events={events2} endingMonthState={true} showCircle={true}/>
+              <div className="mt-[20vw] mb-[10vw]">
+                <h1 className="font-bold text-white text-[36px] sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px] leading-[1]">Pemungutan Suara</h1>
+                <p className="-mt-[1.5vw] text-[#FA3A91] font-bold md:text-[28px] lg:text-[36px] xl:text-[48px]">10-18 Maret 2025</p>
+              </div>
+              <Timeline events={events3} endingMonth="Maret 2025" endingMonthState={true} showCircle={true}/>
             </div>
           </div>
         </div>
