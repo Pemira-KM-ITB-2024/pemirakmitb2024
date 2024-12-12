@@ -26,7 +26,7 @@ export default function Forsos() {
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
           <div className="w-full h-full">
             <Viewer
-              fileUrl="/forsos/forsos.pdf"
+              fileUrl="/forsos/forsas.pdf"
               plugins={[defaultLayoutPluginInstance]}
               defaultScale={SpecialZoomLevel.PageWidth} // Set initial zoom to page width
             />
