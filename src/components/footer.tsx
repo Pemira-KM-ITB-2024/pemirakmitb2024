@@ -101,7 +101,7 @@ const Footer = () => {
             </div>
             <div className="text-[12px] md:text-[1vw] flex items-center justify-center gap-2 p-2 font-bold text-white">
               <IoIosMail />
-              pemirakmitb2425@gmail.com
+              pemira@km.itb.ac.id
             </div>
           </div>
           <div className="flex justify-center md:justify-start w-full md:w-[12vw] leading-[1]">
