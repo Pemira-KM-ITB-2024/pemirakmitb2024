@@ -212,7 +212,7 @@ export default function Home() {
               <p className={`${body.className} mx-4 md:mx-8 my-2 text-xs md:text-3xl font-extrabold leading-2`}>Materi Forsos</p>
             </button>
           </Link>
-          <Link href="https://bit.ly/NotulForSas" target="_blank">
+          <Link href="https://bit.ly/FolderNotulensiForsos" target="_blank">
             <button className="bg-[#FFF859] text-[#FA3A91] rounded-3xl hover:bg-[#FA3A91] hover:text-[#FFF859]">
               <p className={`${body.className} mx-4 md:mx-8 my-2 text-xs md:text-3xl font-extrabold`}>Notulensi Forsos</p>
             </button>

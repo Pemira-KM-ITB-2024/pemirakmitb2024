@@ -136,7 +136,7 @@ const Footer = () => {
       <div
           className={`${body.className} relative z-10 w-full flex items-center justify-center bg-[#FFE859] py-4  text-sm font-bold md:text-lg md:font-extrabold`}
         >
-          <p>©2025 Copyright: Divisi IT KM ITB 2025</p>
+          <p>©2025 Copyright: Divisi IT PEMIRA KM ITB 2025</p>
         </div>
     </footer>
   );
