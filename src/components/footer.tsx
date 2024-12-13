@@ -126,7 +126,7 @@ const Footer = () => {
               </LinkIcon>
               <div className="md:hidden text-[12px] md:text-[1vw] flex items-center justify-center gap-2 p-2 font-bold text-white">
                 <IoIosMail />
-                pemirakmitb2425@gmail.com
+                pemira@km.itb.ac.id
               </div>
             </div>
           </div>
