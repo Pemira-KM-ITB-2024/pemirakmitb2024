@@ -126,6 +126,13 @@ const config = {
         5: "5px",
         6: "6px",
       },
+      backgroundSize: {
+        '150': '150%',
+        '200': '200%',
+        '500': '500%',
+        '1000':'1000%',
+        '2000':'2000%',
+      },
       textStrokeColor: (theme: Function) => theme("colors"),
     },
   },
