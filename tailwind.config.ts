@@ -109,14 +109,14 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       textShadow: {
-        xs: "1px 1px 0px var(--tw-shadow-color), -0.625px -0.625px 0px var(--tw-shadow-color), -0.625px 0.625px 0px var(--tw-shadow-color), 0.625px -0.625px 0px var(--tw-shadow-color)",
-        sm: "2px 2px 0px var(--tw-shadow-color), -1.25px -1.25px 0px var(--tw-shadow-color), -1.25px 1.25px 0px var(--tw-shadow-color), 1.25px -1.25px 0px var(--tw-shadow-color)",
+        xs: "1px 1px 0px rgba(0, 0, 0, 0.5), -0.625px -0.625px 0px rgba(0, 0, 0, 0.5), -0.625px 0.625px 0px rgba(0, 0, 0, 0.5), 0.625px -0.625px 0px rgba(0, 0, 0, 0.5)",
+        sm: '0 1px 2px rgba(0, 0, 0, 0.5)',
         DEFAULT:
-          "3px 3px 0px var(--tw-shadow-color), -2px -2px 0px var(--tw-shadow-color), -2px 2px 0px var(--tw-shadow-color), 2px -2px 0px var(--tw-shadow-color)",
-        md: "4px 4px 0px var(--tw-shadow-color), -2.5px -2.5px 0px var(--tw-shadow-color), -2.5px 2.5px 0px var(--tw-shadow-color), 2.5px -2.5px 0px var(--tw-shadow-color)",
-        blurMd: "4px 4px 2px var(--tw-shadow-color)",
-        lg: "6px 6px 0px var(--tw-shadow-color), -4px -4px 0px var(--tw-shadow-color), -4px 4px 0px var(--tw-shadow-color), 4px -4px 0px var(--tw-shadow-color)",
-        xl: "8px 8px 0px var(--tw-shadow-color), -5.5px -5.5px 0px var(--tw-shadow-color), -5.5px 5.5px 0px var(--tw-shadow-color), 5.5px -5.5px 0px var(--tw-shadow-color)",
+          "3px 3px 0px rgba(0, 0, 0, 0.5), -2px -2px 0px rgba(0, 0, 0, 0.5), -2px 2px 0px rgba(0, 0, 0, 0.5), 2px -2px 0px rgba(0, 0, 0, 0.5)",
+        md: '4px 4px 4px rgba(0, 0, 0, 0.5)',
+        blurMd: "4px 4px 2px rgba(0, 0, 0, 0.5)",
+        lg: '0 4px 8px rgba(0, 0, 0, 0.5)',
+        xl: "8px 8px 0px rgba(0, 0, 0, 0.5), -5.5px -5.5px 0px rgba(0, 0, 0, 0.5), -5.5px 5.5px 0px rgba(0, 0, 0, 0.5), 5.5px -5.5px 0px rgba(0, 0, 0, 0.5)",
       },
       textStrokeWidth: {
         1: "1px",
