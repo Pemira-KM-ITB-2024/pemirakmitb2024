@@ -1,50 +1,51 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/ui/card";
-import { body,header } from "@fonts"
+import { body, header } from "@fonts";
 import Timeline from "~/components/dashboard/timeline";
 import Link from "next/link";
-import { Description } from "@radix-ui/react-dialog";
 
 const Countdown = dynamic(() => import("~/components/countdown"), {
   ssr: false,
 });
 
 const events1 = [
-  { date: '16-18 Desember 2024', description: 'Open Berkas' },
-  { date: '19-21 Desember 2024', description: 'Pengambilan Berkas' },
+  { date: "16-18 Desember 2024", description: "Open Berkas" },
+  { date: "19-21 Desember 2024", description: "Pengambilan Berkas" },
 ];
 
 const events2 = [
-  { date: '17 Februari 2025', description: 'Verifikasi Berkas' },
-  { date: '18 Februari 2025', description: 'Pembekalan Calon K3M dan Calon MWA-WM ITB' },
-  { date: '19-28 Februari 2025', description: 'Hearing Zona dan Hearing by Request'},
-  { date: '1-2 Maret 2025', description: 'Debat dan Uji Panelis' },
-]
+  { date: "17 Februari 2025", description: "Verifikasi Berkas" },
+  {
+    date: "18 Februari 2025",
+    description: "Pembekalan Calon K3M dan Calon MWA-WM ITB",
+  },
+  {
+    date: "19-28 Februari 2025",
+    description: "Hearing Zona dan Hearing by Request",
+  },
+  { date: "1-2 Maret 2025", description: "Debat dan Uji Panelis" },
+];
 
 const events3 = [
-  { date: '19 Maret 2025', description: 'Perhitungan Suara' },
-  { date: '20 Maret 2025', description: 'Pengumuman Hasil Perhitungan Suara' },
-]
+  { date: "19 Maret 2025", description: "Perhitungan Suara" },
+  { date: "20 Maret 2025", description: "Pengumuman Hasil Perhitungan Suara" },
+];
 
 export default function Home() {
+
   return (
-    <div className="relative z-0 flex flex-col items-center w-full min-h-screen overflow-hidden">
-      <section className="w-full flex flex-col items-center justify-center h-fit my-[8vw]">
-        <div className="relative w-[80%] h-[40vw] lg:h-[20vw] flex items-center justify-center">
-          <Image 
+    <div className="relative z-0 flex min-h-screen w-full flex-col items-center overflow-hidden">
+      <section className="my-[8vw] flex h-fit w-full flex-col items-center justify-center">
+        <div className="relative flex h-[40vw] w-[80%] items-center justify-center lg:h-[20vw]">
+          <Image
             src="/landing-logo.svg"
             layout="fill"
             objectFit="contain"
             alt="Gambar Pemira"
             className="absolute z-[-1]"
           />
-          <div className="bottom-0 absolute w-[70%] lg:h-[3vw] h-[6vw]">
-            <Image 
+          <div className="absolute bottom-0 h-[6vw] w-[70%] lg:h-[3vw]">
+            <Image
               src="/landing-text.svg"
               layout="fill"
               objectFit="contain"
@@ -53,7 +54,7 @@ export default function Home() {
             />
           </div>
         </div>
-        
+
         {/* <div className="absolute bottom-0 flex-row items-center text-center max-w-[80%] tracking-widest">
           <h3 className={`${header.className} justify-center flex font-bold text-[36px] text-[#FFF859] w-full`}>
             Pemilihan Ketua Kabinet KM ITB dan <br/> MAJELIS WALI AMANAT WAKIL MAHASISWA ITB 
@@ -202,79 +203,108 @@ export default function Home() {
         </div>
       </section> */}
       {/* forsos */}
-      <section className="w-[80%] my-[8vw] flex flex-col items-center justify-center">
-        <div className={`${header.className} font-bold text-3xl md:text-5xl text-[#FA3A91] flex items-center justify-center text-center`}>
+      <section className="my-[8vw] flex w-[80%] flex-col items-center justify-center">
+        <div
+          className={`${header.className} flex items-center justify-center text-center text-3xl font-bold text-[#FA3A91] md:text-5xl`}
+        >
           FORUM SOSIALISASI
         </div>
-        <div className="flex flex-row justify-center items-center gap-4 mt-6">
+        <div className="mt-6 flex flex-row items-center justify-center gap-4">
           <Link href={"/forsos"}>
-            <button className="bg-[#FFF859] text-[#FA3A91] rounded-3xl hover:bg-[#FA3A91] hover:text-[#FFF859]">
-              <p className={`${body.className} mx-4 md:mx-8 my-2 text-xs md:text-3xl font-extrabold leading-2`}>Materi Forsos</p>
+            <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
+              <p
+                className={`${body.className} leading-2 mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
+              >
+                Materi Forsos
+              </p>
             </button>
           </Link>
           <Link href="https://bit.ly/FolderNotulensiForsos" target="_blank">
-            <button className="bg-[#FFF859] text-[#FA3A91] rounded-3xl hover:bg-[#FA3A91] hover:text-[#FFF859]">
-              <p className={`${body.className} mx-4 md:mx-8 my-2 text-xs md:text-3xl font-extrabold`}>Notulensi Forsos</p>
+            <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
+              <p
+                className={`${body.className} mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
+              >
+                Notulensi Forsos
+              </p>
             </button>
           </Link>
         </div>
       </section>
 
-      <section className="my-[8vw] w-full flex flex-col justify-center items-center">
-        <div className={`${header.className} font-bold text-3xl md:text-5xl text-[#FA3A91]`}>
+      <section className="my-[8vw] flex w-full flex-col items-center justify-center">
+        <div
+          className={`${header.className} text-3xl font-bold text-[#FA3A91] md:text-5xl`}
+        >
           LINI MASA
         </div>
-        <div className="w-[80%] h-full mt-[60px] md:mt-[100px]">
+        <div className="mt-[60px] h-full w-[80%] md:mt-[100px]">
           <div
-            className={`relative ch isolate flex min-h-screen w-full flex-col justify-start gap-6 text-center`}
+            className={`ch relative isolate flex min-h-screen w-full flex-col justify-start gap-6 text-center`}
           >
-            <div className="mt-12 flex flex-col h-auto flex-1 justify-center md:mt-0 mb-[240px] md:mb-[440px]">
+            <div className="mb-[240px] mt-12 flex h-auto flex-1 flex-col justify-center md:mb-[440px] md:mt-0">
               <Image
                 src="/background-landing2.png"
                 width={700}
                 height={700}
                 alt="background1"
-                className="absolute z-[-2] overflow-hidden w-full md:mt-[-2000px] scale-125"
+                className="absolute z-[-2] w-full scale-125 overflow-hidden md:mt-[-2000px]"
               />
-              <Image 
+              <Image
                 src="/mikrofon.png"
                 width={100}
                 height={100}
                 alt="mikrofon"
-                className="absolute z-[-1] mt-[425px] ml-[-375px] lg:w-[200px]  sm:mt-[820px] sm:ml-[-500px] md:mt-[400px] md:w-[130px] md:ml-[-600px] lg:ml-[-800px] xl:ml-[-1200px] xl:mt-[550px]"
+                className="absolute z-[-1] ml-[-375px] mt-[425px] sm:ml-[-500px]  sm:mt-[820px] md:ml-[-600px] md:mt-[400px] md:w-[130px] lg:ml-[-800px] lg:w-[200px] xl:ml-[-1200px] xl:mt-[550px]"
               />
-              <Image 
+              <Image
                 src="/koran.png"
                 width={150}
                 height={150}
                 alt="koran"
-                className="absolute mt-[575px] mr-[-275px] sm:mt-[1150px] sm:w-[200px] sm:mr-[-350px] lg:mt-[1650px] lg:mr-[-550px] lg:w-[300px] "
+                className="absolute mr-[-275px] mt-[575px] sm:mr-[-350px] sm:mt-[1150px] sm:w-[200px] lg:mr-[-550px] lg:mt-[1650px] lg:w-[300px] "
               />
               <Image
                 src="/toapemira.png"
                 width={120}
                 height={120}
                 alt="toa"
-                className="absolute mt-[750px] ml-[-300px] sm:mt-[1450px] sm:ml-[-450px] md:mt-[1750px] md:w-[200px] md:ml-[-550px] lg:mt-[2400px] lg:ml-[-650px]"
+                className="absolute ml-[-300px] mt-[750px] sm:ml-[-450px] sm:mt-[1450px] md:ml-[-550px] md:mt-[1750px] md:w-[200px] lg:ml-[-650px] lg:mt-[2400px]"
               />
               <Image
                 src="/suratpemira.png"
                 width={120}
                 height={120}
                 alt="toa"
-                className="absolute mt-[750px] mr-[-300px] sm:mt-[1450px] sm:mr-[-450px] md:mt-[1750px] md:w-[200px] md:mr-[-550px] lg:mt-[2400px] lg:mr-[-650px]"
+                className="absolute mr-[-300px] mt-[750px] sm:mr-[-450px] sm:mt-[1450px] md:mr-[-550px] md:mt-[1750px] md:w-[200px] lg:mr-[-650px] lg:mt-[2400px]"
               />
-              <Timeline events={events1} month="Desember 2024"/>
-              <div className="mt-[20vw] mb-[10vw]">
-                <h1 className="font-bold text-white text-[36px] sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px] leading-[1]">Pengembalian Berkas</h1>
-                <p className="-mt-[1.5vw] text-[#FA3A91] font-bold md:text-[28px] lg:text-[36px] xl:text-[48px]">17 Februari 2025</p>
+              <Timeline events={events1} month="Desember 2024" />
+              <div className="mb-[10vw] mt-[20vw]">
+                <h1 className="text-[36px] font-bold leading-[1] text-white sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px]">
+                  Pengembalian Berkas
+                </h1>
+                <p className="-mt-[1.5vw] font-bold text-[#FA3A91] md:text-[28px] lg:text-[36px] xl:text-[48px]">
+                  17 Februari 2025
+                </p>
               </div>
-              <Timeline events={events2} endingMonthState={true} showCircle={true}/>
-              <div className="mt-[20vw] mb-[10vw]">
-                <h1 className="font-bold text-white text-[36px] sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px] leading-[1]">Pemungutan Suara</h1>
-                <p className="-mt-[1.5vw] text-[#FA3A91] font-bold md:text-[28px] lg:text-[36px] xl:text-[48px]">10-18 Maret 2025</p>
+              <Timeline
+                events={events2}
+                endingMonthState={true}
+                showCircle={true}
+              />
+              <div className="mb-[10vw] mt-[20vw]">
+                <h1 className="text-[36px] font-bold leading-[1] text-white sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px]">
+                  Pemungutan Suara
+                </h1>
+                <p className="-mt-[1.5vw] font-bold text-[#FA3A91] md:text-[28px] lg:text-[36px] xl:text-[48px]">
+                  10-18 Maret 2025
+                </p>
               </div>
-              <Timeline events={events3} endingMonth="Maret 2025" endingMonthState={true} showCircle={true}/>
+              <Timeline
+                events={events3}
+                endingMonth="Maret 2025"
+                endingMonthState={true}
+                showCircle={true}
+              />
             </div>
           </div>
         </div>
