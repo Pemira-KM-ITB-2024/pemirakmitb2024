@@ -4,8 +4,8 @@ import AzureADProvider from "next-auth/providers/azure-ad";
 export default NextAuth({
   providers: [
     AzureADProvider({
-      clientId: process.env.MICROSOFT_CLIENT_ID,
-      clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
+      clientId: process.env.MICROSOFT_CLIENT_ID ?? "",
+      clientSecret: process.env.MICROSOFT_CLIENT_SECRET ?? "",
       tenantId: process.env.MICROSOFT_TENANT_ID, // Optional: Specify your tenant ID
       authorization: {
         params: {
