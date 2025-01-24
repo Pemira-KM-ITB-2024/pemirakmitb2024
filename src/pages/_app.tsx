@@ -1,5 +1,8 @@
+// filepath: /C:/Users/alvin/Documents/Alvin/projects/pemirakmitb2024/src/pages/_app.tsx
 import { SessionProvider } from "next-auth/react";
 import { type AppProps } from "next/app";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "~/styles/globals.css";
 import Layout from "@/layout";
@@ -23,6 +26,7 @@ const Pemira = ({
     return Component.getLayout(
       <SessionProvider session={session} refetchOnWindowFocus>
         <Component {...pageProps} />
+        <ToastContainer />
       </SessionProvider>,
     );
   }
@@ -31,6 +35,7 @@ const Pemira = ({
     <SessionProvider session={session}>
       <Layout>
         <Component {...pageProps} />
+        <ToastContainer />
       </Layout>
     </SessionProvider>
   );

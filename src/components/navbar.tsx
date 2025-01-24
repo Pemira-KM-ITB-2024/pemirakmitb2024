@@ -6,28 +6,28 @@ import { usePathname } from "next/navigation";
 import Logo from "../../public/Logo Transparan.png";
 import { body } from "@fonts";
 import { useState } from "react";
+import LoginButton from "./login";
 
 const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/forsos", label: "Forsos" },
+    { href: "/pelaporan", label: "Pelaporan" },
     { href: "https://bit.ly/dokumenTAP", label: "Dokumen TAP" },
-    // { href: "/", label: "Profil Calon" },
-    // { href: "/guide-voting", label: "Guide Voting" },
-    // { href: "/", label: "Statistik" },
-    // { href: "/", label: "Hasil Voting" },
   ];
 
   const handleOverlayClick = () => {
     setIsExpanded(false);
+    setIsProfileDropdownOpen(false);
   };
 
   return (
     <>
-      <nav className="sticky top-0 z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] pl-4 pr-6 text-[#FA3A91] md:pl-10 md:pr-24">
+      <nav className="sticky top-0 z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] px-4 text-[#FA3A91] md:px-10">
         <Link href="/">
           <Image className="mr-2" src={Logo} height={60} alt="Logo" />
         </Link>
@@ -50,28 +50,46 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
+          <li className="hidden md:block">
+            <LoginButton
+              isDropdownOpen={isProfileDropdownOpen}
+              setIsDropdownOpen={setIsProfileDropdownOpen}
+              closeMenu={() => setIsExpanded(false)}
+            />
+          </li>
         </ul>
-
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex flex-col gap-[5.5px] md:hidden"
-        >
-          <div
-            className={`h-[4px] w-[32px] bg-[#FA3A91] transition-all duration-300 ${
-              isExpanded ? "translate-y-[10px] rotate-45" : ""
-            }`}
-          ></div>
-          <div
-            className={`h-[4px] w-[32px] bg-[#FA3A91] transition-all duration-300 ${
-              isExpanded ? "opacity-0" : ""
-            }`}
-          ></div>
-          <div
-            className={`h-[4px] w-[32px] bg-[#FA3A91] transition-all duration-300 ${
-              isExpanded ? "translate-y-[-8px] -rotate-45" : ""
-            }`}
-          ></div>
-        </button>
+        <div className="flex flex-row md:hidden items-center justify-between gap-4">
+          <div className="md:hidden">
+            <LoginButton
+              isDropdownOpen={isProfileDropdownOpen}
+              setIsDropdownOpen={setIsProfileDropdownOpen}
+              closeMenu={() => setIsExpanded(false)}
+            />
+          </div>
+          <button
+            onClick={() => {
+              setIsExpanded(!isExpanded);
+              setIsProfileDropdownOpen(false);
+            }}
+            className="flex flex-col gap-[5.5px] md:hidden"
+          >
+            <div
+              className={`h-[4px] w-[32px] bg-[#FA3A91] transition-all duration-300 ${
+                isExpanded ? "translate-y-[10px] rotate-45" : ""
+              }`}
+            ></div>
+            <div
+              className={`h-[4px] w-[32px] bg-[#FA3A91] transition-all duration-300 ${
+                isExpanded ? "opacity-0" : ""
+              }`}
+            ></div>
+            <div
+              className={`h-[4px] w-[32px] bg-[#FA3A91] transition-all duration-300 ${
+                isExpanded ? "translate-y-[-8px] -rotate-45" : ""
+              }`}
+            ></div>
+          </button>
+        </div>
       </nav>
 
       {isExpanded && (
