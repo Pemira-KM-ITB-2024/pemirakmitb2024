@@ -302,7 +302,7 @@ const Pelaporan = () => {
         <input
           type="text"
           className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Jelas dan singkat, deskripsikan pelanggaran yang terjadi."
+          placeholder="Tuliskan ulang."
           value={p1}
           onChange={(e) => setP1(e.target.value)}
           required
@@ -315,7 +315,7 @@ const Pelaporan = () => {
         <input
           type="text"
           className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Jelas dan singkat, deskripsikan pelanggaran yang terjadi."
+          placeholder="Tuliskan ulang."
           value={p2}
           onChange={(e) => setP2(e.target.value)}
           required
@@ -328,7 +328,7 @@ const Pelaporan = () => {
         <input
           type="text"
           className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Jelas dan singkat, deskripsikan pelanggaran yang terjadi."
+          placeholder="Tuliskan ulang."
           value={p3}
           onChange={(e) => setP3(e.target.value)}
           required
@@ -341,7 +341,7 @@ const Pelaporan = () => {
         <input
           type="text"
           className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Jelas dan singkat, deskripsikan pelanggaran yang terjadi."
+          placeholder="Tuliskan ulang."
           value={p4}
           onChange={(e) => setP4(e.target.value)}
           required
