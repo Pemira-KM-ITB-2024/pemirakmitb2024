@@ -18,7 +18,7 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
-  typescipt: {
+  typescript: {
     ignoreBuildErrors: true,
   },
 };
