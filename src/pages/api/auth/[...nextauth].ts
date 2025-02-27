@@ -4,6 +4,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://pemirakmitb.com"
+    : "http://localhost:3000";
+
 export default NextAuth({
   providers: [
     AzureADProvider({
@@ -62,6 +67,9 @@ export default NextAuth({
         console.error("Error in signIn callback:", error);
         return false;
       }
+    },
+    async redirect({ url, baseUrl: defaultBaseUrl }) {
+      return url.startsWith("/") ? `${baseUrl}${url}` : url;
     },
   },
 });
