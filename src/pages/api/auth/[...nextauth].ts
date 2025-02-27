@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const baseUrl =
   process.env.NODE_ENV === "production"
@@ -21,6 +24,50 @@ export default NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    async signIn({ user, account }) {
+      try {
+        // Extract data from the NextAuth user object
+        const email = user.email ?? "";
+        const microsoftId = user.id;
+        const name = user.name ?? user.id;
+
+        // Upsert the Account record, including any linked User records
+        const accountRecord = await prisma.account.upsert({
+          where: { microsoftId },
+          update: {
+            email,
+            accessToken: account?.access_token,
+            refreshToken: account?.refresh_token,
+          },
+          create: {
+            email,
+            microsoftId,
+            name,
+            accessToken: account?.access_token,
+            refreshToken: account?.refresh_token,
+          },
+          include: { User: true }, // include the associated User records
+        });
+
+        // Check if a User record already exists (array is empty if not)
+        if (accountRecord.User.length === 0) {
+          await prisma.user.create({
+            data: {
+              name,
+              email,
+              account: {
+                connect: { id: accountRecord.id },
+              },
+            },
+          });
+        }
+
+        return true;
+      } catch (error) {
+        console.error("Error in signIn callback:", error);
+        return false;
+      }
+    },
     async redirect({ url, baseUrl: defaultBaseUrl }) {
       return url.startsWith("/") ? `${baseUrl}${url}` : url;
     },

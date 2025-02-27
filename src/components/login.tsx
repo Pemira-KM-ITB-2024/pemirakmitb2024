@@ -20,23 +20,25 @@ export default function LoginButton({
     return match ? match[1] : null;
   };
 
-  const userNumber = session?.user?.email ? extractNumberFromEmail(session.user.email) : null;
+  const userNumber = session?.user?.email
+    ? extractNumberFromEmail(session.user.email)
+    : null;
 
   return (
     <div className="relative">
       {session ? (
         <>
-          <div className="flex items-center h-[80%] rounded-xl bg-[#FA3A91]" >
+          <div className="flex h-[80%] items-center rounded-xl bg-[#FA3A91]">
             <Link href="/vote">
               <button
-                className="font-bold  text-white pl-4 pr-2 py-2 hover:text-[#d8d8d8]"
+                className="py-2  pl-4 pr-2 font-bold text-white hover:text-[#d8d8d8]"
                 onClick={closeMenu}
               >
                 Vote
               </button>
             </Link>
             <button
-              className="flex h-full font-bold text-white border-l-2 border-white pl-2 pr-4 hover:text-[#d8d8d8]"
+              className="flex h-full border-l-2 border-white pl-2 pr-4 font-bold text-white hover:text-[#d8d8d8]"
               onClick={() => {
                 setIsDropdownOpen(!isDropdownOpen);
                 closeMenu();
@@ -46,12 +48,14 @@ export default function LoginButton({
             </button>
           </div>
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+            <div className="absolute right-0 z-10 mt-2 w-48 rounded-md bg-white shadow-lg">
               <Link href="/profile">
-                <p className="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded-md">Profile</p>
+                <p className="block rounded-md px-4 py-2 text-gray-800 hover:bg-gray-200">
+                  Profile
+                </p>
               </Link>
               <button
-                className="block w-full text-left px-4 py-2 text-gray-800 rounded-md hover:bg-gray-200"
+                className="block w-full rounded-md px-4 py-2 text-left text-gray-800 hover:bg-gray-200"
                 onClick={() => signOut()}
               >
                 Sign out
@@ -61,7 +65,7 @@ export default function LoginButton({
         </>
       ) : (
         <button
-          className="font-bold bg-[#FA3A91] rounded-xl text-white px-4 py-2 hover:text-[#d8d8d8]"
+          className="rounded-xl bg-[#FA3A91] px-4 py-2 font-bold text-white hover:text-[#d8d8d8]"
           onClick={() => signIn("azure-ad")}
         >
           Sign in
