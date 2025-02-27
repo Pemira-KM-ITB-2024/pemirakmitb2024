@@ -32,7 +32,6 @@ const events3 = [
 ];
 
 export default function Home() {
-
   return (
     <div className="relative z-0 flex min-h-screen w-full flex-col items-center overflow-hidden">
       <section className="my-[8vw] flex h-fit w-full flex-col items-center justify-center">
@@ -54,6 +53,29 @@ export default function Home() {
             />
           </div>
         </div>
+
+        <section className="mb-[8vw] flex w-[80%] flex-col items-center justify-center">
+          <div className="mt-6 flex flex-row items-center justify-center gap-4">
+            <Link href="https://drive.google.com/drive/folders/16ETRW9gRWtXmQEyHbczvd3KrrCVCojw3" target="_blank">
+              <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
+                <p
+                  className={`${body.className} leading-2 mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
+                >
+                  Konten Calon
+                </p>
+              </button>
+            </Link>
+            <Link href="bit.ly/HearingZona2025" target="_blank">
+              <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
+                <p
+                  className={`${body.className} mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
+                >
+                  Hearing Zona
+                </p>
+              </button>
+            </Link>
+          </div>
+        </section>
 
         {/* <div className="absolute bottom-0 flex-row items-center text-center max-w-[80%] tracking-widest">
           <h3 className={`${header.className} justify-center flex font-bold text-[36px] text-[#FFF859] w-full`}>
@@ -202,6 +224,7 @@ export default function Home() {
           </button>
         </div>
       </section> */}
+
       {/* forsos */}
       <section className="my-[8vw] flex w-[80%] flex-col items-center justify-center">
         <div
@@ -231,6 +254,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* lini masa */}
       <section className="my-[8vw] flex w-full flex-col items-center justify-center">
         <div
           className={`${header.className} text-3xl font-bold text-[#FA3A91] md:text-5xl`}
