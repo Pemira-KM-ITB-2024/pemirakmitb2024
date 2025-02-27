@@ -33,11 +33,9 @@ export default async function handler(
       return res.status(400).json({ error: "User has already voted" });
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     await prisma.voteK3M.create({
       data: { isOne: isOneK3M },
     });
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     await prisma.voteMWAWM.create({
       data: { isOne: isOneMWAWM },
     });
