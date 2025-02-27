@@ -5,18 +5,21 @@ import { useSession } from "next-auth/react";
 
 export function withAuth<P extends object>(
   WrappedComponent: React.ComponentType<P>,
-  restrictedRoutes: string[]
+  restrictedRoutes: string[],
 ) {
   return function ProtectedRoute(props: P) {
-    const { data: session, status } = useSession();
+    const { status } = useSession();
     const router = useRouter();
 
     useEffect(() => {
-      if (status === "unauthenticated" && restrictedRoutes.includes(router.pathname)) {
+      if (
+        status === "unauthenticated" &&
+        restrictedRoutes.includes(router.pathname)
+      ) {
         toast.error("Silakan login terlebih dahulu!", {
           position: "top-center",
           autoClose: 3000,
-          toastId: 'auth-warning',
+          toastId: "auth-warning",
           pauseOnHover: false,
           closeOnClick: true,
           transition: Bounce,

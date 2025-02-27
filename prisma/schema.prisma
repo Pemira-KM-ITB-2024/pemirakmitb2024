@@ -1,44 +1,54 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_PRISMA_URL") // uses a direct connection
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_PRISMA_URL")
 }
 
-enum Role {
-  Administrator
-  Voting
+model Account {
+  id           String   @id @default(uuid())
+  name         String   @db.VarChar(255)
+  email        String   @unique
+  microsoftId  String   @unique
+  accessToken  String?
+  refreshToken String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Session      Session?
+  User         User[]
+
+  @@index([email])
+  @@index([microsoftId])
 }
 
-model Admin {
-  id           String    @id @default(uuid())
-  username     String    @unique
-  passwordHash String
-  role         Role
-  votes        VoteK3M[]
+model User {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(255)
+  email     String   @unique
+  accountId String?  @unique
+  hasVoted  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  account   Account? @relation(fields: [accountId], references: [id], onDelete: Cascade)
 }
 
-model Mahasiswa {
-  id    String  @id @default(uuid())
-  nim   String  @unique
-  state Boolean @default(false)
-  token String? @unique
-  voted Boolean @default(false)
+model Session {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  expiresAt   DateTime
+  accessToken String?
+  user        Account  @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VoteK3M {
-  id      String   @unique @default(uuid())
-  pil_1   String
-  pil_2   String?
-  pil_3   String?
-  pil_4   String?
-  created DateTime @default(now())
-  admin   Admin    @relation(fields: [adminId], references: [id])
-  adminId String
+  id    String  @id @default(uuid())
+  isOne Boolean
+}
+
+model VoteMWAWM {
+  id    String  @id @default(uuid())
+  isOne Boolean
 }
