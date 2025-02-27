@@ -8,27 +8,17 @@ const Countdown = dynamic(() => import("~/components/countdown"), {
   ssr: false,
 });
 
-const events1 = [
-  { date: "16-18 Desember 2024", description: "Open Berkas" },
-  { date: "19-21 Desember 2024", description: "Pengambilan Berkas" },
-];
-
-const events2 = [
-  { date: "17 Februari 2025", description: "Verifikasi Berkas" },
-  {
-    date: "18 Februari 2025",
-    description: "Pembekalan Calon K3M dan Calon MWA-WM ITB",
-  },
-  {
-    date: "19-28 Februari 2025",
-    description: "Hearing Zona dan Hearing by Request",
-  },
-  { date: "1-2 Maret 2025", description: "Debat dan Uji Panelis" },
-];
-
-const events3 = [
-  { date: "19 Maret 2025", description: "Perhitungan Suara" },
-  { date: "20 Maret 2025", description: "Pengumuman Hasil Perhitungan Suara" },
+const events = [
+  { date: "10-15 Des 24", description: "Forsos"},
+  { date: "16-18 Des 24", description: "Open Berkas" },
+  { date: "19-21 Des 24", description: "Pengambilan Berkas" },
+  { date: "17 Feb 25", description: "Pengambilan Berkas" },
+  { date: "18 Feb 25", description: "Pembekalan" },
+  { date: "19-21 Feb 25", description: "Hearing" },
+  { date: "26-27 Feb 25", description: "Debat" },
+  { date: "28 Feb - 2 Mar 25", description: "Masa Tenang" },
+  { date: "3-9 Mar 25", description: "Pemungutan Suara" },
+  { date: "11 Mar 25", description: "Pengumuman Perhitungan Suara" },
 ];
 
 export default function Home() {
@@ -261,71 +251,48 @@ export default function Home() {
         >
           LINI MASA
         </div>
-        <div className="mt-[60px] h-full w-[80%] md:mt-[100px]">
+        <div className=" h-full w-[70%] md:my-[100px]">
           <div
-            className={`ch relative isolate flex min-h-screen w-full flex-col justify-start gap-6 text-center`}
+            className={`ch relative isolate flex mb-36 w-full flex-row justify-start gap-6 text-center`}
           >
-            <div className="mb-[240px] mt-12 flex h-auto flex-1 flex-col justify-center md:mb-[440px] md:mt-0">
-              <Image
-                src="/background-landing2.png"
-                width={700}
-                height={700}
-                alt="background1"
-                className="absolute z-[-2] w-full scale-125 overflow-hidden md:mt-[-2000px]"
-              />
-              <Image
-                src="/mikrofon.png"
-                width={100}
-                height={100}
-                alt="mikrofon"
-                className="absolute z-[-1] ml-[-375px] mt-[425px] sm:ml-[-500px]  sm:mt-[820px] md:ml-[-600px] md:mt-[400px] md:w-[130px] lg:ml-[-800px] lg:w-[200px] xl:ml-[-1200px] xl:mt-[550px]"
-              />
-              <Image
-                src="/koran.png"
-                width={150}
-                height={150}
-                alt="koran"
-                className="absolute mr-[-275px] mt-[575px] sm:mr-[-350px] sm:mt-[1150px] sm:w-[200px] lg:mr-[-550px] lg:mt-[1650px] lg:w-[300px] "
-              />
-              <Image
-                src="/toapemira.png"
-                width={120}
-                height={120}
-                alt="toa"
-                className="absolute ml-[-300px] mt-[750px] sm:ml-[-450px] sm:mt-[1450px] md:ml-[-550px] md:mt-[1750px] md:w-[200px] lg:ml-[-650px] lg:mt-[2400px]"
-              />
-              <Image
-                src="/suratpemira.png"
-                width={120}
-                height={120}
-                alt="toa"
-                className="absolute mr-[-300px] mt-[750px] sm:mr-[-450px] sm:mt-[1450px] md:mr-[-550px] md:mt-[1750px] md:w-[200px] lg:mr-[-650px] lg:mt-[2400px]"
-              />
-              <Timeline events={events1} month="Desember 2024" />
-              <div className="mb-[10vw] mt-[20vw]">
-                <h1 className="text-[36px] font-bold leading-[1] text-white sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px]">
-                  Pengembalian Berkas
-                </h1>
-                <p className="-mt-[1.5vw] font-bold text-[#FA3A91] md:text-[28px] lg:text-[36px] xl:text-[48px]">
-                  17 Februari 2025
-                </p>
-              </div>
+            <div className="mt-12 flex h-auto flex-1 flex-row justify-center md:mt-0">
+            {/* <Image
+              src="/background-landing2.png"
+              width={700}
+              height={700}
+              alt="background1"
+              className="absolute z-[-2] w-full scale-125 overflow-hidden md:mt-[-2000px]"
+            />
+            <Image
+              src="/mikrofon.png"
+              width={100}
+              height={100}
+              alt="mikrofon"
+              className="absolute z-[-1] ml-[-375px] mt-[425px] sm:ml-[-500px]  sm:mt-[820px] md:ml-[-600px] md:mt-[400px] md:w-[130px] lg:ml-[-800px] lg:w-[200px] xl:ml-[-1200px] xl:mt-[550px]"
+            />
+            <Image
+              src="/koran.png"
+              width={150}
+              height={150}
+              alt="koran"
+              className="absolute mr-[-275px] mt-[575px] sm:mr-[-350px] sm:mt-[1150px] sm:w-[200px] lg:mr-[-550px] lg:mt-[1650px] lg:w-[300px] "
+            />
+            <Image
+              src="/toapemira.png"
+              width={120}
+              height={120}
+              alt="toa"
+              className="absolute ml-[-300px] mt-[750px] sm:ml-[-450px] sm:mt-[1450px] md:ml-[-550px] md:mt-[1750px] md:w-[200px] lg:ml-[-650px] lg:mt-[2400px]"
+            />
+            <Image
+              src="/suratpemira.png"
+              width={120}
+              height={120}
+              alt="toa"
+              className="absolute mr-[-300px] mt-[750px] sm:mr-[-450px] sm:mt-[1450px] md:mr-[-550px] md:mt-[1750px] md:w-[200px] lg:mr-[-650px] lg:mt-[2400px]"
+            /> */}
               <Timeline
-                events={events2}
-                endingMonthState={true}
-                showCircle={true}
-              />
-              <div className="mb-[10vw] mt-[20vw]">
-                <h1 className="text-[36px] font-bold leading-[1] text-white sm:text-[54px] md:text-[78px] lg:text-[100px] xl:text-[128px]">
-                  Pemungutan Suara
-                </h1>
-                <p className="-mt-[1.5vw] font-bold text-[#FA3A91] md:text-[28px] lg:text-[36px] xl:text-[48px]">
-                  10-18 Maret 2025
-                </p>
-              </div>
-              <Timeline
-                events={events3}
-                endingMonth="Maret 2025"
+                events={events}
                 endingMonthState={true}
                 showCircle={true}
               />
