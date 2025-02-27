@@ -227,11 +227,11 @@ export default function Home() {
         >
           LINI MASA
         </div>
-        <div className="mt-[60px] h-full w-[80%] md:mt-[100px]">
+        <div className=" h-full w-[70%] md:my-[100px]">
           <div
-            className={`ch relative isolate flex min-h-screen w-full flex-row justify-start gap-6 text-center`}
+            className={`ch relative isolate flex mb-36 w-full flex-row justify-start gap-6 text-center`}
           >
-            <div className="mb-[240px] mt-12 flex h-auto flex-1 flex-row justify-center md:mb-[440px] md:mt-0">
+            <div className="mt-12 flex h-auto flex-1 flex-row justify-center md:mt-0">
             {/* <Image
               src="/background-landing2.png"
               width={700}

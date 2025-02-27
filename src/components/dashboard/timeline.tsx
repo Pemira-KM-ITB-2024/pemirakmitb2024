@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface TimelineEvent {
   date: string;
@@ -20,10 +20,10 @@ const Timeline: React.FC<TimelineProps> = ({
   month,
   endingMonthState = false,
   endingMonth,
-  events
+  events,
 }) => {
   return (
-    <div className="relative w-full min-h-[100px] px-8">
+    <div className="relative min-h-[100px] w-full pl-4 pr-8">
       {/* Desktop: 2 rows */}
       <div className="hidden md:block">
         {/* First row */}
@@ -31,36 +31,61 @@ const Timeline: React.FC<TimelineProps> = ({
           <div className="absolute left-10 right-5 top-5 h-1 bg-[#e9e84f]" />
           <div className="relative pt-4">
             {events.slice(0, 5).map((event, index) => (
-              <div key={index} className="absolute" style={{ left: `${(index * 100) / (Math.min(events.length, 5) - 1)}%` }}>
-                 <div className="w-4 h-4 border-4 border-[#e9e84f] rounded-full bg-[#e9e84f]" />
-                 <div className="absolute mt-[-22px] left-[-7px] w-7 h-7 border-4 border-[#e9e84f] rounded-full bg-transparent" />
-                <div className="absolute mt-4 -translate-x-1/2 min-w-[120px]">
-                  <p className="text-[#FA3A91] text-sm font-bold">{event.date}</p>
-                  <p className="text-white text-sm font-bold mt-1">{event.description}</p>
+              <div
+                key={index}
+                className="absolute"
+                style={{
+                  left: `${(index * 100) / (Math.min(events.length, 5) - 1)}%`,
+                }}
+              >
+                <div className="h-4 w-4 rounded-full border-4 border-[#e9e84f] bg-[#e9e84f]" />
+                <div className="absolute left-[-6px] mt-[-22px] h-7 w-7 rounded-full border-4 border-[#e9e84f] bg-transparent" />
+                <div className="absolute ml-2 mt-4 min-w-[120px] -translate-x-1/2">
+                  <p className="text-xs font-bold text-[#FA3A91]">
+                    {event.date}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-white">
+                    {event.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-1 absolute w-[62.5px] h-[125px] border-r-4 border-[#e9e84f] rounded-r-full bg-transparent right-[-10px] overflow-hidden">
-          <div className="w-[125px] h-[125px] border-4 border-[#e9e84f] rounded-full bg-transparent translate-x-[-50%]" />
+        <div className="absolute right-[-10px] mt-1 h-[122px] w-[62.5px] overflow-hidden rounded-r-full border-r-4 border-[#e9e84f] bg-transparent">
+          <div className="h-[122px] w-[125px] translate-x-[-50%] rounded-full border-4 border-[#e9e84f] bg-transparent" />
         </div>
 
         {/* Second row */}
         <div className="relative px-8">
           <div className="absolute left-10 right-5 mt-[25px] h-1 bg-[#e9e84f]" />
-          <div className="relative pt-4 mt-[100px]">
-            {events.slice(5, 10).reverse().map((event, index) => (
-              <div key={index} className="absolute" style={{ left: `${(index * 100) / (Math.min(events.length, 5) - 1)}%` }}>
-                <div className="w-4 h-4 border-4 border-[#e9e84f] rounded-full bg-[#e9e84f]" />
-                <div className="absolute mt-[-22px] left-[-7px] w-7 h-7 border-4 border-[#e9e84f] rounded-full bg-transparent" />
-                <div className="absolute mt-4 -translate-x-1/2 min-w-[120px]">
-                  <p className="text-[#FA3A91] text-sm font-bold">{event.date}</p>
-                  <p className="text-white text-sm font-bold mt-1">{event.description}</p>
+          <div className="relative mt-[100px] pt-4">
+            {events
+              .slice(5, 10)
+              .reverse()
+              .map((event, index) => (
+                <div
+                  key={index}
+                  className="absolute"
+                  style={{
+                    left: `${
+                      (index * 100) / (Math.min(events.length, 5) - 1)
+                    }%`,
+                  }}
+                >
+                  <div className="h-4 w-4 rounded-full border-4 border-[#e9e84f] bg-[#e9e84f]" />
+                  <div className="absolute left-[-6px] mt-[-22px] h-7 w-7 rounded-full border-4 border-[#e9e84f] bg-transparent" />
+                  <div className="absolute ml-2 mt-4 min-w-[120px] -translate-x-1/2">
+                    <p className="text-xs font-bold text-[#FA3A91]">
+                      {event.date}
+                    </p>
+                    <p className="mt-1 text-xs font-bold text-white">
+                      {event.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
@@ -71,79 +96,109 @@ const Timeline: React.FC<TimelineProps> = ({
         <div className="relative ">
           <div className="absolute left-3 right-[-3px] top-5 h-1 bg-[#e9e84f]" />
           <div className="relative pt-4">
-            {events.slice(0, 4).map((event, index) => (
-              <div key={index} className="absolute" style={{ left: `${(index * 100) / 3}%` }}>
-                <div className="w-4 h-4 border-4 border-[#e9e84f] rounded-full bg-[#e9e84f]" />
-                <div className="absolute mt-[-22px] left-[-7px] w-7 h-7 border-4 border-[#e9e84f] rounded-full bg-transparent" />
+            {events.slice(0, 3).map((event, index) => (
+              <div
+                key={index}
+                className="absolute"
+                style={{ left: `${(index * 100) / 2}%` }}
+              >
+                <div className="h-4 w-4 rounded-full border-4 border-[#e9e84f] bg-[#e9e84f]" />
+                <div className="absolute left-[-6px] mt-[-22px] h-7 w-7 rounded-full border-4 border-[#e9e84f] bg-transparent" />
 
-                <div className="absolute mt-4 -translate-x-1/2 min-w-[120px]">
-                  <p className="text-[#FA3A91] text-sm font-bold">{event.date}</p>
-                  <p className="text-white text-sm font-bold mt-1">{event.description}</p>
+                <div className="absolute ml-2 mt-4 min-w-[100px] -translate-x-1/2">
+                  <p className="text-xs font-bold text-[#FA3A91]">
+                    {event.date}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-white">
+                    {event.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-1 absolute w-[62.5px] h-[125px] border-r-4 border-[#e9e84f] rounded-r-full bg-transparent right-[-45px] overflow-hidden">
-          <div className="w-[125px] h-[125px] border-4 border-[#e9e84f] rounded-full bg-transparent translate-x-[-50%]" />
+        <div className="absolute right-[-45px] mt-1 h-[122px] w-[62.5px] overflow-hidden rounded-r-full border-r-4 border-[#e9e84f] bg-transparent">
+          <div className="h-[122px] w-[125px] translate-x-[-50%] rounded-full border-4 border-[#e9e84f] bg-transparent" />
         </div>
 
         {/* Second row */}
         <div className="relative">
           <div className="absolute left-3 right-[-3px] mt-[22px] h-1 bg-[#e9e84f]" />
-          <div className="relative pt-4 mt-[100px]">
-            {events.slice(4, 7).map((event, index) => (
-              <div key={index} className="absolute" style={{ left: `${(index * 100) / 2}%` }}>
-                <div className="w-4 h-4 border-4 border-[#e9e84f] rounded-full bg-[#e9e84f]" />
-                <div className="absolute mt-[-22px] left-[-7px] w-7 h-7 border-4 border-[#e9e84f] rounded-full bg-transparent" />
-                <div className="absolute mt-4 -translate-x-1/2 min-w-[120px]">
-                  <p className="text-[#FA3A91] text-sm font-bold">{event.date}</p>
-                  <p className="text-white text-sm font-bold mt-1">{event.description}</p>
+          <div className="relative mt-[100px] pt-4">
+            {events.slice(3, 6).map((event, index) => (
+              <div
+                key={index}
+                className="absolute"
+                style={{ left: `${(index * 100) / 2}%` }}
+              >
+                <div className="h-4 w-4 rounded-full border-4 border-[#e9e84f] bg-[#e9e84f]" />
+                <div className="absolute left-[-6px] mt-[-22px] h-7 w-7 rounded-full border-4 border-[#e9e84f] bg-transparent" />
+                <div className="absolute ml-2 mt-4 min-w-[100px] -translate-x-1/2">
+                  <p className="text-xs font-bold text-[#FA3A91]">
+                    {event.date}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-white">
+                    {event.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-1 absolute w-[62.5px] h-[125px] bg-transparent left-[-28px] overflow-hidden">
-          <div className="w-[125px] h-[125px] border-4 border-[#e9e84f] rounded-full bg-transparent" />
+        <div className="absolute left-[-45px] mt-[6px] h-[122px] w-[62.5px] overflow-hidden bg-transparent">
+          <div className="h-[122px] w-[125px] rounded-full border-4 border-[#e9e84f] bg-transparent" />
         </div>
-
 
         {/* Third row */}
         <div className="relative">
           <div className="absolute left-3 right-[-3px] mt-[23px] h-1 bg-[#e9e84f]" />
-          <div className="relative pt-4 mt-[100px]">
-            {events.slice(7, 9).map((event, index) => (
-              <div key={index} className="absolute" style={{ left: `${(index * 100) / 1}%` }}>
-                <div className="w-4 h-4 border-4 border-[#e9e84f] rounded-full bg-[#e9e84f]" />
-                <div className="absolute mt-[-22px] left-[-7px] w-7 h-7 border-4 border-[#e9e84f] rounded-full bg-transparent" />
-                <div className="absolute mt-4 -translate-x-1/2 min-w-[120px]">
-                  <p className="text-[#FA3A91] text-sm font-bold">{event.date}</p>
-                  <p className="text-white text-sm font-bold mt-1">{event.description}</p>
+          <div className="relative mt-[100px] pt-4">
+            {events.slice(6, 9).map((event, index) => (
+              <div
+                key={index}
+                className="absolute"
+                style={{ left: `${(index * 100) / 2}%` }}
+              >
+                <div className="h-4 w-4 rounded-full border-4 border-[#e9e84f] bg-[#e9e84f]" />
+                <div className="absolute left-[-6px] mt-[-22px] h-7 w-7 rounded-full border-4 border-[#e9e84f] bg-transparent" />
+                <div className="absolute ml-2 mt-4 min-w-[100px] -translate-x-1/2">
+                  <p className="text-xs font-bold text-[#FA3A91]">
+                    {event.date}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-white">
+                    {event.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-1 absolute w-[62.5px] h-[125px] border-r-4 border-[#e9e84f] rounded-r-full bg-transparent right-[-45px] overflow-hidden">
-          <div className="w-[125px] h-[125px] border-4 border-[#e9e84f] rounded-full bg-transparent translate-x-[-50%]" />
+        <div className="absolute right-[-45px] mt-2 h-[118px] w-[62.5px] overflow-hidden rounded-r-full border-r-4 border-[#e9e84f] bg-transparent">
+          <div className="h-[118px] w-[125px] translate-x-[-50%] rounded-full border-4 border-[#e9e84f] bg-transparent" />
         </div>
 
         <div className="relative">
-          <div className="relative pt-4 mt-[100px]">
-            {events.slice(9, 10).reverse().map((event, index) => (
-              <div key={index} className="absolute right-[-15px]">
-                <div className="w-4 h-4 border-4 border-[#e9e84f] rounded-full bg-[#e9e84f]" />
-                <div className="absolute mt-[-22px] left-[-7px] w-7 h-7 border-4 border-[#e9e84f] rounded-full bg-transparent" />
-                <div className="absolute mt-4 -translate-x-1/2 min-w-[120px]">
-                  <p className="text-[#FA3A91] text-sm font-bold">{event.date}</p>
-                  <p className="text-white text-sm font-bold mt-1">{event.description}</p>
+          <div className="relative mt-[100px] pt-4">
+            {events
+              .slice(9, 10)
+              .reverse()
+              .map((event, index) => (
+                <div key={index} className="absolute right-[-15px]">
+                  <div className="h-4 w-4 rounded-full border-4 border-[#e9e84f] bg-[#e9e84f]" />
+                  <div className="absolute left-[-6px] mt-[-22px] h-7 w-7 rounded-full border-4 border-[#e9e84f] bg-transparent" />
+                  <div className="absolute ml-2 mt-4 min-w-[100px] -translate-x-1/2">
+                    <p className="text-xs font-bold text-[#FA3A91]">
+                      {event.date}
+                    </p>
+                    <p className="mt-1 text-xs font-bold text-white">
+                      {event.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
