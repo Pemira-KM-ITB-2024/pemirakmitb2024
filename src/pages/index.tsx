@@ -55,7 +55,7 @@ export default function Home() {
                 </p>
               </button>
             </Link>
-            <Link href="bit.ly/HearingZona2025" target="_blank">
+            <Link href="https://bit.ly/HearingZona2025" target="_blank">
               <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
                 <p
                   className={`${body.className} mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
