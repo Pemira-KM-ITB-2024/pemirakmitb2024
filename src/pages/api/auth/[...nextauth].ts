@@ -10,6 +10,7 @@ const baseUrl =
     : "http://localhost:3000";
 
 export default NextAuth({
+  debug: true,
   providers: [
     AzureADProvider({
       clientId: process.env.MICROSOFT_CLIENT_ID ?? "",
