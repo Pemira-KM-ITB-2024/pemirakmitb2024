@@ -42,7 +42,7 @@ const Profile = () => {
             -WM
           </h1>
         </div>
-        <div className="flex justify-center items-center gap-8 mt-8">
+        <div className="flex justify-center items-center gap-8 mt-8 mb-[244px] z-10">
             < MProfileCard />
         </div>
 
