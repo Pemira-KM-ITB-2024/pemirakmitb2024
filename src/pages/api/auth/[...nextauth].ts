@@ -19,11 +19,23 @@ export default NextAuth({
       authorization: {
         params: {
           scope: "openid profile email",
+          prompt: "select_account",
         },
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+      },
+    },
+  },
   callbacks: {
     async signIn({ user, account }) {
       try {
