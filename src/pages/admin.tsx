@@ -12,16 +12,18 @@ import {
   LinearScale,
   Title,
   Tooltip,
-  Legend,
+  Legend
 } from "chart.js";
 
+import type { ChartComponentLike } from "chart.js";
+
 ChartJS.register(
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Title,
-  Tooltip,
-  Legend,
+  BarElement as ChartComponentLike,
+  CategoryScale as ChartComponentLike,
+  LinearScale as ChartComponentLike,
+  Title as ChartComponentLike,
+  Tooltip as ChartComponentLike,
+  Legend as ChartComponentLike
 );
 
 const prisma = new PrismaClient();
