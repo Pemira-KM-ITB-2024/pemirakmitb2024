@@ -9,7 +9,7 @@ const Countdown = dynamic(() => import("~/components/countdown"), {
 });
 
 const events = [
-  { date: "10-15 Des 24", description: "Forsos"},
+  { date: "10-15 Des 24", description: "Forsos" },
   { date: "16-18 Des 24", description: "Open Berkas" },
   { date: "19-21 Des 24", description: "Pengambilan Berkas" },
   { date: "17 Feb 25", description: "Pengambilan Berkas" },
@@ -46,7 +46,10 @@ export default function Home() {
 
         <section className="mb-[8vw] flex w-[80%] flex-col items-center justify-center">
           <div className="mt-6 flex flex-row items-center justify-center gap-4">
-            <Link href="https://drive.google.com/drive/folders/16ETRW9gRWtXmQEyHbczvd3KrrCVCojw3" target="_blank">
+            <Link
+              href="https://drive.google.com/drive/folders/16ETRW9gRWtXmQEyHbczvd3KrrCVCojw3"
+              target="_blank"
+            >
               <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
                 <p
                   className={`${body.className} leading-2 mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
@@ -253,10 +256,10 @@ export default function Home() {
         </div>
         <div className=" h-full w-[70%] md:my-[100px]">
           <div
-            className={`ch relative isolate flex mb-36 w-full flex-row justify-start gap-6 text-center`}
+            className={`ch relative isolate mb-36 flex w-full flex-row justify-start gap-6 text-center`}
           >
             <div className="mt-12 flex h-auto flex-1 flex-row justify-center md:mt-0">
-            {/* <Image
+              {/* <Image
               src="/background-landing2.png"
               width={700}
               height={700}

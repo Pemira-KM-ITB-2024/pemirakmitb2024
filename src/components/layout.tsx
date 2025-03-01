@@ -19,15 +19,16 @@ const Layout = ({ children }: { children?: ReactNode }) => (
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster richColors />
-      <main className="flex min-h-dvh flex-1 flex-col overflow-hidden"
-      style={{
-        backgroundImage: "url(/background-pemira-1.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      <main
+        className="flex min-h-dvh flex-1 flex-col overflow-hidden"
+        style={{
+          backgroundImage: "url(/background-pemira-1.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
         {children}
-        <Footer/>
+        <Footer />
       </main>
     </div>
   </FadeIn>
