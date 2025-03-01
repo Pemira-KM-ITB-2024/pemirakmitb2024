@@ -8,7 +8,6 @@ import Image from "next/image";
 import VoteCard from "~/components/voteCard";
 import { header } from "~/styles/fonts";
 import Swal from "sweetalert2";
-import { error } from "console";
 
 interface FormData {
   voteK3M: "true" | "false";
