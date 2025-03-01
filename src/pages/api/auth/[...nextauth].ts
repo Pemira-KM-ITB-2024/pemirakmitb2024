@@ -30,7 +30,7 @@ export default NextAuth({
       name:
         process.env.NODE_ENV === "production"
           ? "__Secure-next-auth.session-token"
-          : "next-auth.session-token", // Use a non-secure cookie for development
+          : "next-auth.session-token",
       options: {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // Must be false in development
@@ -38,7 +38,7 @@ export default NextAuth({
         path: "/",
       },
     },
-  },  
+  },
   callbacks: {
     async signIn({ user, account }) {
       try {
@@ -84,7 +84,7 @@ export default NextAuth({
         return false;
       }
     },
-    async redirect({ url, baseUrl: defaultBaseUrl }) {
+    async redirect({ url, baseUrl }) {
       const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
       const finalBaseUrl = `${protocol}://${baseUrl.replace(
         /^https?:\/\//,
