@@ -6,6 +6,16 @@ const header = localFont({
   variable: "--font-header",
 });
 
+const anisette = {
+  variable: "font-anisette",
+  // other properties...
+};
+
+const clashDisplay = {
+  variable: "font-clash-display",
+  // other properties...
+};
+
 const body = localFont({
   src: "/fonts/ClashDisplay-Variable.ttf",
 });
@@ -32,6 +42,8 @@ const montserrat = Montserrat({
 });
 
 export {
+  anisette,
+  clashDisplay,
   header,
   body,
   bodyBold,
