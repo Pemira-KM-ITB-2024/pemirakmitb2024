@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
   if (req.method === "POST") {
-    const { name, studentId, programstudi, campuses, contactinfo, pelanggarans, extrapelanggaran, buktiinfo, deskripsiinfo, p1, p2, p3, p4, image } = req.body;
+    const { name, studentId, programstudi, kontak, tempatKejadian, photo, pelanggaranRingan, pelanggaranSedang, pelanggaranBerat, bukti, deskripsi, p1, p2, p3, p4 } = req.body;
     if (!name) {
       return res.status(400).json({ error: "Nama tidak boleh kosong." });
     }
@@ -18,42 +18,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!programstudi) {
       return res.status(400).json({ error: "Program Studi tidak boleh kosong." });
     }
-    if (!campuses || campuses.length === 0) {
-      return res.status(400).json({ error: "Minimal pilih satu kampus." });
+    if (!kontak) {
+      return res.status(400).json({ error: "Kontak tidak boleh kosong." });
     }
-    if (!contactinfo) {
-      return res.status(400).json({ error: "Contact info tidak boleh kosong." });
+    if(!photo) {
+      return res.status(400).json({ error: "Foto tidak boleh kosong." });
     }
-    if (!pelanggarans || pelanggarans.length === 0) {
-      return res.status(400).json({ error: "Minimal pilih satu jenis pelanggaran." });
-    }
-    if (!buktiinfo) {
+    if(!bukti) {
       return res.status(400).json({ error: "Bukti tidak boleh kosong." });
     }
-    if (!deskripsiinfo) {
+    if(!deskripsi) {
       return res.status(400).json({ error: "Deskripsi tidak boleh kosong." });
     }
-    if (!p1) {
-      return res.status(400).json({ error: "Pakta Integritas tidak lengkap." });
+    if(!p1) {
+      return res.status(400).json({ error: "P1 tidak boleh kosong." });
     }
-    if (!p2) {
-      return res.status(400).json({ error: "Pakta Integritas tidak lengkap." });
+    if(!p2) {
+      return res.status(400).json({ error: "P2 tidak boleh kosong." });
     }
-    if (!p3) {
-      return res.status(400).json({ error: "Pakta Integritas tidak lengkap." });
+    if(!p3) {
+      return res.status(400).json({ error: "P3 tidak boleh kosong." });
     }
-    if (!p4) {
-      return res.status(400).json({ error: "Pakta Integritas tidak lengkap." });
-    }
-    if (!image) {
-      return res.status(400).json({ error: "Foto KTM tidak boleh kosong." });
+    if(!p4) {
+      return res.status(400).json({ error: "P4 tidak boleh kosong." });
     }
     try {
       const client = await clientPromise;
       const db = client.db("PemiraReports"); 
       const collection = db.collection("Reports"); 
 
-      const result = await collection.insertOne({ name, studentId, programstudi, campuses, contactinfo, pelanggarans, extrapelanggaran, buktiinfo, deskripsiinfo, p1, p2, p3, p4, image, createdAt: new Date() });
+      const result = await collection.insertOne({ name, studentId, programstudi, kontak, tempatKejadian, photo, pelanggaranRingan, pelanggaranSedang, pelanggaranBerat, bukti, deskripsi, p1, p2, p3, p4, createdAt: new Date() });
 
       return res.status(201).json({ message: "Pelaporan berhasil dilakukan!", data: result });
     } catch (error) {
