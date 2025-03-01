@@ -1,371 +1,273 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+/* eslint-disable @typescript-eslint/consistent-type-imports */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @next/next/no-img-element */
+import { IoDocumentText } from "react-icons/io5";
+import abstract1 from "public/abstract/abstract3.svg";
+import abstract2 from "public/abstract/abstract4.svg";
+import fplogo from "public/abstract/fplogo.png";
+import React, { useCallback, useRef } from 'react';
 import { withAuth } from "~/utils/withAuth";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-import { body, header } from "@fonts";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import { SpecialZoomLevel } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import { useState, useRef, useCallback } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
+import { body, bodyBold } from "~/styles/fonts";
 import Webcam from "react-webcam";
 
-const Countdown = dynamic(() => import("~/components/countdown"), {
-  ssr: false,
-});
+interface FormData {
+  name: string;
+  studentId: string;
+  programstudi: string;
+  kontak: string;
+  tempatKejadian: string[];
+  photo?: string;
+  pelanggaranRingan: string[];
+  pelanggaranSedang: string[];
+  pelanggaranBerat: string[];
+  bukti: string;
+  deskripsi: string;
+  p1: string;
+  p2: string;
+  p3: string;
+  p4: string;
+}
 
-const campusOptions = [
-  "Kampus Ganesha",
-  "Kampus Cirebon",
-  "Kampus Jatinangor",
-  "Dan Lain-lain",
-];
-
-const pelanggaranOptions = [
-  "Calon K3M atau Calon MWA-WM ITB tidak dapat mendatangkan Promotor pada acara Kampanye sesuai dengan jumlah atau waktu yang ditentukan Panitia Pelaksana Pemira KM ITB 2024/2025;",
-  "Tim Kampanye datang pada acara Kampanye yang wajib dihadirinya melebihi waktu yang ditentukan Komisi Disiplin Pemira KM ITB 2024/2025;",
-  "Tim Kampanye menyerahkan catatan pemasukan dan pengeluaran dana Kampanye melebihi batas waktu yang ditentukan Panitia Pelaksana Pemira KM ITB 2024/2025;",
-  "Tim Kampanye mengisi presensi kehadiran acara Kampanye, tetapi sebenarnya tidak hadir;",
-  "Tim Kampanye tidak mengisi presensi pada saat pemungutan suara berlangsung;",
-  "Tim Kampanye tidak mencelupkan tangannya pada tinta yang disediakan saat pemungutan suara;",
-  "Calon K3M atau Calon MWA-WM ITB melakukan Kampanye di luar masa Kampanye yang telah ditetapkan oleh Panitia Pelaksana Pemira KM ITB 2024/2025;",
-  "Promotor memprovokasi massa dalam Kampanye;",
-  "Jumlah Promotor melebihi batas yang ditentukan;",
-  "Sanksi pelanggaran ringan yang diberikan kepada Tim Kampanye tidak selesai dikerjakan hingga batas waktu yang ditentukan Komisi Disiplin;",
-  "Calon K3M atau Calon MWA-WM ITB tidak datang pada acara Kampanye yang wajib dihadirinya tanpa mematuhi mekanisme yang ditentukan oleh Panitia Pelaksana Pemira KM ITB 2024/2025;",
-  "Tim Kampanye menggunakan dana Kampanye melebihi batas atas pengeluaran Kampanye;",
-  "Tim Kampanye melakukan pencelaan dan/atau provokasi yang tidak mengandung unsur Suku, Agama, Ras, dan Antargolongan terhadap pihak lain;",
-  "Tim Kampanye melakukan Kampanye pada saat pemungutan suara berlangsung;",
-  "Calon K3M atau Calon MWA-WM ITB dan/atau Promotornya melakukan penyuapan, kekerasan, dan pemerasan terhadap pihak manapun dalam rangkaian Pemira KM ITB 2024/2025;",
-  "Calon K3M atau Calon MWA-WM ITB dan/atau Promotornya ditemukan melakukan kecurangan dalam memenuhi syarat-syarat yang telah ditentukan, baik sebelum maupun setelah melewati tahap verifikasi berkas;",
-  "Tim Kampanye melakukan pencelaan dan/atau provokasi yang mengandung unsur Suku, Agama, Ras, dan Antargolongan terhadap pihak lain;",
-  "Calon berafiliasi dengan partai politik, organisasi sayap, dan turunannya, serta dengan sengaja menerima bantuan yang diberikan oleh lembaga tersebut;",
-  "Calon terbukti tersangkut kasus pidana, sanksi akademik, atau sanksi organisasi KM ITB;",
-  "Tim Kampanye mengintervensi hak demokrasi orang lain;",
-  "Calon maupun Tim Kampanye melakukan intervensi terkait perhitungan suara kepada Panitia Pelaksana Pemira KM ITB 2024/2025;",
-  "Calon maupun Tim Kampanye menyabotase kegiatan Pemungutan dan Perhitungan Suara."
-];
-
-
-const Pelaporan = () => {
-  const defaultLayoutPluginInstance = defaultLayoutPlugin({
-    sidebarTabs: (defaultTabs) => [],
-  });
-
-  const [name, setName] = useState("");
-  const [studentId, setStudentId] = useState("");
-  const [programstudi, setProgramstudi] = useState("");
-  const [contactinfo, setContactinfo] = useState("");
-  const [extrapelanggaran, setExtrapelanggaran] = useState("");
-  const [buktiinfo, setBuktiinfo] = useState("");
-  const [deskripsiinfo, setDeskripsiinfo] = useState("");
-  const [p1, setP1] = useState("");
-  const [p2, setP2] = useState("");
-  const [p3, setP3] = useState("");
-  const [p4, setP4] = useState("");
-  const [selectedCampuses, setSelectedCampuses] = useState<string[]>([]);
-  const [selectedPelanggarans, setSelectedPelanggarans] = useState<string[]>([]);
-  const [image, setImage] = useState<string | null>(null);
-  const webcamRef = useRef<Webcam>(null);
-
-  const handleCampusChange = (campus: string) => {
-    setSelectedCampuses((prev) =>
-      prev.includes(campus)
-        ? prev.filter((item) => item !== campus)
-        : [...prev, campus]
-    );
-  };
-
-  const handlePelanggaranChange = (pelanggaran: string) => {
-    setSelectedPelanggarans((prev) =>
-      prev.includes(pelanggaran)
-        ? prev.filter((item) => item !== pelanggaran)
-        : [...prev, pelanggaran]
-    );
-  };
+const Pelaporan: React.FC = () => {
+  const { register, handleSubmit, formState: { errors }, reset, watch } = useForm<FormData>();
+  const [message, setMessage] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<string | null>(null);
+  const webcamRef = useRef<Webcam | null>(null);
+  const tempatKejadian = watch("tempatKejadian", []);
 
   const capture = useCallback(() => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
-      setImage(imageSrc);
+      if (imageSrc) {
+        setPhoto(imageSrc);
+      }
     }
   }, [webcamRef]);
 
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const response = await fetch("/api/saveStudent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, studentId, programstudi, campuses: selectedCampuses, contactinfo, pelanggarans: selectedPelanggarans, extrapelanggaran, buktiinfo, deskripsiinfo, p1, p2, p3, p4, image }),
-    });
-
-    if (response.ok) {
-      alert("Data submitted successfully!");
-      setName("");
-      setStudentId("");
-      setProgramstudi("");
-      setContactinfo("");
-      setExtrapelanggaran("");
-      setBuktiinfo("");
-      setDeskripsiinfo("");
-      setSelectedCampuses([]);
-      setSelectedPelanggarans([]);
-      setImage(null);
-    } else {
-      alert("Error submitting data! Pastikan semua field terisi/Pakta integritas ditulis dengan benar! (Jika terdapat kendala lebih lanjut, mohon hubungi michael.ballard di LINE)");
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    if (data.tempatKejadian.length === 0) {
+      setMessage("Minimal satu tempat kejadian harus dipilih.");
+      return;
+    }
+    if (!photo) {
+      setMessage("Silakan ambil foto sebagai bukti KTM/KSM.");
+      return;
+    }
+    setMessage(null);
+    try {
+      const response = await fetch("/api/saveStudent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({...data, photo}),
+      });
+      
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error);
+      setMessage(result.message);
+      reset();
+      setPhoto(null);
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Terjadi kesalahan.");
     }
   };
 
   return (
-    <div className="relative z-0 flex flex-col items-center justify-center w-full overflow-hidden mb-[20vw]">
-      <div
-        className={`${header.className} w-[80%] flex text-center items-center justify-center mt-[100px] font-bold text-3xl md:text-5xl text-[#FA3A91]`}
-      >
-        SOP Pelaporan
-      </div>
-      <div className="w-[80%] h-[80vw] md:h-[40vw] border border-gray-200 shadow-lg mt-12">
-        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
-          <div className="w-full h-full">
-            <Viewer
-              fileUrl="/soplapor.pdf"
-              plugins={[defaultLayoutPluginInstance]}
-              defaultScale={SpecialZoomLevel.PageWidth}
-            />
-          </div>
-        </Worker>
-      </div>
-      <div
-        className={`${header.className} w-[80%] flex text-center items-center justify-center mt-[100px] font-bold text-3xl md:text-5xl text-[#FA3A91]`}
-      >
-        Form Pelaporan
-      </div>
+    <div className="flex flex-col items-center self-center w-full md:bg-black md:bg-opacity-20 md:w-[80%] mb-[20vh] md:items-start md:px-4">
+      <img src={abstract1.src} alt="Abstract 1" className="absolute top-0 left-0 w-[50%] h-[50%] object-cover -translate-x-[50%] -translate-y-[30%]" />
+      <img src={abstract2.src} alt="Abstract 2" className="absolute top-0 right-0 w-[50%] h-[50%] object-cover translate-x-[50%] -translate-y-[30%]" />
+      <img src={fplogo.src} alt="FP Logo" className="object-contain h-full w-[55%] md:w-[70%] self-center mt-12" />
+      <div className="text-white font-semibold text-3xl md:text-6xl mt-12 self-center">SOP</div>
+      <button className="flex flex-row justify-center items-center bg-yellow-500 border border-[#B6B258] h-fit w-[40%] self-center mt-6 rounded-lg hover:cursor-pointer">
+        <div className="flex flex-row bg-[#FFE859] w-full rounded-lg items-center justify-center mx-1 my-1 hover:cursor-pointer px-2 py-4">
+          <IoDocumentText color="#FA3A91" size="2em" />
+          <div className="text-2xl text-[#FA3A91] underline ml-2 hover:cursor-pointer">SOP Pelaporan</div>
+        </div>
+      </button>
+      
 
-      <form
-        className="flex flex-col items-center justify-center w-[80%] mt-12 space-y-4"
-        onSubmit={handleSubmit}
-      >
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Nama Lengkap
-        </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Nama lengkap (isi sesuai KTM)"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 p-6 rounded-lg shadow-md w-[90%] md:w-[90%] z-50 self-center">
+        <label className={`${bodyBold.className} block text-white text-xl`}>NAMA LENGKAP</label>
+        <div className={`${body.className} block mb-2 text-[#FA3A91] text-sm`}>(Isi selengkap-lengkapnya, tidak ada singkatan pada nama yang dicantumkan atau sesuai yang tertulis pada KTM)</div>
+        <input 
+          {...register("name", { required: "Nama wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Masukkan nama"
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          NIM
-        </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="NIM (isi sesuai KTM, NIM Jurusan apabila ada)"
-          value={studentId}
-          onChange={(e) => setStudentId(e.target.value)}
-          required
+        {errors.name && <p className="text-red-500 text-sm">{String(errors.name.message)}</p>}
+        <label className={`${bodyBold.className} block mt-6 text-white text-xl`}>NIM</label>
+        <div className={`${body.className} block mb-2 text-[#FA3A91] text-sm`}>(Isi dengan NIM Jurusan apabila sudah mendapatkan, NIM TPB jika belum)</div>
+        <input 
+          {...register("studentId", { required: "NIM wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Masukkan NIM"
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Program Studi
-        </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Isi Program Studi (ex: Teknik Informatika/TPB)"
-          value={programstudi}
-          onChange={(e) => setProgramstudi(e.target.value)}
-          required
+        {errors.studentId && <p className="text-red-500 text-sm">{String(errors.studentId.message)}</p>}
+        <label className={`${bodyBold.className} block mt-6 text-white text-xl`}>PROGRAM STUDI</label>
+        <div className={`${body.className} block mb-2 text-[#FA3A91] text-sm`}>(Isi dengan program studi, TPB jika belum ada.)</div>
+        <input 
+          {...register("programstudi", { required: "Program Studi wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Masukkan Program Studi"
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Tempat Kejadian Pelanggaran
-        </div>
-        <div className="flex flex-col self-start space-y-2 mt-2 items-start">
-          {campusOptions.map((campus) => (
-            <label
-              key={campus}
-              className="items-center flex space-x-2 text-lg font-medium text-[#FA3A91]"
-            >
-              <input
-                type="checkbox"
-                className="items-center w-fit h-fit accent-pink-500"
-                checked={selectedCampuses.includes(campus)}
-                onChange={() => handleCampusChange(campus)}
+        {errors.programstudi && <p className="text-red-500 text-sm">{String(errors.programstudi.message)}</p>}
+        <label className={`${bodyBold.className} block mt-6 text-white text-xl`}>KONTAK PELAPOR</label>
+        <div className={`${body.className} block mb-2 text-[#FA3A91] text-sm`}>(Isi dengan Nomor Whatsapp atau ID Line, selain itu tidak valid.)</div>
+        <input 
+          {...register("kontak", { required: "Program Studi wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Masukkan Program Studi"
+        />
+        {errors.kontak && <p className="text-red-500 text-sm">{String(errors.kontak.message)}</p>}
+        <label className={`${bodyBold.className} block mt-6 text-white text-xl`}>TEMPAT KEJADIAN</label>
+        <div className="flex flex-col space-y-2">
+          {["Kampus Ganesha", "Kampus Jatinangor", "Kampus Cirebon", "Tempat lain"].map((campus) => (
+            <label key={campus} className="text-white">
+              <input 
+                type="checkbox" 
+                value={campus} 
+                {...register("tempatKejadian")}
+                className="mr-2 accent-[#FA3A91]"
               />
-              <span>{campus}</span>
+              {campus}
             </label>
           ))}
         </div>
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Contact Info
+        {tempatKejadian.length === 0 && <p className="text-red-500 text-sm">Minimal satu tempat kejadian harus dipilih.</p>}
+        <label className={`${bodyBold.className} block mt-6 text-white text-xl`}>BUKTI KTM/KSM</label>
+        <div className={`${body.className} block mb-2 text-[#FA3A91] text-sm`}>(Ambillah foto diri anda dengan KTM dengan muka anda juga berada di dalam foto)</div>
+        <div className="flex flex-col items-center">
+          <Webcam
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            className="w-[80%] md:w-[50%] h-auto border border-gray-300 rounded-lg"
+          />
+          <button type="button" onClick={capture} className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg">
+            Ambil Foto
+          </button>
+          {photo && <img src={photo} alt="Captured" className="mt-4 w-[60%] md:w-[30%] border border-gray-300 rounded-lg" />}
         </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Isi dengan nomor telepon/ ID Line yang bisa dihubungi"
-          value={contactinfo}
-          onChange={(e) => setContactinfo(e.target.value)}
-          required
-        />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Jenis Pelanggaran
-        </div>
-        <div className="flex flex-col self-start space-y-2 mt-2 items-start">
-          {pelanggaranOptions.map((pelanggaran) => (
-            <label
-              key={pelanggaran}
-              className="items-center flex space-x-2 text-lg font-medium text-[#FA3A91]"
-            >
+        <label className={`${bodyBold.className} block mt-6 text-white text-xl mb-4`}>JENIS PELANGGARAN</label>
+
+        <div className="flex flex-col gap-2 items-center mx-auto bg-[#FA3A91] rounded-lg w-[90%] bg-opacity-30">
+          <div className={`${bodyBold.className} bg-[#FA3A91] rounded-lg w-full text-[#FFE859] self-center flex items-center justify-center mb-4 py-4`}>
+            Pelanggaran Ringan
+          </div>
+          
+          {["Calon K3M atau Calon MWA-WM ITB tidak dapat mendatangkan Promotor pada acara Kampanye sesuai dengan jumlah atau waktu yang ditentukan Panitia Pelaksana Pemira KM ITB 2024/2025;", "Tim Kampanye datang pada acara Kampanye yang wajib dihadirinya melebihi waktu yang ditentukan Komisi Disiplin Pemira KM ITB 2024/2025;", "Tim Kampanye menyerahkan catatan pemasukan dan pengeluaran dana Kampanye melebihi batas waktu yang ditentukan Panitia Pelaksana Pemira KM ITB 2024/2025;", "Tim Kampanye mengisi presensi kehadiran acara Kampanye, tetapi sebenarnya tidak hadir;", "Tim Kampanye tidak mengisi presensi pada saat pemungutan suara berlangsung;", "Tim Kampanye tidak mencelupkan tangannya pada tinta yang disediakan saat pemungutan suara."].map((option) => (
+            <label key={option} className="flex items-center w-[95%] bg-[#FA3A91] rounded-lg border border-white text-white p-2 mb-2">
               <input
                 type="checkbox"
-                className="items-center w-fit h-fit accent-pink-500"
-                checked={selectedPelanggarans.includes(pelanggaran)}
-                onChange={() => handlePelanggaranChange(pelanggaran)}
+                value={option}
+                {...register("pelanggaranRingan")}
+                className="mr-2 accent-white"
               />
-              <span>{pelanggaran}</span>
+              {option}
             </label>
           ))}
         </div>
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Pelanggaran Lainnya
+        {errors.pelanggaranRingan && <p className="text-red-500 text-sm">{String(errors.pelanggaranRingan.message)}</p>}
+
+        <div className="flex flex-col gap-2 mt-12 mx-auto items-center bg-[#FFE859] rounded-lg w-[90%] bg-opacity-60">
+          <div className={`${bodyBold.className} bg-[#FFE859] rounded-lg w-full text-[#FA3A91] self-center flex items-center justify-center mb-4 py-4`}>
+            Pelanggaran Sedang
+          </div>
+          
+          {["Calon K3M atau Calon MWA-WM ITB melakukan Kampanye di luar masa Kampanye yang telah ditetapkan oleh Panitia Pelaksana Pemira KM ITB 2024/2025;", "Promotor memprovokasi massa dalam Kampanye;", "Jumlah Promotor melebihi batas yang ditentukan;", "Sanksi pelanggaran ringan yang diberikan kepada Tim Kampanye tidak selesai dikerjakan hingga batas waktu yang ditentukan Komisi Disiplin;", "Calon K3M atau Calon MWA-WM ITB tidak datang pada acara Kampanye yang wajib dihadirinya tanpa mematuhi mekanisme yang ditentukan oleh Panitia Pelaksana Pemira KM ITB 2024/2025;", "Tim Kampanye menggunakan dana Kampanye melebihi batas atas pengeluaran Kampanye;", "Tim Kampanye melakukan pencelaan dan/atau provokasi yang tidak mengandung unsur Suku, Agama, Ras, dan Antargolongan terhadap pihak lain;", "Tim Kampanye melakukan Kampanye pada saat pemungutan suara berlangsung."].map((option) => (
+            <label key={option} className="flex items-center w-[95%] bg-[#FFE859] bg-opacity-40 rounded-lg border border-white text-white p-2 mb-2">
+              <input
+                type="checkbox"
+                value={option}
+                {...register("pelanggaranSedang")}
+                className="mr-2 accent-white"
+              />
+              {option}
+            </label>
+          ))}
         </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Silahkan isi jika terdapat pelanggaran lain yang tidak terdapat di daftar pelanggaran"
-          value={extrapelanggaran}
-          onChange={(e) => setExtrapelanggaran(e.target.value)}
-          required
+        {errors.pelanggaranSedang && <p className="text-red-500 text-sm">{String(errors.pelanggaranSedang.message)}</p>}
+
+        <div className="flex flex-col gap-2 mt-12 mx-auto items-center bg-[#5A8AF9] rounded-lg w-[90%] bg-opacity-60">
+          <div className={`${bodyBold.className} bg-[#5A8AF9] rounded-lg w-full text-[#BEEF62] self-center flex items-center justify-center mb-4 py-4`}>
+            Pelanggaran Berat
+          </div>
+          
+          {["Calon K3M atau Calon MWA-WM ITB dan/atau Promotornya melakukan penyuapan, kekerasan, dan pemerasan terhadap pihak manapun dalam rangkaian Pemira KM ITB 2024/2025;", "Calon K3M atau Calon MWA-WM ITB dan/atau Promotornya ditemukan melakukan kecurangan dalam memenuhi syarat-syarat yang telah ditentukan, baik sebelum maupun setelah melewati tahap verifikasi berkas;", "Tim Kampanye melakukan pencelaan dan/atau provokasi yang mengandung unsur Suku, Agama, Ras, dan Antargolongan terhadap pihak lain;", "Calon berafiliasi dengan partai politik, organisasi sayap, dan turunannya, serta dengan sengaja menerima bantuan yang diberikan oleh lembaga tersebut;", "Calon terbukti tersangkut kasus pidana, sanksi akademik, atau sanksi organisasi KM ITB;", "Tim Kampanye mengintervensi hak demokrasi orang lain;", "Calon maupun Tim Kampanye melakukan intervensi terkait perhitungan suara kepada Panitia Pelaksana Pemira KM ITB 2024/2025 Pemira KM ITB 2024/2025;", "Calon maupun Tim Kampanye menyabotase kegiatan Pemungutan dan Perhitungan Suara"].map((option) => (
+            <label key={option} className="flex items-center w-[95%] bg-[#5A8AF9] bg-opacity-40 rounded-lg border border-white text-white p-2 mb-2">
+              <input
+                type="checkbox"
+                value={option}
+                {...register("pelanggaranBerat")}
+                className="mr-2 accent-white"
+              />
+              {option}
+            </label>
+          ))}
+        </div>
+        {errors.pelanggaranBerat && <p className="text-red-500 text-sm">{String(errors.pelanggaranBerat.message)}</p>}
+
+        <label className={`${bodyBold.className} block text-white text-xl mt-12`}>BUKTI PELANGGARAN</label>
+        <div className={`${body.className} block mb-2 text-[#FA3A91] text-sm`}>(Cantumkan link yang berisi kumpulan bukti/foto dalam bentuk link Google Drive/OneDrive/etc.)</div>
+        <input 
+          {...register("bukti", { required: "Bukti sangat wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Masukkan link bukti pelanggaran"
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Bukti Pelanggaran
-        </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Isi dengan link tempat penyimpanan bukti pelanggaran (ex: Google Drive, OneDrive, Dropbox)"
-          value={buktiinfo}
-          onChange={(e) => setBuktiinfo(e.target.value)}
-          required
+        {errors.bukti && <p className="text-red-500 text-sm">{String(errors.bukti.message)}</p>}
+
+        <label className={`${bodyBold.className} block text-white text-xl mt-6`}>DESKRIPSI PELANGGARAN</label>
+        <div className={`${body.className} block mb-2 text-[#FA3A91] text-sm`}>(Deskripsikan pelanggaran yang terjadi, atau jika terdapat pelanggaran yang tidak ada di opsi)</div>
+        <input 
+          {...register("deskripsi", { required: "Deskripsi wajib diisi" })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Masukkan link bukti pelanggaran"
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Deskripsi Pelanggaran
-        </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Jelas dan singkat, deskripsikan pelanggaran yang terjadi."
-          value={deskripsiinfo}
-          onChange={(e) => setDeskripsiinfo(e.target.value)}
-          required
+        {errors.deskripsi && <p className="text-red-500 text-sm">{String(errors.deskripsi.message)}</p>}
+
+        <label className={`${bodyBold.className} block text-white text-xl mt-12`}>Pakta Integritas</label>
+        <div className={`${body.className} block mb-2 text-[#FA3A91] text-sm`}>KETIK ULANG 4 PERNYATAAN DI BAWAH INI:</div>
+        <div className={`${bodyBold.className} block mb-2 text-white text-sm`}>1. Menjunjung tinggi kejujuran, keadilan, dan transparansi dalam seluruh proses Pemilihan Umum Raya KM ITB 2024/2025</div>
+        <input 
+          {...register("p1", { required: "Pakta wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Menjunjung tinggi kejujuran, keadilan, dan transparansi dalam seluruh proses Pemilihan Umum Raya KM ITB 2024/2025."
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Pakta Integritas
-        </div>
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[10px] font-bold text-sm md:text-sm text-[#FA3A91]`}
-        >
-          Mohon ketik ulang pernyataan-pernyataan di bawah ini (Angka di awal tidak perlu ditulis).
-        </div>
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[10px] font-bold text-sm md:text-sm text-white`}
-        >
-          1. Menjunjung tinggi kejujuran, keadilan, dan transparansi dalam seluruh proses Pemilihan Umum Raya KM ITB 2024/2025.
-        </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Tuliskan ulang."
-          value={p1}
-          onChange={(e) => setP1(e.target.value)}
-          required
+        {errors.p1 && <p className="text-red-500 text-sm">{String(errors.p1.message)}</p>}
+        <div className={`${bodyBold.className} block mb-2 text-white text-sm mt-4`}>2. Mematuhi seluruh peraturan dan ketentuan yang berlaku terkait Pemilihan Umum Raya KM ITB 2024/2025, sesuai dengan TAP 042 KONGRES KM ITB 2024/2025</div>
+        <input 
+          {...register("p2", { required: "Pakta wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Mematuhi seluruh peraturan dan ketentuan yang berlaku terkait Pemilihan Umum Raya KM ITB 2024/2025, sesuai dengan TAP 042 KONGRES KM ITB 2024/2025"
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[10px] font-bold text-sm md:text-sm text-white`}
-        >
-          2. Mematuhi seluruh peraturan dan ketentuan yang berlaku terkait Pemilihan Umum Raya KM ITB 2024/2025, sesuai dengan TAP 042 KONGRES KM ITB 2024/2025.
-        </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Tuliskan ulang."
-          value={p2}
-          onChange={(e) => setP2(e.target.value)}
-          required
+        {errors.p2 && <p className="text-red-500 text-sm">{String(errors.p2.message)}</p>}
+        <div className={`${bodyBold.className} block mb-2 text-white text-sm mt-4`}>3. Menolak segala bentuk kecurangan, ketidakooperatifan, dan tindakan tidak etis lainnya yang dapat mencederai proses Pemilihan Umum Raya KM ITB 2024/2025</div>
+        <input 
+          {...register("p3", { required: "Pakta wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Menolak segala bentuk kecurangan, ketidakooperatifan, dan tindakan tidak etis lainnya yang dapat mencederai proses Pemilihan Umum Raya KM ITB 2024/2025"
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[10px] font-bold text-sm md:text-sm text-white`}
-        >
-          3. Menolak segala bentuk kecurangan, ketidakooperatifan, dan tindakan tidak etis lainnya yang dapat mencederai proses Pemilihan Umum Raya KM ITB 2024/2025.
-        </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Tuliskan ulang."
-          value={p3}
-          onChange={(e) => setP3(e.target.value)}
-          required
+        {errors.p3 && <p className="text-red-500 text-sm">{String(errors.p3.message)}</p>}
+        <div className={`${bodyBold.className} block mb-2 text-white text-sm mt-4`}>4. Mengunduh dan menceritakan bukti yang dicantumkan dengan sebenar-benarnya dan dapat dipertanggungjawabkan</div>
+        <input 
+          {...register("p4", { required: "Pakta wajib diisi." })} 
+          className="w-full p-2 text-white border border-gray-300 rounded-md bg-opacity-40 bg-[#3957D1] placeholder:text-slate-300" 
+          placeholder="Mengunduh dan menceritakan bukti yang dicantumkan dengan sebenar-benarnya dan dapat dipertanggungjawabkan"
         />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[10px] font-bold text-sm md:text-sm text-white`}
-        >
-          4. Mengunduh dan menceritakan bukti yang dicantumkan dengan sebenar-benarnya dan dapat dipertanggungjawabkan.
+        {errors.p4 && <p className="text-red-500 text-sm">{String(errors.p4.message)}</p>}
+
+        <div className="flex items-center justify-center">
+          <button type="submit" className="items-center mt-4 text-[#FA3A91] font-semibold text-xl bg-[#BEEF62] px-10 md:px-28 py-3 rounded-lg hover:bg-[#FF82BB] hover:text-white">
+            SUBMIT!
+          </button>
         </div>
-        <input
-          type="text"
-          className="w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Tuliskan ulang."
-          value={p4}
-          onChange={(e) => setP4(e.target.value)}
-          required
-        />
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[50px] font-bold text-xl md:text-3xl text-[#FA3A91]`}
-        >
-          Foto Bukti Wajah & KTM
-        </div>
-        <div
-          className={`w-[100%] flex text-start items-start justify-start mt-[10px] font-bold text-sm md:text-sm text-[#FA3A91]`}
-        >
-          Mohon untuk mengambil foto wajah dan KTM anda sebagai bukti pelaporan.
-        </div>
-        <Webcam ref={webcamRef} screenshotFormat="image/jpeg" className="border w-64 h-48" />
-        <button type="button" onClick={capture} className="px-4 py-2 bg-blue-500 text-white">Capture Image</button>
-        {image && <img src={image} alt="Captured" className="w-32 h-24 border" />}
-        <button
-          type="submit"
-          className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-        >
-          Submit
-        </button>
       </form>
+      {message && <p className="mt-2 self-center text-center text-white bg-gray-800 p-3 rounded-md">{message}</p>}
     </div>
   );
 };
