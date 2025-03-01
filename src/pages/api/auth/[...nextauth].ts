@@ -84,7 +84,7 @@ export default NextAuth({
         return false;
       }
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ url, baseUrl: defaultUrl }) {
       const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
       const finalBaseUrl = `${protocol}://${baseUrl.replace(
         /^https?:\/\//,

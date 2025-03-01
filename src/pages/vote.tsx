@@ -8,6 +8,7 @@ import Image from "next/image";
 import VoteCard from "~/components/voteCard";
 import { header } from "~/styles/fonts";
 import Swal from "sweetalert2";
+import { error } from "console";
 
 interface FormData {
   voteK3M: "true" | "false";
@@ -86,7 +87,7 @@ const Vote = () => {
     const voteK3MIsOne = formData.voteK3M === "true";
     const voteMWAWMIsOne = formData.voteMWAWM === "true";
 
-    void Swal.fire({
+    Swal.fire({
       title: "Apakah Anda yakin mengirimkan suara Anda?",
       showCancelButton: true,
       confirmButtonColor: "#FA3A91",
@@ -99,34 +100,46 @@ const Vote = () => {
       customClass: {
         popup: "border border-[#5A8AF9]",
       },
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          setIsLoading(true);
+    })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            setIsLoading(true);
 
-          const response = await fetch("/api/vote", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email,
-              isOneK3M: voteK3MIsOne,
-              isOneMWAWM: voteMWAWMIsOne,
-            }),
-          });
-
-          if (response.ok) {
-            toast.success("Vote Anda telah terekam!", {
-              position: "top-center",
-              autoClose: 3000,
-              toastId: "vote-success",
-              pauseOnHover: false,
-              closeOnClick: true,
-              transition: Bounce,
-              theme: "colored",
+            const response = await fetch("/api/vote", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email,
+                isOneK3M: voteK3MIsOne,
+                isOneMWAWM: voteMWAWMIsOne,
+              }),
             });
-            void router.push("/");
-          } else {
-            toast.error("Vote failed!", {
+
+            if (response.ok) {
+              toast.success("Vote Anda telah terekam!", {
+                position: "top-center",
+                autoClose: 3000,
+                toastId: "vote-success",
+                pauseOnHover: false,
+                closeOnClick: true,
+                transition: Bounce,
+                theme: "colored",
+              });
+              void router.push("/");
+            } else {
+              toast.error("Vote failed!", {
+                position: "top-center",
+                autoClose: 3000,
+                toastId: "vote-error",
+                pauseOnHover: false,
+                closeOnClick: true,
+                transition: Bounce,
+                theme: "colored",
+              });
+            }
+          } catch (error) {
+            toast.error("Internal server error", {
               position: "top-center",
               autoClose: 3000,
               toastId: "vote-error",
@@ -135,22 +148,14 @@ const Vote = () => {
               transition: Bounce,
               theme: "colored",
             });
+          } finally {
+            setIsLoading(false);
           }
-        } catch (error) {
-          toast.error("Internal server error", {
-            position: "top-center",
-            autoClose: 3000,
-            toastId: "vote-error",
-            pauseOnHover: false,
-            closeOnClick: true,
-            transition: Bounce,
-            theme: "colored",
-          });
-        } finally {
-          setIsLoading(false);
         }
-      }
-    });
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const handleVoteClick = (
