@@ -1,12 +1,28 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useState } from "react";
 import { withAuthPlus } from "../utils/withAuthPlus";
 import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
+ChartJS.register(
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+);
 
 const prisma = new PrismaClient();
 
@@ -29,7 +45,11 @@ interface AdminPageProps {
   };
 }
 
-const AdminPage = ({ session, voteResultsK3M, voteResultsMWAWM }: AdminPageProps) => {
+const AdminPage = ({
+  session,
+  voteResultsK3M,
+  voteResultsMWAWM,
+}: AdminPageProps) => {
   const { user } = session;
   const [selectedVote, setSelectedVote] = useState("K3M");
 
@@ -54,7 +74,10 @@ const AdminPage = ({ session, voteResultsK3M, voteResultsMWAWM }: AdminPageProps
     datasets: [
       {
         label: "Votes",
-        data: [voteResultsMWAWM.optionOneVotes, voteResultsMWAWM.optionTwoVotes],
+        data: [
+          voteResultsMWAWM.optionOneVotes,
+          voteResultsMWAWM.optionTwoVotes,
+        ],
         backgroundColor: ["#00BFFF", "#BEEF62"],
       },
     ],
@@ -80,8 +103,8 @@ const AdminPage = ({ session, voteResultsK3M, voteResultsMWAWM }: AdminPageProps
             weight: "bold" as const,
             size: 16,
           },
-          callback: function(tickValue: string | number) {
-            if (typeof tickValue === 'number') {
+          callback: function (tickValue: string | number) {
+            if (typeof tickValue === "number") {
               return tickValue.toLocaleString();
             }
             return tickValue;
@@ -106,7 +129,7 @@ const AdminPage = ({ session, voteResultsK3M, voteResultsMWAWM }: AdminPageProps
   };
 
   return (
-    <div className="font-medium min-h-screen m-12 mb-48 text-white">
+    <div className="m-12 mb-48 min-h-screen font-medium text-white">
       <h1 className="text-[54px] font-bold">Welcome to the Admin Page</h1>
       <p>Nama: {user.name}</p>
       <p>Email: {user.email}</p>
@@ -114,12 +137,14 @@ const AdminPage = ({ session, voteResultsK3M, voteResultsMWAWM }: AdminPageProps
       <div className="mt-8">
         <h2 className="text-4xl font-bold">Voting Results</h2>
         <div className="my-4">
-          <label htmlFor="voteType" className="mr-2">Select Vote Type:</label>
+          <label htmlFor="voteType" className="mr-2">
+            Select Vote Type:
+          </label>
           <select
             id="voteType"
             value={selectedVote}
             onChange={(e) => setSelectedVote(e.target.value)}
-            className="p-2 rounded bg-gray-800 text-white"
+            className="rounded bg-gray-800 p-2 text-white"
           >
             <option value="K3M">K3M</option>
             <option value="MWAWM">MWAWM</option>
