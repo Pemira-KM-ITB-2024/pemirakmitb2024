@@ -33,7 +33,7 @@ export default NextAuth({
           : "next-auth.session-token",
       options: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === "production", // Must be false in development
         sameSite: "lax",
         path: "/",
       },

@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
-import { withAuth } from "~/utils/withAuth";
+import { dynamicAuth } from "../utils/dynamicAuth";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import VoteCard from "~/components/voteCard";
@@ -321,4 +321,4 @@ const Vote = () => {
   );
 };
 
-export default withAuth(Vote, ["/vote"]);
+export default dynamicAuth(Vote);
