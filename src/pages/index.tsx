@@ -15,7 +15,7 @@ const events = [
   { date: "19-21 Des 24", description: "Pengambilan Berkas" },
   { date: "11-12 Jan 25", description: "Extended Open Berkas MWAWM"},
   { date: "13-15 Feb 25", description: "Pengambilan Berkas MWAWM" },
-  { date: "18 Feb 25", description: "Pengambilan Berkas K3M" },
+  { date: "18 Feb 25", description: "Pengembalian Berkas K3M" },
   { date: "24-27 Mar 25", description: "Hearing" },
   { date: "1-2 Mar 25", description: "Masa Tenang" },
   { date: "3-9 Mar 25", description: "Pemungutan Suara" },
