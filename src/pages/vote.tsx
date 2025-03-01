@@ -117,12 +117,11 @@ const Vote = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="mb-6 text-4xl font-bold text-white">Vote</h1>
-      <form
+      <h1 className="mb-6 text-4xl font-bold text-white">Coming Soon</h1>
+      {/* <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col items-center gap-8"
       >
-        {/* VoteK3M Group*/}
         <fieldset className="flex flex-col items-start gap-2">
           <legend className="text-xl text-white">VoteK3M</legend>
           <label className="flex items-center gap-2 text-white">
@@ -134,7 +133,8 @@ const Vote = () => {
             No (isNotOne)
           </label>
         </fieldset>
-        {/* VoteMWAWM Group */}
+
+
         <fieldset className="flex flex-col items-start gap-2">
           <legend className="text-xl text-white">VoteMWAWM</legend>
           <label className="flex items-center gap-2 text-white">
@@ -152,7 +152,7 @@ const Vote = () => {
         >
           Submit Votes
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };
