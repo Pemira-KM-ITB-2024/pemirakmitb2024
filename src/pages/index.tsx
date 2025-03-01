@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { body, header } from "@fonts";
 import Timeline from "~/components/dashboard/timeline";
 import Link from "next/link";
+import { Description } from "@radix-ui/react-dialog";
 
 const Countdown = dynamic(() => import("~/components/countdown"), {
   ssr: false,
@@ -12,6 +13,7 @@ const events = [
   { date: "10-15 Des 24", description: "Forsos"},
   { date: "16-18 Des 24", description: "Open Berkas" },
   { date: "19-21 Des 24", description: "Pengambilan Berkas" },
+  { date: "11-12 Jan 25", description: "Extended Open Berkas MWAWM"},
   { date: "13-15 Feb 25", description: "Pengambilan Berkas MWAWM" },
   { date: "18 Feb 25", description: "Pengambilan Berkas K3M" },
   { date: "24-27 Mar 25", description: "Hearing" },
