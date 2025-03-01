@@ -38,16 +38,23 @@ export default NextAuth({
         path: "/",
       },
     },
+    state: {
+      name: "next-auth.state",
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+      },
+    },
   },
   callbacks: {
     async signIn({ user, account }) {
       try {
-        // Extract data from the NextAuth user object
         const email = user.email ?? "";
         const microsoftId = user.id;
         const name = user.name ?? user.id;
 
-        // Upsert the Account record, including any linked User records
         const accountRecord = await prisma.account.upsert({
           where: { microsoftId },
           update: {
@@ -66,7 +73,6 @@ export default NextAuth({
         });
 
         const jurusan = "stei";
-        // Check if a User record already exists (array is empty if not)
         if (accountRecord.User.length === 0) {
           await prisma.user.create({
             data: {
