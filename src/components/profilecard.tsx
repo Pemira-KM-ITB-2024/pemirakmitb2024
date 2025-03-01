@@ -9,7 +9,7 @@ export const KProfileCard = () => {
       <div className="flex h-full w-full flex-col gap-12 xl:flex-row xl:gap-4">
         {/* left part */}
         <div className="relative flex w-full flex-col xl:w-[40vw]">
-          <div className="flex aspect-square h-[440px] flex-col items-center justify-center rounded-xl bg-[#3957D1] xl:h-full">
+          <div className="flex w-full aspect-square h-[440px] flex-col items-center justify-center rounded-xl bg-[#3957D1] xl:h-full">
             <div className="relative mb-4 mt-12 flex h-[75%] w-[80%] rounded-lg">
               <Image
                 src="/k3m.jpg"
@@ -165,7 +165,7 @@ export const MProfileCard = () => {
       <div className="flex h-full w-full flex-col gap-12 xl:flex-row xl:gap-4">
         {/* left part */}
         <div className="relative flex w-full flex-col xl:w-[40vw]">
-          <div className="flex aspect-square h-[440px] flex-col items-center justify-center rounded-xl bg-[#FFA5B380] xl:h-full">
+          <div className="relative w-full flex aspect-square h-[440px] flex-col items-center justify-center rounded-xl bg-[#FFA5B380] xl:h-full">
             <div className="relative mb-4 mt-12 flex h-[75%] w-[80%] rounded-lg">
               <Image
                 src="/mwam.jpg"
