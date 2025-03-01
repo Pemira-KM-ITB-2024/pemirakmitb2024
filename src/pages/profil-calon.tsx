@@ -1,3 +1,4 @@
+
 import React from "react";
 import Image from "next/image";
 import BintangPink from "public/profil/bintangpink.png";
@@ -5,7 +6,7 @@ import BintangKuning from "public/profil/bintangkuning.png"
 import { KProfileCard, MProfileCard } from "../components/profilecard";
 import { header } from "~/styles/fonts";
 
-const Profile = () => {
+const ProfilCalon = () => {
   return (
     <div className="relative w-full min-h-screen bg-[url('/guidevoting/background.png')] bg-cover lg:bg-500 bg-center overflow-auto lg:overflow-hidden">
         <div className="lg:absolute lg:-top-56 lg:-left-40 lg:w-[450px] absolute w-[146px] left-[-60px] -top-16">
@@ -50,4 +51,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilCalon;

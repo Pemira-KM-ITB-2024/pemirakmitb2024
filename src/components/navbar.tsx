@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/profile", label: "Profil Calon" },
+    { href: "/profil-calon", label: "Profil Calon" },
     { href: "/forsos", label: "Forsos" },
     { href: "/pelaporan", label: "Pelaporan" },
     { href: "https://bit.ly/dokumenTAP", label: "Dokumen TAP" },
