@@ -65,12 +65,14 @@ export default NextAuth({
           include: { User: true }, // include the associated User records
         });
 
+        const jurusan = "stei";
         // Check if a User record already exists (array is empty if not)
         if (accountRecord.User.length === 0) {
           await prisma.user.create({
             data: {
               name,
               email,
+              jurusan,
               account: {
                 connect: { id: accountRecord.id },
               },
@@ -84,7 +86,7 @@ export default NextAuth({
         return false;
       }
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ url, baseUrl: defaultUrl }) {
       const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
       const finalBaseUrl = `${protocol}://${baseUrl.replace(
         /^https?:\/\//,
