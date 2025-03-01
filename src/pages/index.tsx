@@ -3,20 +3,21 @@ import dynamic from "next/dynamic";
 import { body, header } from "@fonts";
 import Timeline from "~/components/dashboard/timeline";
 import Link from "next/link";
+import { Description } from "@radix-ui/react-dialog";
 
 const Countdown = dynamic(() => import("~/components/countdown"), {
   ssr: false,
 });
 
 const events = [
-  { date: "10-15 Des 24", description: "Forsos"},
+  { date: "10-15 Des 24", description: "Forsos" },
   { date: "16-18 Des 24", description: "Open Berkas" },
   { date: "19-21 Des 24", description: "Pengambilan Berkas" },
-  { date: "17 Feb 25", description: "Pengambilan Berkas" },
-  { date: "18 Feb 25", description: "Pembekalan" },
-  { date: "19-21 Feb 25", description: "Hearing" },
-  { date: "26-27 Feb 25", description: "Debat" },
-  { date: "28 Feb - 2 Mar 25", description: "Masa Tenang" },
+  { date: "11-12 Jan 25", description: "Extended Open Berkas MWAWM"},
+  { date: "13-15 Feb 25", description: "Pengambilan Berkas MWAWM" },
+  { date: "18 Feb 25", description: "Pengambilan Berkas K3M" },
+  { date: "24-27 Mar 25", description: "Hearing" },
+  { date: "1-2 Mar 25", description: "Masa Tenang" },
   { date: "3-9 Mar 25", description: "Pemungutan Suara" },
   { date: "11 Mar 25", description: "Pengumuman Perhitungan Suara" },
 ];
@@ -46,7 +47,10 @@ export default function Home() {
 
         <section className="mb-[8vw] flex w-[80%] flex-col items-center justify-center">
           <div className="mt-6 flex flex-row items-center justify-center gap-4">
-            <Link href="https://drive.google.com/drive/folders/16ETRW9gRWtXmQEyHbczvd3KrrCVCojw3" target="_blank">
+            <Link
+              href="https://drive.google.com/drive/folders/16ETRW9gRWtXmQEyHbczvd3KrrCVCojw3"
+              target="_blank"
+            >
               <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
                 <p
                   className={`${body.className} leading-2 mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
@@ -253,10 +257,10 @@ export default function Home() {
         </div>
         <div className=" h-full w-[70%] md:my-[100px]">
           <div
-            className={`ch relative isolate flex mb-36 w-full flex-row justify-start gap-6 text-center`}
+            className={`ch relative isolate mb-36 flex w-full flex-row justify-start gap-6 text-center`}
           >
             <div className="mt-12 flex h-auto flex-1 flex-row justify-center md:mt-0">
-            {/* <Image
+              {/* <Image
               src="/background-landing2.png"
               width={700}
               height={700}

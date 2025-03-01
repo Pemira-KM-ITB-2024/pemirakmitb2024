@@ -9,7 +9,9 @@ import { Toaster } from "./ui/sonner";
 const Layout = ({ children }: { children?: ReactNode }) => (
   <FadeIn>
     <Navbar />
-    <div className={`${body.className} flex min-h-dvh flex-col text-black`}>
+    <div
+      className={`${body.className} flex min-h-dvh w-[100vw] max-w-[100vw] flex-col overflow-x-hidden text-black`}
+    >
       <Head>
         <title>PEMIRA KM ITB</title>
         <meta
@@ -19,15 +21,16 @@ const Layout = ({ children }: { children?: ReactNode }) => (
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster richColors />
-      <main className="flex min-h-dvh flex-1 flex-col overflow-hidden"
-      style={{
-        backgroundImage: "url(/background-pemira-1.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      <main
+        className="flex min-h-dvh w-[100vw] max-w-[100vw] flex-1 flex-col overflow-hidden"
+        style={{
+          backgroundImage: "url(/background-pemira-1.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
         {children}
-        <Footer/>
+        <Footer />
       </main>
     </div>
   </FadeIn>
