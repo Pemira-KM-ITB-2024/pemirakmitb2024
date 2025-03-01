@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
-import { withAuth } from "~/utils/withAuth";
+import { dynamicAuth } from "../utils/dynamicAuth";
 import { useForm } from "react-hook-form";
 
 interface FormData {
@@ -118,9 +118,9 @@ const Vote = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <h1 className="mb-6 text-4xl font-bold text-white">Coming Soon</h1>
-      {/* <form
+      <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center gap-8"
+        className="flex flex-col items-center gap-8 mb-24"
       >
         <fieldset className="flex flex-col items-start gap-2">
           <legend className="text-xl text-white">VoteK3M</legend>
@@ -152,9 +152,9 @@ const Vote = () => {
         >
           Submit Votes
         </button>
-      </form> */}
+      </form>
     </div>
   );
 };
 
-export default withAuth(Vote, ["/vote"]);
+export default dynamicAuth(Vote);

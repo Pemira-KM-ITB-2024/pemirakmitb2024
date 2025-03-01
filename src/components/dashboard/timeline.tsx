@@ -126,7 +126,7 @@ const Timeline: React.FC<TimelineProps> = ({
         <div className="relative">
           <div className="absolute left-3 right-[-3px] mt-[22px] h-1 bg-[#e9e84f]" />
           <div className="relative mt-[100px] pt-4">
-            {events.slice(3, 6).map((event, index) => (
+            {events.slice(3, 6).reverse().map((event, index) => (
               <div
                 key={index}
                 className="absolute"

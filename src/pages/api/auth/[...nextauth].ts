@@ -27,15 +27,18 @@ export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   cookies: {
     sessionToken: {
-      name: `__Secure-next-auth.session-token`,
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.session-token"
+          : "next-auth.session-token", // Use a non-secure cookie for development
       options: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === "production", // Must be false in development
         sameSite: "lax",
         path: "/",
       },
     },
-  },
+  },  
   callbacks: {
     async signIn({ user, account }) {
       try {
