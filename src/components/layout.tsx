@@ -9,7 +9,7 @@ import { Toaster } from "./ui/sonner";
 const Layout = ({ children }: { children?: ReactNode }) => (
   <FadeIn>
     <Navbar />
-    <div className={`${body.className} flex min-h-dvh flex-col text-black`}>
+    <div className={`${body.className} max-w-[100vw] w-[100vw] overflow-x-hidden flex min-h-dvh flex-col text-black`}>
       <Head>
         <title>PEMIRA KM ITB</title>
         <meta
@@ -19,7 +19,7 @@ const Layout = ({ children }: { children?: ReactNode }) => (
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster richColors />
-      <main className="flex min-h-dvh flex-1 flex-col overflow-hidden"
+      <main className="flex min-h-dvh flex-1 flex-col max-w-[100vw] w-[100vw] overflow-hidden"
       style={{
         backgroundImage: "url(/background-pemira-1.png)",
         backgroundSize: "cover",

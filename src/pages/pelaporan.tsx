@@ -14,6 +14,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { body, bodyBold } from "~/styles/fonts";
 import Webcam from "react-webcam";
+import Link from "next/link";
 
 interface FormData {
   name: string;
@@ -79,17 +80,19 @@ const Pelaporan: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center self-center w-full md:bg-black md:bg-opacity-20 md:w-[80%] mb-[20vh] md:items-start md:px-4">
-      <img src={abstract1.src} alt="Abstract 1" className="absolute top-0 left-0 w-[50%] h-[50%] object-cover -translate-x-[50%] -translate-y-[30%]" />
-      <img src={abstract2.src} alt="Abstract 2" className="absolute top-0 right-0 w-[50%] h-[50%] object-cover translate-x-[50%] -translate-y-[30%]" />
+    <div className="flex flex-col items-center self-center w-full md:bg-black md:bg-opacity-20 md:w-[80%] max-w-[100vw] mb-[20vh] md:items-start md:px-4 overflow-x-hidden">
+      <img src={abstract1.src} alt="Abstract 1" className="object-contain absolute top-0 left-0 w-[50%] h-[50%] -translate-x-[50%] -translate-y-[30%]" />
+      <img src={abstract2.src} alt="Abstract 2" className="object-contain absolute top-0 right-0 w-[50%] h-[50%] translate-x-[50%] -translate-y-[30%]" />
       <img src={fplogo.src} alt="FP Logo" className="object-contain h-full w-[55%] md:w-[70%] self-center mt-12" />
       <div className="text-white font-semibold text-3xl md:text-6xl mt-12 self-center">SOP</div>
-      <button className="flex flex-row justify-center items-center bg-yellow-500 border border-[#B6B258] h-fit w-[40%] self-center mt-6 rounded-lg hover:cursor-pointer">
+      <Link target="_blank" href="https://drive.google.com/file/d/1EghOXs8UTd9uTPI2MYnSb8s1hgt8snih/view?usp=sharing" className="hover:scale-[1.01] w-full flex items-center justify-center">
+      <button className="flex flex-row justify-center items-center bg-yellow-500 border border-[#B6B258] h-fit w-[80%] self-center mt-6 rounded-lg hover:cursor-pointer">
         <div className="flex flex-row bg-[#FFE859] w-full rounded-lg items-center justify-center mx-1 my-1 hover:cursor-pointer px-2 py-4">
           <IoDocumentText color="#FA3A91" size="2em" />
           <div className="text-2xl text-[#FA3A91] underline ml-2 hover:cursor-pointer">SOP Pelaporan</div>
         </div>
       </button>
+      </Link>
       
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 p-6 rounded-lg shadow-md w-[90%] md:w-[90%] z-50 self-center">
@@ -155,7 +158,7 @@ const Pelaporan: React.FC = () => {
         </div>
         <label className={`${bodyBold.className} block mt-6 text-white text-xl mb-4`}>JENIS PELANGGARAN</label>
 
-        <div className="flex flex-col gap-2 items-center mx-auto bg-[#FA3A91] rounded-lg w-[90%] bg-opacity-30">
+        <div className="flex pb-6 flex-col gap-2 items-center mx-auto bg-[#FA3A91] rounded-lg w-full bg-opacity-30">
           <div className={`${bodyBold.className} bg-[#FA3A91] rounded-lg w-full text-[#FFE859] self-center flex items-center justify-center mb-4 py-4`}>
             Pelanggaran Ringan
           </div>
@@ -174,7 +177,7 @@ const Pelaporan: React.FC = () => {
         </div>
         {errors.pelanggaranRingan && <p className="text-red-500 text-sm">{String(errors.pelanggaranRingan.message)}</p>}
 
-        <div className="flex flex-col gap-2 mt-12 mx-auto items-center bg-[#FFE859] rounded-lg w-[90%] bg-opacity-60">
+        <div className="flex pb-6 flex-col gap-2 mt-12 mx-auto items-center bg-[#FFE859] rounded-lg w-full bg-opacity-60">
           <div className={`${bodyBold.className} bg-[#FFE859] rounded-lg w-full text-[#FA3A91] self-center flex items-center justify-center mb-4 py-4`}>
             Pelanggaran Sedang
           </div>
@@ -193,7 +196,7 @@ const Pelaporan: React.FC = () => {
         </div>
         {errors.pelanggaranSedang && <p className="text-red-500 text-sm">{String(errors.pelanggaranSedang.message)}</p>}
 
-        <div className="flex flex-col gap-2 mt-12 mx-auto items-center bg-[#5A8AF9] rounded-lg w-[90%] bg-opacity-60">
+        <div className="flex pb-6 flex-col gap-2 mt-12 mx-auto items-center bg-[#5A8AF9] rounded-lg w-full bg-opacity-60">
           <div className={`${bodyBold.className} bg-[#5A8AF9] rounded-lg w-full text-[#BEEF62] self-center flex items-center justify-center mb-4 py-4`}>
             Pelanggaran Berat
           </div>
@@ -261,7 +264,7 @@ const Pelaporan: React.FC = () => {
         />
         {errors.p4 && <p className="text-red-500 text-sm">{String(errors.p4.message)}</p>}
 
-        <div className="flex items-center justify-center">
+        <div className="my-12 flex items-center justify-center">
           <button type="submit" className="items-center mt-4 text-[#FA3A91] font-semibold text-xl bg-[#BEEF62] px-10 md:px-28 py-3 rounded-lg hover:bg-[#FF82BB] hover:text-white">
             SUBMIT!
           </button>
