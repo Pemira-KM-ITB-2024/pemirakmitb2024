@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaClient } from "@prisma/client";
+import { jurusan } from "~/lib/constant/jurusan";
 
 const prisma = new PrismaClient();
 
@@ -72,13 +73,22 @@ export default NextAuth({
           include: { User: true }, // include the associated User records
         });
 
-        const jurusan = "stei";
+        // Extract jurusan code from email and match with the list
+        const jurusanCode = email.substring(0, 3);
+        const numericJurusanCode = parseInt(jurusanCode, 10);
+
+        // Find matching department or default to "Pascasarjana"
+        const matchedJurusan =
+          jurusan.find((j) => j.kode === numericJurusanCode)?.nama ??
+          "Pascasarjana";
+
+        // Check if a User record already exists (array is empty if not)
         if (accountRecord.User.length === 0) {
           await prisma.user.create({
             data: {
               name,
               email,
-              jurusan,
+              jurusan: matchedJurusan,
               account: {
                 connect: { id: accountRecord.id },
               },

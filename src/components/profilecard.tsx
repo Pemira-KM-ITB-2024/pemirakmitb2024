@@ -37,27 +37,27 @@ export const KProfileCard = () => {
           <div className="flex h-full w-full flex-col rounded-xl  bg-[#3957D1] p-8">
             <div className="mb-2">
               <div
-                className={`${header.variable} mb-2 text-center text-4xl font-bold text-[#BEEF62]`}
+                className={`${header.variable} mb-2 text-center text-xl md:text-5xl font-bold text-[#BEEF62]`}
               >
                 Farell Faiz Firmansyah
               </div>
               <div
-                className={`${header.variable} mb-2 text-center text-xl font-bold text-[#FFE859]`}
+                className={`${header.variable} mb-2 text-center text-md md:text-2xl font-bold text-[#FFE859]`}
               >
-                Teknik Geodesi dan Geomatika &apos;21
+                Teknik Geodesi dan Geomatika 2021
               </div>
             </div>
 
             <div className="space-y-6">
               <div>
                 <div
-                  className={`${header.variable} mb-2 text-center text-xl font-bold text-white`}
+                  className={`${header.variable} mb-2 text-center text-xl md:text-2xl font-bold text-white`}
                 >
                   VISI
                 </div>
                 <div className="rounded-3xl border-4 border-gray-400 bg-[#5A8AF9] p-4">
                   <p
-                    className={`${header.variable} text-center text-base font-semibold text-white`}
+                    className={`${header.variable} text-center text-md md:text-xl font-semibold text-white`}
                   >
                     Ameliorasi KM ITB menjadi ruang gerak bersama dalam
                     keberdampakan secara progresif, inklusif, dan solutif untuk
@@ -68,59 +68,49 @@ export const KProfileCard = () => {
 
               <div>
                 <div
-                  className={`${header.variable} mb-3 text-center text-xl font-bold text-white`}
+                  className={`${header.variable} mb-3 text-center text-xl md:text-2xl font-bold text-white`}
                 >
                   MISI
                 </div>
-                <div className="space-y-4">
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#5A8AF9] p-4">
+                <div className="space-y- text-justify">
+                  <div className="rounded-3xl border-4 border-gray-400 bg-[#5A8AF9] flex flex-col gap-2 text-md md:text-xl p-6">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable} font-semibold text-white`}
                     >
-                      Mengoptimalkan tata kelola internal Kabinet KM ITB untuk
+                      1. Mengoptimalkan tata kelola internal Kabinet KM ITB untuk
                       meningkatkan efektivitas dan akuntabilitas organisasi
                     </p>
-                  </div>
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#5A8AF9] p-4">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable} font-semibold text-white`}
                     >
-                      Membangun ekosistem media, informasi, dan teknologi yang
+                      2. Membangun ekosistem media, informasi, dan teknologi yang
                       terintegrasi guna mendukung knowledge management dan
                       pengarusutamaan informasi di KM ITB
                     </p>
-                  </div>
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#5A8AF9] p-4">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable} font-semibold text-white`}
                     >
-                      Merekatkan elemen internal dan eksternal KM ITB melalui
+                      3. Merekatkan elemen internal dan eksternal KM ITB melalui
                       dinamisasi dan kolaborasi yang sinergis dan berkelanjutan
                     </p>
-                  </div>
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#5A8AF9] p-4">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable} font-semibold text-white`}
                     >
-                      Mereformasi pemenuhan kebutuhan dasar secara proaktif dan
+                      4. Mereformasi pemenuhan kebutuhan dasar secara proaktif dan
                       kolaboratif, memastikan kesejahteraan mahasiswa yang lebih
                       inklusif
                     </p>
-                  </div>
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#5A8AF9] p-4">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable} font-semibold text-white`}
                     >
-                      Menjadi katalisator bagi individu dan lembaga di KM ITB
+                      5. Menjadi katalisator bagi individu dan lembaga di KM ITB
                       untuk terus berkembang, berdaya, dan berkontribusi bagi
                       lingkungan sekitar
                     </p>
-                  </div>
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#5A8AF9] p-4">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable} font-semibold text-white`}
                     >
-                      Mentransformasi lini pergerakan KM ITB menjadi lebih
+                      6. Mentransformasi lini pergerakan KM ITB menjadi lebih
                       inklusif, adaptif, dan relevan dalam menjawab tantangan
                       zaman
                     </p>
@@ -135,9 +125,9 @@ export const KProfileCard = () => {
             <Link
               target="_blank"
               className="w-full"
-              href="https://drive.google.com/file/d/18U21_JliVd5O1V98r9WashSfOBYdHbBY/view?usp=drivesdk"
+              href="https://drive.google.com/file/d/18Dqu_omeuZangOZ4HHu2f9vN54-GQnqo/view?usp=drive_link"
             >
-              <button className="w-full flex-grow rounded-full bg-[#FFE859] px-12 py-2 font-semibold text-black transition-transform hover:scale-[1.01]">
+              <button className="hover: w-full flex-grow rounded-full bg-[#FFE859] px-12 py-2 font-semibold text-black transition-transform hover:scale-[1.01]">
                 PORTOFOLIO
               </button>
             </Link>
@@ -193,27 +183,27 @@ export const MProfileCard = () => {
           <div className="flex h-full w-full flex-col rounded-xl bg-[#FFA5B380] p-8">
             <div className="mb-2">
               <div
-                className={`${header.variable} mb-2 text-center text-4xl font-bold text-[#FFE859]`}
+                className={`${header.variable} mb-2 text-center text-xl md:text-5xl font-bold text-[#FFE859]`}
               >
                 Putri Dzakiyah Suharyono
               </div>
               <div
-                className={`${header.variable} mb-2 text-center text-xl font-bold text-[#BEEF62]`}
+                className={`${header.variable} mb-2 text-center text-xl md:text-2xl font-bold text-[#BEEF62]`}
               >
-                Kewirausahaan &apos;22
+                Kewirausahaan 2022
               </div>
             </div>
 
             <div className="space-y-6">
               <div>
                 <div
-                  className={`${header.variable} mb-2 text-center text-xl font-bold text-white`}
+                  className={`${header.variable} mb-2 text-center text-xl md:text-2xl font-bold text-white`}
                 >
                   VISI
                 </div>
                 <div className="rounded-3xl border-4 border-gray-400 bg-[#FFAAB7] p-4">
                   <p
-                    className={`${header.variable} text-center text-base font-semibold text-white`}
+                    className={`${header.variable} text-center text-md md:text-xl  font-semibold text-white`}
                   >
                     MWA WM ITB sebagai media akselerasi suara mahasiswa yang
                     mendorong perubahan secara inklusif dan kolaboratif untuk
@@ -224,31 +214,27 @@ export const MProfileCard = () => {
 
               <div>
                 <div
-                  className={`${header.variable} mb-3 text-center text-xl font-bold text-white`}
+                  className={`${header.variable} mb-3 text-center text-xl md:text-2xl font-bold text-white`}
                 >
                   MISI
                 </div>
-                <div className="space-y-4">
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#FFAAB7] p-4">
+                <div className="space-y- text-justify">
+                  <div className="rounded-3xl border-4 border-gray-400 bg-[#FFAAB7] p-6 flex flex-col gap-2 text-md md:text-xl">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable}  font-semibold text-white`}
                     >
-                      Mengakselarasi penyaluran aspirasi mahasiswa secara
+                      1. Mengakselarasi penyaluran aspirasi mahasiswa secara
                       inklusif dan akuntabel
                     </p>
-                  </div>
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#FFAAB7] p-4">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable}  font-semibold text-white`}
                     >
-                      Mendorong dan mengawal kebijakan yang berkelanjutan
+                      2. Mendorong dan mengawal kebijakan yang berkelanjutan
                     </p>
-                  </div>
-                  <div className="rounded-3xl border-4 border-gray-400 bg-[#FFAAB7] p-4">
                     <p
-                      className={`${header.variable} text-center text-base font-semibold text-white`}
+                      className={`${header.variable}  font-semibold text-white`}
                     >
-                      Meningkatkan sinergi antara mahasiswa, lembaga
+                      3. Meningkatkan sinergi antara mahasiswa, lembaga
                       kemahasiswaan, dan organ ITB
                     </p>
                   </div>
@@ -262,7 +248,7 @@ export const MProfileCard = () => {
             <Link
               target="_blank"
               className="w-full"
-              href="https://www.canva.com/design/DAGgHig0JLQ/229Ldk-gc-aHKzhUXA4mSg/view?utm_content=DAGgHig0JLQ&utm_campaign=designshare&utm_medium=lin"
+              href="https://drive.google.com/file/d/1ItlOtrYvrBrF67djffCoQAn3SUfer97M/view?usp=drive_link"
             >
               <button className="w-full flex-grow rounded-full bg-[#BEEF62] px-12  py-2 font-semibold text-black transition-transform hover:scale-[1.01]">
                 PORTOFOLIO
