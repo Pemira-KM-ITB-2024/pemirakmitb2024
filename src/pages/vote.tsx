@@ -169,7 +169,7 @@ const Vote = () => {
 
   if (isLoading) {
     return (
-      <div className="flex h-full min-h-screen flex-col items-center justify-center text-6xl text-white">
+      <div className=" font-bold flex h-full min-h-screen flex-col items-center justify-center text-4xl text-white">
         Loading...
       </div>
     );
@@ -204,10 +204,10 @@ const Vote = () => {
               <Image
                 src={"/K3M-warp.svg"}
                 alt="title"
-                width={windowWidth > 768 ? 300 : 150}
+                width={windowWidth > 768 ? 600 : 400}
                 height={100}
               />
-              <div className="flex flex-col gap-10 md:flex-row">
+              <div className="mt-2 md:mt-12 flex flex-col gap-10 md:flex-row">
                 <VoteCard
                   bgColor="#FA3A91"
                   textColor="#FFE859"
@@ -215,10 +215,10 @@ const Vote = () => {
                   onClick={() => handleVoteClick("voteK3M", "true")}
                   clicked={voteK3MValue === "true"}
                   name="Farell Faiz Firmansyah"
-                  faculty="Teknik Geodesi dan Geomatika '21"
+                  faculty="GD'21"
                 />
                 <VoteCard
-                  imgUrl="/grey.jpg"
+                  imgUrl="/kotakKosong.png"
                   bgColor="#BEEF62"
                   textColor="#FFFFFF"
                   name="Kotak Kosong"
@@ -231,10 +231,10 @@ const Vote = () => {
               <Image
                 src={"/MWA-WM-warp.svg"}
                 alt="title"
-                width={windowWidth > 768 ? 500 : 300}
+                width={windowWidth > 768 ? 800 : 600}
                 height={100}
               />
-              <div className="flex flex-col gap-10 md:flex-row">
+              <div className="mt-2 md:mt-12 flex flex-col gap-10 md:flex-row">
                 <VoteCard
                   bgColor="#BEEF62"
                   textColor="#FA3A91"
@@ -242,10 +242,10 @@ const Vote = () => {
                   onClick={() => handleVoteClick("voteMWAWM", "true")}
                   clicked={voteMWAWMValue === "true"}
                   name="Putri Dzakiyah Suharyono"
-                  faculty="Kewirausahaan '22"
+                  faculty="MK'25"
                 />
                 <VoteCard
-                  imgUrl="/grey.jpg"
+                  imgUrl="/kotakKosong.png"
                   bgColor="#FFE859"
                   textColor="#FFFFFF"
                   name="Kotak Kosong"
@@ -264,8 +264,8 @@ const Vote = () => {
                 onChange={toggleIsRead}
                 className="h-5 w-5 accent-[#FA3A91]"
               />
-              <label htmlFor="readCheckbox" className="text-lg text-white">
-                Saya telah membaca dan memahami informasi pemilihan
+              <label htmlFor="readCheckbox" className="w-[80vw] font-bold text-lg text-white">
+              Saya yakin dengan pilihan saya dan memahami bahwa suara yang saya berikan bersifat final. Saya telah mempertimbangkan dengan saksama sebelum memberikan suara dalam Pemira KM ITB 2024/2025
               </label>
             </div>
 
