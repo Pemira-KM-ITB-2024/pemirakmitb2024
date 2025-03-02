@@ -22,14 +22,16 @@ const VoteCard = (props: Props) => {
       } flex min-h-[400px] w-full max-w-[500px] cursor-pointer flex-col items-center justify-between rounded-lg border-[5px] p-4 duration-200 hover:scale-105 hover:border-[#3A71F0]`}
       style={{ backgroundColor: props.bgColor }}
     >
-      <Image
-        src={props.imgUrl}
-        alt={props.imgUrl}
-        width={300}
-        height={400}
-        className="rounded-lg object-cover"
-      />
-      <div className="flex flex-col items-center justify-center text-center">
+      <div className="relative rounded-lg overflow-hidden flex h-[350px] w-full items-center justify-center">
+        <Image
+          src={props.imgUrl}
+          alt={props.imgUrl}
+          width={350}
+          height={350}
+          className="rounded-lg flex object-cover"
+        />
+      </div>
+      <div className="my-6 flex flex-col items-center justify-center text-center">
         <p
           className={`${header.variable} text-2xl font-bold text-[${props.textColor}] xl:mb-0`}
         >

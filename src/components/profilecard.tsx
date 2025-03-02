@@ -15,7 +15,7 @@ export const KProfileCard = () => {
                 src="/k3m.jpg"
                 alt="profile picture"
                 layout="fill"
-                className="rounded-lg object-cover"
+                className="rounded-lg flex items-center justify-start object-[50%_35%] object-cover"
               />
             </div>
             <h1
@@ -161,7 +161,7 @@ export const MProfileCard = () => {
                 src="/mwam.jpg"
                 alt="profile picture"
                 layout="fill"
-                className="rounded-lg object-cover"
+                className="rounded-lg flex items-center justify-start object-[50%_30%] object-cover"
               />
             </div>
             <h1
