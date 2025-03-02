@@ -83,7 +83,7 @@ export default NextAuth({
           "Pascasarjana";
 
         // Check if a User record already exists (array is empty if not)
-        if (accountRecord.User.length === 0) {
+        if (!accountRecord.User) {
           await prisma.user.create({
             data: {
               name,
