@@ -49,7 +49,6 @@ const Vote = () => {
           const response = await fetch(`/api/getUser?email=${data.user.email}`);
           if (response.ok) {
             const user = await response.json();
-            console.log(user);
             setHasVoted(user.hasVoted as boolean);
           }
         } catch (error) {
