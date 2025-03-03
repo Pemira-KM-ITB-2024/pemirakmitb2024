@@ -48,23 +48,14 @@ export default function Home() {
         <section className="mb-[8vw] flex w-[80%] flex-col items-center justify-center">
           <div className="mt-6 flex flex-row items-center justify-center gap-4">
             <Link
-              href="https://drive.google.com/drive/folders/16ETRW9gRWtXmQEyHbczvd3KrrCVCojw3"
+              href="/vote"
               target="_blank"
             >
               <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
                 <p
                   className={`${body.className} leading-2 mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
                 >
-                  Konten Calon
-                </p>
-              </button>
-            </Link>
-            <Link href="https://bit.ly/HearingZona2025" target="_blank">
-              <button className="rounded-3xl bg-[#FFF859] text-[#FA3A91] hover:bg-[#FA3A91] hover:text-[#FFF859]">
-                <p
-                  className={`${body.className} mx-4 my-2 text-xs font-extrabold md:mx-8 md:text-3xl`}
-                >
-                  Hearing Zona
+                  Berikan Suaramu
                 </p>
               </button>
             </Link>
