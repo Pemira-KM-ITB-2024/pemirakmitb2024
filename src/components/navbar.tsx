@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] px-4 text-[#FA3A91] md:px-10">
+      <nav className="fixed top-0 z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] px-4 text-[#FA3A91] md:px-10">
         <Link href="/">
           <Image className="mr-2" src={Logo} height={60} alt="Logo" />
         </Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
           className={`${body.className} flex items-center font-black *:px-4 *:transition-colors *:duration-300`}
         >
           {navLinks.map((link) => (
-            <li key={link.href} className="relative hidden md:block">
+            <li key={link.href} className="relative hidden md:block ">
               <Link href={link.href}>
                 <span className="group relative">
                   <span className="transition-colors duration-300 hover:text-[#FFAAB7]">
@@ -102,7 +102,7 @@ const Navbar = () => {
       )}
 
       <div
-        className={`fixed left-0 right-0 z-[999] rounded-b bg-[#BEEF62] transition-opacity duration-300 ease-in-out md:hidden ${
+        className={`fixed left-0 right-0 z-[999] rounded-b mt-16 bg-[#BEEF62] transition-opacity duration-300 ease-in-out md:hidden ${
           isExpanded
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -112,7 +112,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <li
               key={link.href}
-              className={`group w-full ${
+              className={`group w-full  ${
                 pathname === link.href ? "bg-[#b3e251]" : ""
               }`}
             >
