@@ -46,6 +46,8 @@ export default NextAuth({
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
+        domain: process.env.NODE_ENV === "production" ? "pemirakmitb.com" : "localhost",
+        maxAge: 60 * 20,
       },
     },
   },

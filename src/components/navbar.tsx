@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] px-4 text-[#FA3A91] md:px-10">
+      <nav className="fixed mb-24 top-0 z-[999] flex !h-16 w-full items-center justify-between bg-[#BEEF62] px-4 text-[#FA3A91] md:px-10">
         <Link href="/">
           <Image className="mr-2" src={Logo} height={60} alt="Logo" />
         </Link>

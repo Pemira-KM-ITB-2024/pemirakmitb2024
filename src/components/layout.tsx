@@ -22,7 +22,7 @@ const Layout = ({ children }: { children?: ReactNode }) => (
       </Head>
       <Toaster richColors />
       <main
-        className="flex items-center min-h-dvh w-[100vw] max-w-[100vw] flex-1 flex-col overflow-hidden"
+        className="pt-16 flex items-center min-h-dvh w-[100vw] max-w-[100vw] flex-1 flex-col overflow-hidden"
         style={{
           backgroundImage: "url(/background-pemira-1.png)",
           backgroundSize: "cover",
