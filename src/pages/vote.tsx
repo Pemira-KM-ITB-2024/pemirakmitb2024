@@ -201,7 +201,7 @@ const Vote = () => {
   return (
     <>
       {!hasVoted ? (
-        <div className="mb-[100px] flex h-full min-h-screen flex-col items-center justify-center gap-8 p-5 pt-10 md:mb-[300px] md:gap-[100px]">
+        <div className="mb-[100px] mt-[4vw] flex h-full min-h-screen flex-col items-center justify-center gap-8 p-5 pt-10 md:mb-[300px] md:gap-[100px]">
           <>
             {windowWidth > 768 ? (
               <Image
@@ -224,14 +224,14 @@ const Vote = () => {
             className="flex h-full flex-col items-center gap-[100px]"
           >
             {canVoteK3M && (
-              <div className="flex h-full flex-col items-center justify-center gap-5 md:gap-10">
+              <div className="flex h-full flex-col items-center justify-center gap-5">
                 <Image
                   src={"/K3M-warp.svg"}
                   alt="title"
                   width={windowWidth > 768 ? 600 : 400}
                   height={100}
                 />
-                <div className="mt-2 flex flex-col gap-10 md:mt-12 md:flex-row">
+                <div className="flex flex-col gap-10 md:mt-12 md:flex-row">
                   <VoteCard
                     bgColor="#FA3A91"
                     textColor="#FFE859"
@@ -252,7 +252,7 @@ const Vote = () => {
                 </div>
               </div>
             )}
-            <div className="flex h-full flex-col items-center justify-center gap-10">
+            <div className="flex h-full flex-col items-center justify-center gap-5">
               <Image
                 src={"/MWA-WM-warp.svg"}
                 alt="title"
