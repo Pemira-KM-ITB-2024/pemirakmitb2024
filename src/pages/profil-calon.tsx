@@ -8,11 +8,11 @@ import { header } from "~/styles/fonts";
 
 const ProfilCalon = () => {
   return (
-    <div className="relative w-full min-h-screen bg-[url('/guidevoting/background.png')] bg-cover lg:bg-500 bg-center overflow-auto lg:overflow-hidden">
-        <div className="lg:absolute lg:-top-56 lg:-left-40 lg:w-[450px] absolute w-[146px] left-[-60px] -top-16">
-          <Image src={BintangPink} alt="Star" layout="responsive" />
+    <div className="relative w-full min-h-screen bg-[url('/guidevoting/background.png')] bg-cover lg:bg-500 bg-center overflow-x-hidden lg:overflow-hidden">
+        <div className="overflow-hidden lg:absolute lg:-top-56 lg:-left-40 lg:w-[450px] absolute w-[200px] left-[-60px] -top-[100px]">
+          <Image src={BintangPink} alt="Star" layout="responsive"  />
         </div>
-        <div className="lg:absolute lg:-top-32 lg:-right-34 lg:w-[450px] absolute w-[146px] right-[-42px] -top-16">
+        <div className="lg:absolute lg:-top-32 lg:-right-34 lg:w-[450px] absolute w-[200px] right-[-42px] -top-16">
           <Image src={BintangKuning} alt="Star" layout="responsive" />
         </div>
         <div className="lg:flex lg:items-center lg:justify-center flex flex-row justify-center items-center mt-4 sm:mt-8 md:mt-16 lg:mt-32">
