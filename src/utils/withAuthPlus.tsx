@@ -3,7 +3,7 @@ import { Bounce, toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-const allowedNumbers = ["13523003", "18223080", "13523036", "13523033", "15823040", "18235021", "18223040"]; // Add your allowed numbers here
+const allowedNumbers = ["13523003", "18223080", "13523036", "13523033", "15823040", "18235021", "18223040", "13423069"]; // Add your allowed numbers here
 
 function isEmailAllowed(email: string): boolean {
   const regex = new RegExp(`(${allowedNumbers.join("|")})`);
