@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fakultas, programStudi } from "../lib/constant/jurusan";
 import { Bar } from "react-chartjs-2";
+import { withAuthPlus } from "../utils/withAuthPlus";
 import {
   Chart as ChartJS,
   BarElement,
@@ -192,4 +193,4 @@ const Statistik: React.FC = () => {
   );
 };
 
-export default Statistik;
+export default withAuthPlus(Statistik, ["/statisik"]);

@@ -21,6 +21,8 @@ const Vote = () => {
   const router = useRouter();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [hasVoted, setHasVoted] = useState(false);
+  const [userJurusan, setUserJurusan] = useState<string | null>(null);
+  const [nimStartsWith, setNimStartsWith] = useState<string | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,6 +52,9 @@ const Vote = () => {
           if (response.ok) {
             const user = await response.json();
             setHasVoted(user.hasVoted as boolean);
+            setUserJurusan(user.jurusan as string);
+            const nim = extractNumberFromEmail(data.user.email);
+            setNimStartsWith(nim ? nim.charAt(0) : null);
           }
         } catch (error) {
           console.error(error);
@@ -61,6 +66,11 @@ const Vote = () => {
 
     void checkUserExists();
   }, [data?.user?.email, router]);
+
+  const extractNumberFromEmail = (email: string) => {
+    const match = email.match(/^(\d+)@mahasiswa\.itb\.ac\.id$/);
+    return match ? match[1] : null;
+  };
 
   const onSubmit = async (formData: FormData) => {
     if (!data?.user?.email) return;
@@ -174,6 +184,8 @@ const Vote = () => {
       </div>
     );
   }
+  console.log(nimStartsWith, userJurusan);
+  const canVoteK3M = nimStartsWith === "1" && userJurusan !== "Pascasarjana";
 
   return (
     <>
@@ -200,33 +212,35 @@ const Vote = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex h-full flex-col items-center gap-[100px]"
           >
-            <div className="flex h-full flex-col items-center justify-center gap-5 md:gap-10">
-              <Image
-                src={"/K3M-warp.svg"}
-                alt="title"
-                width={windowWidth > 768 ? 600 : 400}
-                height={100}
-              />
-              <div className="mt-2 md:mt-12 flex flex-col gap-10 md:flex-row">
-                <VoteCard
-                  bgColor="#FA3A91"
-                  textColor="#FFE859"
-                  imgUrl="/k3m.jpg"
-                  onClick={() => handleVoteClick("voteK3M", "true")}
-                  clicked={voteK3MValue === "true"}
-                  name="Farell Faiz Firmansyah"
-                  faculty="GD'21"
+            {canVoteK3M && (
+              <div className="flex h-full flex-col items-center justify-center gap-5 md:gap-10">
+                <Image
+                  src={"/K3M-warp.svg"}
+                  alt="title"
+                  width={windowWidth > 768 ? 600 : 400}
+                  height={100}
                 />
-                <VoteCard
-                  imgUrl="/kotakKosong.png"
-                  bgColor="#BEEF62"
-                  textColor="#FFFFFF"
-                  name="Kotak Kosong"
-                  onClick={() => handleVoteClick("voteK3M", "false")}
-                  clicked={voteK3MValue === "false"}
-                />
+                <div className="mt-2 md:mt-12 flex flex-col gap-10 md:flex-row">
+                  <VoteCard
+                    bgColor="#FA3A91"
+                    textColor="#FFE859"
+                    imgUrl="/k3m.jpg"
+                    onClick={() => handleVoteClick("voteK3M", "true")}
+                    clicked={voteK3MValue === "true"}
+                    name="Farell Faiz Firmansyah"
+                    faculty="GD'21"
+                  />
+                  <VoteCard
+                    imgUrl="/kotakKosong.png"
+                    bgColor="#BEEF62"
+                    textColor="#FFFFFF"
+                    name="Kotak Kosong"
+                    onClick={() => handleVoteClick("voteK3M", "false")}
+                    clicked={voteK3MValue === "false"}
+                  />
+                </div>
               </div>
-            </div>
+            )}
             <div className="flex h-full flex-col items-center justify-center gap-10">
               <Image
                 src={"/MWA-WM-warp.svg"}
@@ -265,7 +279,7 @@ const Vote = () => {
                 className="h-5 w-5 accent-[#FA3A91]"
               />
               <label htmlFor="readCheckbox" className="w-[80vw] font-bold text-lg text-white">
-              Saya yakin dengan pilihan saya dan memahami bahwa suara yang saya berikan bersifat final. Saya telah mempertimbangkan dengan saksama sebelum memberikan suara dalam Pemira KM ITB 2024/2025
+                Saya yakin dengan pilihan saya dan memahami bahwa suara yang saya berikan bersifat final. Saya telah mempertimbangkan dengan saksama sebelum memberikan suara dalam Pemira KM ITB 2024/2025
               </label>
             </div>
 
