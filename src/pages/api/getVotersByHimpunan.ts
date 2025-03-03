@@ -3,7 +3,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const { himpunan } = req.query;
 
   if (!himpunan || typeof himpunan !== "string") {
@@ -14,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const voters = await prisma.user.findMany({
-      where: { himpunan },
+      where: { himpunan, hasVoted: true },
     });
 
     return res.status(200).json(voters);
