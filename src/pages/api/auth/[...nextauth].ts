@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import { PrismaClient } from "@prisma/client";
+import { programStudi } from "~/lib/constant/jurusan";
 
 const prisma = new PrismaClient();
 
@@ -72,13 +73,36 @@ export default NextAuth({
           include: { User: true }, // include the associated User records
         });
 
-        const jurusan = "stei";
-        if (accountRecord.User.length === 0) {
+        // Extract jurusan code from email and match with the list
+        const jurusanCode = email.substring(0, 3);
+        const numericJurusanCode = parseInt(jurusanCode, 10);
+
+        // Find matching department
+        const matchedProgram = programStudi.find((j) => j.kode === jurusanCode);
+
+        const jurusan = matchedProgram?.nama ?? "Pascasarjana";
+        const fakultas = matchedProgram?.fakultasKode ?? "SPS";
+        let himpunan = matchedProgram?.himpunan ?? null;
+
+        // Check if the 4-5th extracted number from the email is 24
+        if (email.substring(3, 5) === "24") {
+          himpunan = null;
+        }
+
+        // Check if himpunan is an empty string and set it to null
+        if (himpunan === "") {
+          himpunan = null;
+        }
+
+        // Check if a User record already exists (array is empty if not)
+        if (!accountRecord.User) {
           await prisma.user.create({
             data: {
               name,
               email,
               jurusan,
+              fakultas,
+              himpunan: himpunan ?? "",
               account: {
                 connect: { id: accountRecord.id },
               },

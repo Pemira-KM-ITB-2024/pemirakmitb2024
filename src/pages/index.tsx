@@ -4,6 +4,9 @@ import { body, header } from "@fonts";
 import Timeline from "~/components/dashboard/timeline";
 import Link from "next/link";
 import { Description } from "@radix-ui/react-dialog";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 const Countdown = dynamic(() => import("~/components/countdown"), {
   ssr: false,
@@ -15,14 +18,39 @@ const events = [
   { date: "19-21 Des 24", description: "Pengambilan Berkas" },
   { date: "11-12 Jan 25", description: "Extended Open Berkas MWAWM"},
   { date: "13-15 Feb 25", description: "Pengambilan Berkas MWAWM" },
-  { date: "18 Feb 25", description: "Pengambilan Berkas K3M" },
+  { date: "18 Feb 25", description: "Pengembalian Berkas K3M" },
   { date: "24-27 Mar 25", description: "Hearing" },
   { date: "1-2 Mar 25", description: "Masa Tenang" },
   { date: "3-9 Mar 25", description: "Pemungutan Suara" },
   { date: "11 Mar 25", description: "Pengumuman Perhitungan Suara" },
 ];
 
-export default function Home() {
+const Home = () => {
+  const { data } = useSession();
+  const router = useRouter();
+  const [hasVoted, setHasVoted] = useState(false);
+
+  useEffect(() => {
+    const checkUserExists = async () => {
+      if (data?.user?.email) {
+        try {
+          const response = await fetch(`/api/getUser?email=${data.user.email}`);
+          if (response.ok) {
+            const user = await response.json();
+            setHasVoted(user.hasVoted as boolean);
+            if (!user.hasVoted) {
+              void router.push("/vote");
+            }
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
+    void checkUserExists();
+  }, [data?.user?.email, router]);
+
   return (
     <div className="relative z-0 flex min-h-screen w-full flex-col items-center overflow-hidden">
       <section className="my-[8vw] flex h-fit w-full flex-col items-center justify-center">
@@ -306,4 +334,6 @@ export default function Home() {
       </section>
     </div>
   );
-}
+};
+
+export default Home;

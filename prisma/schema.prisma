@@ -18,7 +18,7 @@ model Account {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   Session      Session?
-  User         User[]
+  User         User?
 
   @@index([email])
   @@index([microsoftId])
@@ -31,6 +31,8 @@ model User {
   accountId String?  @unique
   hasVoted  Boolean  @default(false)
   jurusan   String
+  fakultas  String
+  himpunan  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   account   Account? @relation(fields: [accountId], references: [id], onDelete: Cascade)

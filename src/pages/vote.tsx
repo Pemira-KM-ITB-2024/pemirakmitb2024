@@ -21,6 +21,8 @@ const Vote = () => {
   const router = useRouter();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [hasVoted, setHasVoted] = useState(false);
+  const [userJurusan, setUserJurusan] = useState<string | null>(null);
+  const [nimStartsWith, setNimStartsWith] = useState<string | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -49,8 +51,21 @@ const Vote = () => {
           const response = await fetch(`/api/getUser?email=${data.user.email}`);
           if (response.ok) {
             const user = await response.json();
-            console.log(user);
             setHasVoted(user.hasVoted as boolean);
+            setUserJurusan(user.jurusan as string);
+            const nim = extractNumberFromEmail(data.user.email);
+            setNimStartsWith(nim ? nim.charAt(0) : null);
+          } else {
+            toast.error("User not found. Please sign out and sign in again.", {
+              position: "top-center",
+              autoClose: 3000,
+              toastId: "user-not-found",
+              pauseOnHover: false,
+              closeOnClick: true,
+              transition: Bounce,
+              theme: "colored",
+            });
+            void router.push("/");
           }
         } catch (error) {
           console.error(error);
@@ -62,6 +77,11 @@ const Vote = () => {
 
     void checkUserExists();
   }, [data?.user?.email, router]);
+
+  const extractNumberFromEmail = (email: string) => {
+    const match = email.match(/^(\d+)@mahasiswa\.itb\.ac\.id$/);
+    return match ? match[1] : null;
+  };
 
   const onSubmit = async (formData: FormData) => {
     if (!data?.user?.email) return;
@@ -170,16 +190,18 @@ const Vote = () => {
 
   if (isLoading) {
     return (
-      <div className="flex h-full min-h-screen flex-col items-center justify-center text-6xl text-white">
+      <div className=" flex h-full min-h-screen flex-col items-center justify-center text-4xl font-bold text-white">
         Loading...
       </div>
     );
   }
+  console.log(nimStartsWith, userJurusan);
+  const canVoteK3M = nimStartsWith === "1" && userJurusan !== "Pascasarjana";
 
   return (
     <>
       {!hasVoted ? (
-        <div className="mb-[100px] flex h-full min-h-screen flex-col items-center justify-center gap-8 p-5 pt-10 md:mb-[300px] md:gap-[100px]">
+        <div className="mb-[100px] mt-[4vw] flex h-full min-h-screen flex-col items-center justify-center gap-8 p-5 pt-10 md:mb-[300px] md:gap-[100px]">
           <>
             {windowWidth > 768 ? (
               <Image
@@ -201,41 +223,43 @@ const Vote = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex h-full flex-col items-center gap-[100px]"
           >
-            <div className="flex h-full flex-col items-center justify-center gap-5 md:gap-10">
-              <Image
-                src={"/K3M-warp.svg"}
-                alt="title"
-                width={windowWidth > 768 ? 300 : 150}
-                height={100}
-              />
-              <div className="flex flex-col gap-10 md:flex-row">
-                <VoteCard
-                  bgColor="#FA3A91"
-                  textColor="#FFE859"
-                  imgUrl="/k3m.jpg"
-                  onClick={() => handleVoteClick("voteK3M", "true")}
-                  clicked={voteK3MValue === "true"}
-                  name="Farell Faiz Firmansyah"
-                  faculty="Teknik Geodesi dan Geomatika '21"
+            {canVoteK3M && (
+              <div className="flex h-full flex-col items-center justify-center gap-5">
+                <Image
+                  src={"/K3M-warp.svg"}
+                  alt="title"
+                  width={windowWidth > 768 ? 600 : 400}
+                  height={100}
                 />
-                <VoteCard
-                  imgUrl="/grey.jpg"
-                  bgColor="#BEEF62"
-                  textColor="#FFFFFF"
-                  name="Kotak Kosong"
-                  onClick={() => handleVoteClick("voteK3M", "false")}
-                  clicked={voteK3MValue === "false"}
-                />
+                <div className="flex flex-col gap-10 md:mt-12 md:flex-row">
+                  <VoteCard
+                    bgColor="#FA3A91"
+                    textColor="#FFE859"
+                    imgUrl="/k3m.jpg"
+                    onClick={() => handleVoteClick("voteK3M", "true")}
+                    clicked={voteK3MValue === "true"}
+                    name="Farell Faiz Firmansyah"
+                    faculty="GD'21"
+                  />
+                  <VoteCard
+                    imgUrl="/kotakKosong.png"
+                    bgColor="#BEEF62"
+                    textColor="#FFFFFF"
+                    name="Kotak Kosong"
+                    onClick={() => handleVoteClick("voteK3M", "false")}
+                    clicked={voteK3MValue === "false"}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="flex h-full flex-col items-center justify-center gap-10">
+            )}
+            <div className="flex h-full flex-col items-center justify-center gap-5">
               <Image
                 src={"/MWA-WM-warp.svg"}
                 alt="title"
-                width={windowWidth > 768 ? 500 : 300}
+                width={windowWidth > 768 ? 800 : 600}
                 height={100}
               />
-              <div className="flex flex-col gap-10 md:flex-row">
+              <div className="mt-2 flex flex-col gap-10 md:mt-12 md:flex-row">
                 <VoteCard
                   bgColor="#BEEF62"
                   textColor="#FA3A91"
@@ -243,10 +267,10 @@ const Vote = () => {
                   onClick={() => handleVoteClick("voteMWAWM", "true")}
                   clicked={voteMWAWMValue === "true"}
                   name="Putri Dzakiyah Suharyono"
-                  faculty="Kewirausahaan '22"
+                  faculty="MK'25"
                 />
                 <VoteCard
-                  imgUrl="/grey.jpg"
+                  imgUrl="/kotakKosong.png"
                   bgColor="#FFE859"
                   textColor="#FFFFFF"
                   name="Kotak Kosong"
@@ -265,8 +289,13 @@ const Vote = () => {
                 onChange={toggleIsRead}
                 className="h-5 w-5 accent-[#FA3A91]"
               />
-              <label htmlFor="readCheckbox" className="text-lg text-white">
-                Saya telah membaca dan memahami informasi pemilihan
+              <label
+                htmlFor="readCheckbox"
+                className="w-[80vw] text-lg font-bold text-white"
+              >
+                Saya yakin dengan pilihan saya dan memahami bahwa suara yang
+                saya berikan bersifat final. Saya telah mempertimbangkan dengan
+                saksama sebelum memberikan suara dalam Pemira KM ITB 2024/2025
               </label>
             </div>
 
