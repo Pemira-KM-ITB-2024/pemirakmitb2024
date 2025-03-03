@@ -4,9 +4,6 @@ import { body, header } from "@fonts";
 import Timeline from "~/components/dashboard/timeline";
 import Link from "next/link";
 import { Description } from "@radix-ui/react-dialog";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
 
 const Countdown = dynamic(() => import("~/components/countdown"), {
   ssr: false,
@@ -25,32 +22,7 @@ const events = [
   { date: "11 Mar 25", description: "Pengumuman Perhitungan Suara" },
 ];
 
-const Home = () => {
-  const { data } = useSession();
-  const router = useRouter();
-  const [hasVoted, setHasVoted] = useState(false);
-
-  useEffect(() => {
-    const checkUserExists = async () => {
-      if (data?.user?.email) {
-        try {
-          const response = await fetch(`/api/getUser?email=${data.user.email}`);
-          if (response.ok) {
-            const user = await response.json();
-            setHasVoted(user.hasVoted as boolean);
-            if (!user.hasVoted) {
-              void router.push("/vote");
-            }
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    };
-
-    void checkUserExists();
-  }, [data?.user?.email, router]);
-
+export default function Home() {
   return (
     <div className="relative z-0 flex min-h-screen w-full flex-col items-center overflow-hidden">
       <section className="my-[8vw] flex h-fit w-full flex-col items-center justify-center">
@@ -334,6 +306,4 @@ const Home = () => {
       </section>
     </div>
   );
-};
-
-export default Home;
+}
