@@ -55,6 +55,17 @@ const Vote = () => {
             setUserJurusan(user.jurusan as string);
             const nim = extractNumberFromEmail(data.user.email);
             setNimStartsWith(nim ? nim.charAt(0) : null);
+          } else {
+            toast.error("User not found. Please sign out and sign in again.", {
+              position: "top-center",
+              autoClose: 3000,
+              toastId: "user-not-found",
+              pauseOnHover: false,
+              closeOnClick: true,
+              transition: Bounce,
+              theme: "colored",
+            });
+            void router.push("/");
           }
         } catch (error) {
           console.error(error);
@@ -179,7 +190,7 @@ const Vote = () => {
 
   if (isLoading) {
     return (
-      <div className=" font-bold flex h-full min-h-screen flex-col items-center justify-center text-4xl text-white">
+      <div className=" flex h-full min-h-screen flex-col items-center justify-center text-4xl font-bold text-white">
         Loading...
       </div>
     );
@@ -220,7 +231,7 @@ const Vote = () => {
                   width={windowWidth > 768 ? 600 : 400}
                   height={100}
                 />
-                <div className="mt-2 md:mt-12 flex flex-col gap-10 md:flex-row">
+                <div className="mt-2 flex flex-col gap-10 md:mt-12 md:flex-row">
                   <VoteCard
                     bgColor="#FA3A91"
                     textColor="#FFE859"
@@ -248,7 +259,7 @@ const Vote = () => {
                 width={windowWidth > 768 ? 800 : 600}
                 height={100}
               />
-              <div className="mt-2 md:mt-12 flex flex-col gap-10 md:flex-row">
+              <div className="mt-2 flex flex-col gap-10 md:mt-12 md:flex-row">
                 <VoteCard
                   bgColor="#BEEF62"
                   textColor="#FA3A91"
@@ -278,8 +289,13 @@ const Vote = () => {
                 onChange={toggleIsRead}
                 className="h-5 w-5 accent-[#FA3A91]"
               />
-              <label htmlFor="readCheckbox" className="w-[80vw] font-bold text-lg text-white">
-                Saya yakin dengan pilihan saya dan memahami bahwa suara yang saya berikan bersifat final. Saya telah mempertimbangkan dengan saksama sebelum memberikan suara dalam Pemira KM ITB 2024/2025
+              <label
+                htmlFor="readCheckbox"
+                className="w-[80vw] text-lg font-bold text-white"
+              >
+                Saya yakin dengan pilihan saya dan memahami bahwa suara yang
+                saya berikan bersifat final. Saya telah mempertimbangkan dengan
+                saksama sebelum memberikan suara dalam Pemira KM ITB 2024/2025
               </label>
             </div>
 
