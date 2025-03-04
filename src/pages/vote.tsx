@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
-import { withAuth }  from "../utils/withAuth";
+import { withAuth } from "../utils/withAuth";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import VoteCard from "~/components/voteCard";
@@ -15,7 +15,11 @@ interface FormData {
   isRead: "true" | "false";
 }
 
-const Vote = ({ secureApiCall }: { secureApiCall: (url: string, options: RequestInit) => Promise<Response> }) => {
+const Vote = ({
+  secureApiCall,
+}: {
+  secureApiCall: (url: string, options: RequestInit) => Promise<Response>;
+}) => {
   const { data } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
