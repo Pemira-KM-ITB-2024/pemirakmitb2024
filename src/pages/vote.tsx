@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
-import { dynamicAuth } from "../utils/dynamicAuth";
+import { withAuth }  from "../utils/withAuth";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import VoteCard from "~/components/voteCard";
@@ -15,7 +15,7 @@ interface FormData {
   isRead: "true" | "false";
 }
 
-const Vote = () => {
+const Vote = ({ secureApiCall }: { secureApiCall: (url: string, options: RequestInit) => Promise<Response> }) => {
   const { data } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -125,7 +125,7 @@ const Vote = () => {
           try {
             setIsLoading(true);
 
-            const response = await fetch("/api/vote", {
+            const response = await secureApiCall("/api/vote", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
@@ -354,4 +354,4 @@ const Vote = () => {
   );
 };
 
-export default dynamicAuth(Vote);
+export default withAuth(Vote, ["/vote"]);

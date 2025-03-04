@@ -23,6 +23,23 @@ export function withAuth<P extends object>(
           theme: "colored",
         });
         void router.push("/");
+        return;
+      }
+
+      if (router.pathname === "/vote" && session?.user?.email) {
+        if (!session.user.email.endsWith('@mahasiswa.itb.ac.id')) {
+          toast.error("Unauthorized email domain", {
+            position: "top-center",
+            autoClose: 3000,
+            toastId: "domain-error",
+            pauseOnHover: false,
+            closeOnClick: true,
+            transition: Bounce,
+            theme: "colored",
+          });
+          void router.push("/");
+          return;
+        }
       }
     }, [status, session, router]);
 
@@ -30,6 +47,33 @@ export function withAuth<P extends object>(
       return <div>Loading...</div>;
     }
 
-    return <WrappedComponent {...props} session={session} />;
+    // Wrap API calls with security headers
+    const secureApiCall = async (url: string, options: RequestInit = {}) => {
+
+      const csrfResponse = await fetch('/api/auth/csrf');
+      const { csrfToken } = await csrfResponse.json();
+      
+      const headers = {
+        ...options.headers,
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken,
+      };
+
+      return fetch(url, {
+        ...options,
+        headers,
+        credentials: 'include',
+      });
+    };
+
+    // Pass the secure API call function to the wrapped component
+    const enhancedProps = {
+      ...props,
+      session,
+      secureApiCall,
+    };
+
+    return <WrappedComponent {...enhancedProps} />;
   };
 }
