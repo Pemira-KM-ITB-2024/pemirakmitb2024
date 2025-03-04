@@ -24,6 +24,7 @@ export default async function handler(
   }
 
   const csrfToken = req.headers['x-csrf-token'];
+  console.log("CSRF token:", csrfToken); 
   if (!csrfToken) {
     return res.status(403).json({ error: "Missing CSRF token" });
   }
