@@ -25,6 +25,13 @@ export default NextAuth({
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+    maxAge: 24 * 60 * 60,
+  },
+  jwt: {
+    maxAge: 24 * 60 * 60,
+  },
   secret: process.env.NEXTAUTH_SECRET,
   cookies: {
     sessionToken: {
@@ -34,7 +41,12 @@ export default NextAuth({
           : "next-auth.session-token",
       options: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Must be false in development
+        secure: process.env.NODE_ENV === "production",
+        domain:
+          process.env.NODE_ENV === "production"
+            ? "pemirakmitb.com"
+            : "localhost",
+
         sameSite: "lax",
         path: "/",
       },
@@ -46,7 +58,10 @@ export default NextAuth({
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
-        domain: process.env.NODE_ENV === "production" ? "pemirakmitb.com" : "localhost",
+        domain:
+          process.env.NODE_ENV === "production"
+            ? "pemirakmitb.com"
+            : "localhost",
         maxAge: 60 * 20,
       },
     },

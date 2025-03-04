@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
+import { getSession } from "next-auth/react";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -18,8 +18,26 @@ export default async function handler(
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { email, isOneK3M, isOneMWAWM }: VoteData = req.body;
+  const origin = req.headers.origin;
+  if (process.env.NODE_ENV === "production" && origin !== "https://pemirakmitb.com") {
+    return res.status(403).json({ error: "Unauthorized origin" });
+  }
 
+  const csrfToken = req.headers['x-csrf-token'];
+  if (!csrfToken) {
+    return res.status(403).json({ error: "Missing CSRF token" });
+  }
+
+  const session = await getSession({ req });
+  if (!session || !session.user?.email) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  const { email, isOneK3M, isOneMWAWM }: VoteData = req.body;
+  if (email !== session.user.email) {
+    return res.status(403).json({ error: "Email mismatch" });
+  }
+  
   try {
     const user = await prisma.user.findUnique({
       where: { email },
