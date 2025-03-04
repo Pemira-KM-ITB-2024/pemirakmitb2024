@@ -1,4 +1,4 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Link from "next/link";
 
@@ -19,7 +19,14 @@ export default function LoginButton({
     const match = email.match(/^(\d+)@mahasiswa\.itb\.ac\.id$/);
     return match ? match[1] : null;
   };
-
+  
+  const handleSignOut = async () => {
+    await fetch("/api/auth/signout", {
+      method: "POST",
+    });
+    window.location.reload();
+  };
+  
   const userNumber = session?.user?.email
     ? extractNumberFromEmail(session.user.email)
     : null;
@@ -56,7 +63,7 @@ export default function LoginButton({
               </Link>
               <button
                 className="block w-full rounded-md px-4 py-2 text-left text-gray-800 hover:bg-gray-200"
-                onClick={() => signOut()}
+                onClick={handleSignOut}
               >
                 Sign out
               </button>
