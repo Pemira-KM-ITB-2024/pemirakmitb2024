@@ -110,6 +110,7 @@ const Vote = ({
     const voteK3MIsOne = formData.voteK3M === "true";
     const voteMWAWMIsOne = formData.voteMWAWM === "true";
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     Swal.fire({
       title: "Apakah Anda yakin mengirimkan suara Anda?",
       showCancelButton: true,
