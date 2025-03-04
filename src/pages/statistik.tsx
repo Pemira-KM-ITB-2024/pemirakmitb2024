@@ -35,39 +35,32 @@ const Statistik: React.FC = () => {
   );
 
   useEffect(() => {
-    if (selectedJurusan) {
-      fetch(`/api/getVotersByJurusan?jurusan=${selectedJurusan}`)
-        .then((res) => res.json())
-        .then((data: any[]) => setVoterCount(data.length))
-        .catch((error) => {
-          console.error("Error fetching voters by jurusan:", error);
+    const fetchVoters = async () => {
+      const params = new URLSearchParams();
+      if (selectedJurusan) params.append("jurusan", selectedJurusan);
+      if (selectedFakultas) params.append("fakultas", selectedFakultas);
+      if (selectedHimpunan) params.append("himpunan", selectedHimpunan);
+
+      const queryString = params.toString();
+      const url = queryString ? `/api/getVotersByJurusan?${queryString}` : `/api/getAllVoters`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setVoterCount(data.length);
+        } else if (data.count !== undefined) {
+          setVoterCount(data.count as number);
+        } else {
           setVoterCount(0);
-        });
-    } else if (selectedFakultas) {
-      fetch(`/api/getVotersByFakultas?fakultas=${selectedFakultas}`)
-        .then((res) => res.json())
-        .then((data: any[]) => setVoterCount(data.length))
-        .catch((error) => {
-          console.error("Error fetching voters by fakultas:", error);
-          setVoterCount(0);
-        });
-    } else if (selectedHimpunan) {
-      fetch(`/api/getVotersByHimpunan?himpunan=${selectedHimpunan}`)
-        .then((res) => res.json())
-        .then((data: any[]) => setVoterCount(data.length))
-        .catch((error) => {
-          console.error("Error fetching voters by himpunan:", error);
-          setVoterCount(0);
-        });
-    } else {
-      fetch(`/api/getAllVoters`)
-        .then((res) => res.json())
-        .then((data: { count: number }) => setVoterCount(data.count))
-        .catch((error) => {
-          console.error("Error fetching all voters:", error);
-          setVoterCount(0);
-        });
-    }
+        }
+      } catch (error) {
+        console.error("Error fetching voters:", error);
+        setVoterCount(0);
+      }
+    };
+
+    void fetchVoters();
   }, [selectedJurusan, selectedFakultas, selectedHimpunan]);
 
   const data = {
