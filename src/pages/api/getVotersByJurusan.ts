@@ -7,20 +7,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { jurusan } = req.query;
+  const { jurusan, fakultas, himpunan } = req.query;
 
-  if (!jurusan || typeof jurusan !== "string") {
-    return res.status(400).json({
-      error: "Jurusan query parameter is required and must be a string",
-    });
-  }
+  const filters: any = { hasVoted: true };
+  if (jurusan && typeof jurusan === "string") filters.jurusan = jurusan;
+  if (fakultas && typeof fakultas === "string") filters.fakultas = fakultas;
+  if (himpunan && typeof himpunan === "string") filters.himpunan = himpunan;
 
   try {
-    const voters = await prisma.user.findMany({
-      where: { jurusan, hasVoted: true },
+    const count = await prisma.user.count({
+      where: filters,
     });
 
-    return res.status(200).json(voters);
+    return res.status(200).json({ count });
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   } finally {
