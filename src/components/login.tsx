@@ -1,6 +1,7 @@
 import { signIn, useSession } from "next-auth/react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 interface LoginButtonProps {
   isDropdownOpen: boolean;
@@ -23,8 +24,11 @@ export default function LoginButton({
   const handleSignOut = async () => {
     await fetch("/api/auth/signout", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-    window.location.reload();
+    await signOut({ callbackUrl: "/" });
   };
   
   const userNumber = session?.user?.email
