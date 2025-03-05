@@ -9,6 +9,8 @@ const signOutHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader("Set-Cookie", [
       `next-auth.session-token=; Path=/; Max-Age=0; HttpOnly`,
       `__Secure-next-auth.session-token=; Path=/; Max-Age=0; HttpOnly; Secure`,
+      `next-auth.csrf-token=; Path=/; Max-Age=0; HttpOnly`,
+      `__Secure-next-auth.csrf-token=; Path=/; Max-Age=0; HttpOnly; Secure`,
     ]);
     res.status(200).json({ message: "Signed out successfully" });
   } else {
