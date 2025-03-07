@@ -24,6 +24,7 @@ const Statistik: React.FC = () => {
   const [selectedJurusan, setSelectedJurusan] = useState<string>("");
   const [selectedFakultas, setSelectedFakultas] = useState<string>("");
   const [selectedHimpunan, setSelectedHimpunan] = useState<string>("");
+  const [selectedAngkatan, setSelectedAngkatan] = useState<string>("");
   const [voterCount, setVoterCount] = useState<number>(0);
 
   const jurusanOptions = Array.from(
@@ -34,12 +35,17 @@ const Statistik: React.FC = () => {
     new Set(programStudi.map((ps) => ps.himpunan).filter((h) => h !== "")),
   );
 
+  const angkatanOptions = ["20", "21", "22", "23", "24", "Other"];
+
+
   useEffect(() => {
     const fetchVoters = async () => {
       const params = new URLSearchParams();
       if (selectedJurusan) params.append("jurusan", selectedJurusan);
       if (selectedFakultas) params.append("fakultas", selectedFakultas);
       if (selectedHimpunan) params.append("himpunan", selectedHimpunan);
+      if (selectedAngkatan) params.append("angkatan", selectedAngkatan);
+
 
       const queryString = params.toString();
       const url = queryString ? `/api/getVotersByJurusan?${queryString}` : `/api/getAllVoters`;
@@ -61,7 +67,7 @@ const Statistik: React.FC = () => {
     };
 
     void fetchVoters();
-  }, [selectedJurusan, selectedFakultas, selectedHimpunan]);
+  }, [selectedJurusan, selectedFakultas, selectedHimpunan, selectedAngkatan]);
 
   const data = {
     labels: ["Voters"],
@@ -170,6 +176,23 @@ const Statistik: React.FC = () => {
                 {himpunanOptions.map((himpunan) => (
                   <option key={himpunan} value={himpunan}>
                     {himpunan}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div>
+            <label className="flex flex-row gap-2">
+              Filter by Angkatan:
+              <select
+                className="text-black select-short"
+                value={selectedAngkatan}
+                onChange={(e) => setSelectedAngkatan(e.target.value)}
+              >
+                <option value="">All</option>
+                {angkatanOptions.map((angkatan) => (
+                  <option key={angkatan} value={angkatan}>
+                    {angkatan === "Other" ? angkatan : `20${angkatan}`}
                   </option>
                 ))}
               </select>
