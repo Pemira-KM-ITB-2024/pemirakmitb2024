@@ -15,6 +15,8 @@ interface FormData {
   isRead: "true" | "false";
 }
 
+const VOTE_DEADLINE = "2025-03-09T23:59:59.999+07:00"; 
+
 const Vote = ({
   secureApiCall,
 }: {
@@ -25,8 +27,35 @@ const Vote = ({
   const router = useRouter();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [hasVoted, setHasVoted] = useState(false);
+  const [hasVotingEnded, setHasVotingEnded] = useState(false);
   const [userJurusan, setUserJurusan] = useState<string | null>(null);
   const [nimStartsWith, setNimStartsWith] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkVotingPeriod = () => {
+      const now = new Date();
+      const deadline = new Date(VOTE_DEADLINE);
+      
+      if (now > deadline) {
+        setHasVotingEnded(true);
+        toast.error("Masa pemilihan telah berakhir", {
+          position: "top-center",
+          autoClose: 5000,
+          toastId: "voting-ended",
+          pauseOnHover: false,
+          closeOnClick: true,
+          transition: Bounce,
+          theme: "colored",
+        });
+        void router.push("/");
+      }
+    };
+
+    checkVotingPeriod();
+    // Check every minute for deadline
+    const interval = setInterval(checkVotingPeriod, 60000);
+    return () => clearInterval(interval);
+  }, [router]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,7 +75,7 @@ const Vote = ({
   const voteK3MValue = watch("voteK3M");
   const voteMWAWMValue = watch("voteMWAWM");
   const isReadValue = watch("isRead");
-
+  
   useEffect(() => {
     const checkUserExists = async () => {
       if (data?.user?.email) {
@@ -200,8 +229,15 @@ const Vote = ({
       </div>
     );
   }
-  console.log(nimStartsWith, userJurusan);
   const canVoteK3M = nimStartsWith === "1" && userJurusan !== "Pascasarjana";
+
+  if (isLoading || hasVotingEnded) {
+    return (
+      <div className="flex h-full min-h-screen flex-col items-center justify-center text-4xl font-bold text-white">
+        {hasVotingEnded ? "Masa pemilihan telah berakhir" : "Loading..."}
+      </div>
+    );
+  }
 
   return (
     <>
@@ -318,7 +354,7 @@ const Vote = ({
           </form>
         </div>
       ) : (
-        <div className="flex min-h-screen flex-col items-center justify-start gap-6 p-5 pt-10 md:pb-[150px]">
+        <div className="flex min-h-screen flex-col items-center justify-start gap-6 p-5 mt-24 pt-10 md:pb-[150px]">
           <>
             {windowWidth > 768 ? (
               <Image

@@ -3,6 +3,8 @@ import { Bounce, toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
+const VOTE_DEADLINE = "2025-03-09T23:59:59.999+07:00"; 
+
 export function withAuth<P extends object>(
   WrappedComponent: React.ComponentType<P>,
   restrictedRoutes: string[],
@@ -41,6 +43,30 @@ export function withAuth<P extends object>(
           return;
         }
       }
+    }, [status, session, router]);
+
+    useEffect(() => {
+      // Add date check for vote page
+      if (router.pathname === "/vote") {
+        const now = new Date();
+        const deadline = new Date(VOTE_DEADLINE);
+        
+        if (now > deadline) {
+          toast.error("Masa pemilihan telah berakhir", {
+            position: "top-center",
+            autoClose: 3000,
+            toastId: "voting-ended",
+            pauseOnHover: false,
+            closeOnClick: true,
+            transition: Bounce,
+            theme: "colored",
+          });
+          void router.push("/");
+          return;
+        }
+      }
+
+      // ...rest of your existing useEffect code...
     }, [status, session, router]);
 
     if (status === "loading") {
