@@ -10,12 +10,24 @@ interface VoteData {
   isOneMWAWM: boolean;
 }
 
+const VOTE_DEADLINE = "2025-03-09T23:59:59.999+07:00"; 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const now = new Date();
+  const deadline = new Date(VOTE_DEADLINE);
+  
+  if (now > deadline) {
+    return res.status(403).json({ 
+      error: "Voting period has ended",
+      serverTime: now.toISOString(),
+      deadline: VOTE_DEADLINE 
+    });
   }
 
   const origin = req.headers.origin;
